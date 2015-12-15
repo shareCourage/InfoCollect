@@ -1,0 +1,52 @@
+//
+//  InfoCollect.pch
+//  InfoCollect
+//
+//  Created by Kowloon on 15/12/13.
+//  Copyright © 2015年 Goome. All rights reserved.
+//
+
+#ifndef InfoCollect_pch
+#define InfoCollect_pch
+
+#ifdef DEBUG
+#define PHLog(...) NSLog(__VA_ARGS__)
+#else
+#define PHLog(...)
+#endif
+
+
+#define PH_RGBColor(r,g,b)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+#define PH_RGBAColor(r,g,b,a)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define PH_iOS(version) ([[[UIDevice currentDevice] systemVersion] floatValue] >= version)
+#define PH_iOS5 PH_iOS(5.0f)
+#define PH_iOS6 PH_iOS(6.0f)
+#define PH_iOS7 PH_iOS(7.0f)
+
+#define PH_AppDelegate  (AppDelegate *)[UIApplication sharedApplication].delegate
+#define PH_UserDefaults [NSUserDefaults standardUserDefaults]
+#define PH_BoolForKey(LocationModelKey) [[NSUserDefaults standardUserDefaults] boolForKey:LocationModelKey]
+#define PH_Version [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+
+#define PH_WS(weakSelf) __weak __typeof(&*self)weakSelf = self;
+
+#define PH_DefaultColor          PH_RGBColor(156, 195, 234)
+#define PH_HeightOfNavigationBar 64
+#define PH_HeightOfTabBar        49
+#define PH_WidthOfScreen         [UIScreen mainScreen].bounds.size.width
+#define PH_HeightOfScreen        [UIScreen mainScreen].bounds.size.height
+#define PH_SystemFontSize        [UIFont systemFontSize]         /* 14px */
+#define PH_pageSize              5
+#define PH_MapLineWidth          8.0
+
+#define Argu_KeyOfUMeng             @"566d0aabe0f55a3501003682"
+#define Argu_KeyOfBMK               @"1A9ddhPEj7V75AGlVbOqTAz4"
+#endif /* InfoCollect_pch */
+
+#ifdef __OBJC__
+
+#import "EBNetworkRequest.h"
+#import "PHTool.h"
+
+#endif
+
