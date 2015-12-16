@@ -16,7 +16,7 @@
     button.titleLabel.font = [UIFont systemFontOfSize:20];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
-    [button setBackgroundColor:PH_RGBColor(157, 197, 236)];
+    [button setBackgroundColor:kRGBColor(157, 197, 236)];
     CGFloat height = frame.size.height;
     button.layer.cornerRadius = height / 2;
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];

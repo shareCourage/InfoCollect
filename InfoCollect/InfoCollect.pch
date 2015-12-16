@@ -15,38 +15,40 @@
 #define PHLog(...)
 #endif
 
+#define kRedColor kRGBColor(225,108,120)
+#define kRGBColor(r,g,b)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+#define kRGBAColor(r,g,b,a)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define kiOS(version) ([[[UIDevice currentDevice] systemVersion] floatValue] >= version)
+#define kiOS5 kiOS(5.0f)
+#define kiOS6 kiOS(6.0f)
+#define kiOS7 kiOS(7.0f)
 
-#define PH_RGBColor(r,g,b)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
-#define PH_RGBAColor(r,g,b,a)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
-#define PH_iOS(version) ([[[UIDevice currentDevice] systemVersion] floatValue] >= version)
-#define PH_iOS5 PH_iOS(5.0f)
-#define PH_iOS6 PH_iOS(6.0f)
-#define PH_iOS7 PH_iOS(7.0f)
+#define kAppDelegate  (AppDelegate *)[UIApplication sharedApplication].delegate
+#define kUserDefaults [NSUserDefaults standardUserDefaults]
+#define kBoolForKey(LocationModelKey) [[NSUserDefaults standardUserDefaults] boolForKey:LocationModelKey]
+#define kVersion [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
 
-#define PH_AppDelegate  (AppDelegate *)[UIApplication sharedApplication].delegate
-#define PH_UserDefaults [NSUserDefaults standardUserDefaults]
-#define PH_BoolForKey(LocationModelKey) [[NSUserDefaults standardUserDefaults] boolForKey:LocationModelKey]
-#define PH_Version [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+#define kWS(weakSelf) __weak __typeof(&*self)weakSelf = self;
 
-#define PH_WS(weakSelf) __weak __typeof(&*self)weakSelf = self;
-
-#define PH_DefaultColor          PH_RGBColor(156, 195, 234)
-#define PH_HeightOfNavigationBar 64
-#define PH_HeightOfTabBar        49
-#define PH_WidthOfScreen         [UIScreen mainScreen].bounds.size.width
-#define PH_HeightOfScreen        [UIScreen mainScreen].bounds.size.height
-#define PH_SystemFontSize        [UIFont systemFontSize]         /* 14px */
-#define PH_pageSize              5
-#define PH_MapLineWidth          8.0
+#define kDefaultColor          kRGBColor(156, 195, 234)
+#define kHeightOfNavigationBar 64
+#define kHeightOfTabBar        49
+#define kWidthOfScreen         [UIScreen mainScreen].bounds.size.width
+#define kHeightOfScreen        [UIScreen mainScreen].bounds.size.height
+#define kSystemFontSize        [UIFont systemFontSize]         /* 14px */
+#define kpageSize              5
+#define kMapLineWidth          8.0
 
 #define Argu_KeyOfUMeng             @"566d0aabe0f55a3501003682"
 #define Argu_KeyOfBMK               @"1A9ddhPEj7V75AGlVbOqTAz4"
+#define Argu_KeyOfIDCard            @"5P2T5BEE6LEV5L2"
 #endif /* InfoCollect_pch */
 
 #ifdef __OBJC__
 
 #import "EBNetworkRequest.h"
 #import "PHTool.h"
+#import "PHInfo.h"
 
 #endif
 

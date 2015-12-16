@@ -21,7 +21,7 @@
     [super viewDidLoad];
     
     PHTabBar *myTabBar = [[PHTabBar alloc] init];
-    myTabBar.backgroundColor = PH_RGBColor(39, 39, 39);
+    myTabBar.backgroundColor = kRGBColor(39, 39, 39);
     myTabBar.delegate = self;
     myTabBar.frame = self.tabBar.bounds;
     [self.tabBar addSubview:myTabBar];

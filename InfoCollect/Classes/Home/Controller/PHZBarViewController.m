@@ -51,17 +51,19 @@
 {
     const zbar_symbol_t *symbol =zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
     NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
+    
+    [PHUseInfo sharedPHUseInfo].courierNo = symbolStr;
+    [self.navigationController popViewControllerAnimated:YES];
+    
     //判断是否包含 头'http:'
     NSString *regex =@"http+:[^\\s]*";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"" message:symbolStr delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:nil];
-    [alertView show];
     //判断是否包含 头'ssid:'
     NSString *ssid =@"ssid+:[^\\s]*";;
     NSPredicate *ssidPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",ssid];
-    if ([predicate evaluateWithObject:symbolStr]) {
+    if ([predicate evaluateWithObject:symbolStr]) {//如果带http
     }
-    else if([ssidPre evaluateWithObject:symbolStr]){
+    else if([ssidPre evaluateWithObject:symbolStr]){//如果带ssid
         NSArray *arr = [symbolStr componentsSeparatedByString:@";"];
         NSArray * arrInfoHead = [[arr objectAtIndex:0]componentsSeparatedByString:@":"];
         NSArray * arrInfoFoot = [[arr objectAtIndex:1]componentsSeparatedByString:@":"];
@@ -150,19 +152,21 @@
     
     UIButton *openButton=[[UIButton alloc] initWithFrame:CGRectMake(10,20, 300.0, 40.0)];
     
+    openButton.layer.cornerRadius = 5;
+    
     [openButton setTitle:@"开启闪光灯" forState:UIControlStateNormal];
     
     [openButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     openButton.titleLabel.textAlignment=NSTextAlignmentCenter;
     
-    openButton.backgroundColor=[UIColor redColor];
+    openButton.backgroundColor = kRedColor;
     
     openButton.titleLabel.font=[UIFont systemFontOfSize:22.0];
     
     [openButton addTarget:self action:@selector(openLight) forControlEvents:UIControlEventTouchUpInside];
     
-//    [darkView addSubview:openButton];
+    [darkView addSubview:openButton];
     
     
     

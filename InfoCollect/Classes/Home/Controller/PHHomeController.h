@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Goome. All rights reserved.
 //
 
+//com.phh.InfoCollect
 #import "PHViewController.h"
 
 @interface PHHomeController : PHViewController

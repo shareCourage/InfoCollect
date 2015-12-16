@@ -103,14 +103,16 @@
                                         <constraint firstAttribute="height" constant="50" id="weL-rp-vmz"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Up-4S-b6P">
-                                    <rect key="frame" x="0.0" y="50" width="335" height="60"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Up-4S-b6P">
+                                    <rect key="frame" x="0.0" y="50" width="335" height="50"/>
                                     <color key="backgroundColor" red="1" green="0.51724441136835542" blue="0.48338584425135434" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="60" id="g2v-AS-fX7"/>
+                                        <constraint firstAttribute="height" constant="50" id="g2v-AS-fX7"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                    <state key="normal" title="登录"/>
+                                    <state key="normal" title="登录">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="loginClick:" destination="-1" eventType="touchUpInside" id="RbR-j6-WYv"/>
                                     </connections>

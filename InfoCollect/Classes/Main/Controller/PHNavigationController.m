@@ -30,9 +30,9 @@
     UINavigationBar *navBar = [UINavigationBar appearance];
     // 设置背景图片
     NSString *bgName = nil;
-    if (PH_iOS7) { // 至少是iOS 7.0
+    if (kiOS7) { // 至少是iOS 7.0
         bgName = @"NavBar64";
-        navBar.tintColor = PH_RGBColor(157, 197, 236);// [UIColor grayColor];//改变返回键的颜色
+        navBar.tintColor = kRGBColor(157, 197, 236);// [UIColor grayColor];//改变返回键的颜色
     } else { // 非iOS7
         bgName = @"NavBar";
     }
@@ -40,7 +40,7 @@
     
     // 设置标题文字颜色
     NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
-    if (PH_iOS7) {
+    if (kiOS7) {
         attrs[NSForegroundColorAttributeName] = [UIColor blackColor];
         attrs[NSFontAttributeName] = [UIFont systemFontOfSize:18];
     }

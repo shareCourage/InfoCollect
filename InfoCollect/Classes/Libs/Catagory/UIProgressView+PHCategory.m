@@ -11,7 +11,7 @@
 @implementation UIProgressView (PHCategory)
 
 - (void)setTheProgress:(float)progress animated:(BOOL)animated{
-    if (PH_iOS7) {
+    if (kiOS7) {
         [self setProgress:progress animated:animated];
     }else {
         self.progress = progress;

@@ -36,8 +36,8 @@
     [button setImage:[UIImage imageNamed:selName] forState:UIControlStateSelected];
     
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:PH_RGBColor(128, 138, 165) forState:UIControlStateNormal];
-    [button setTitleColor:PH_RGBColor(90, 155, 255) forState:UIControlStateSelected];
+    [button setTitleColor:kRGBColor(128, 138, 165) forState:UIControlStateNormal];
+    [button setTitleColor:kRGBColor(90, 155, 255) forState:UIControlStateSelected];
     button.titleLabel.font = [UIFont systemFontOfSize:12];
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     // 添加

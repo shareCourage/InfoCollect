@@ -12,7 +12,7 @@
 #import "MobClickSocialAnalytics.h"
 
 #import "AppDelegate.h"
-
+#import "PHCourier.h"
 
 @interface AppDelegate ()
 {
@@ -36,9 +36,33 @@
 - (void)rootViewControllerInitial {
     if ([PHTool loginEnable]) {
         [PHTool setHomeViewControllerForRoot];
+        [self loginInitial];
     } else {
         [PHTool setLoginViewControllerForRoot];
     }
+}
+
+- (void)loginInitial {
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    if ([PHUseInfo sharedPHUseInfo].userName) {
+        [param setObject:[PHUseInfo sharedPHUseInfo].userName forKey:kArgu_identityCardId];
+    }
+    if ([PHUseInfo sharedPHUseInfo].userCode) {
+        [param setObject:[PHUseInfo sharedPHUseInfo].userCode forKey:kArgu_pwd];
+    }
+    [self loginRequest:param];
+}
+
+- (void)loginRequest:(NSDictionary *)param {
+    [EBNetworkRequest GET:kUrl_login parameters:param dictBlock:^(NSDictionary *dict) {
+        NSDictionary *resultD = dict[kArgu_result];
+        NSNumber *value = resultD[kArgu_success];
+        if ([value boolValue]) {
+            [[PHUseInfo sharedPHUseInfo] setPropertyValue:dict];
+        } else {
+            [[PHUseInfo sharedPHUseInfo] setPropertyNil];
+        }
+    } errorBlock:nil];
 }
 
 - (void)UMengSetUp {
