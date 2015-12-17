@@ -19,7 +19,6 @@
 		A90316351C1D3D3900087A81 /* PHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A903162D1C1D3D3900087A81 /* PHTabBar.m */; settings = {ASSET_TAGS = (); }; };
 		A90316361C1D3D3900087A81 /* PHTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A903162F1C1D3D3900087A81 /* PHTabBarButton.m */; settings = {ASSET_TAGS = (); }; };
 		A903163E1C1D3E0A00087A81 /* PHLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = A903163C1C1D3E0A00087A81 /* PHLoginController.m */; settings = {ASSET_TAGS = (); }; };
-		A903163F1C1D3E0A00087A81 /* PHLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A903163D1C1D3E0A00087A81 /* PHLoginController.xib */; settings = {ASSET_TAGS = (); }; };
 		A90316431C1D3E5E00087A81 /* PHHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90316411C1D3E5E00087A81 /* PHHomeController.m */; settings = {ASSET_TAGS = (); }; };
 		A90316441C1D3E5E00087A81 /* PHHomeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90316421C1D3E5E00087A81 /* PHHomeController.xib */; settings = {ASSET_TAGS = (); }; };
 		A90316711C1D42D300087A81 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = A903164A1C1D42D300087A81 /* MBProgressHUD+MJ.m */; settings = {ASSET_TAGS = (); }; };
@@ -64,6 +63,21 @@
 		A90316CB1C1D513F00087A81 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A90316CA1C1D513F00087A81 /* libsqlite3.0.tbd */; };
 		A90316CD1C1D514E00087A81 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A90316CC1C1D514E00087A81 /* libstdc++.6.0.9.tbd */; };
 		A90316CF1C1D51DA00087A81 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A90316CE1C1D51DA00087A81 /* mapapi.bundle */; settings = {ASSET_TAGS = (); }; };
+		A90C74AD1C22E010007600A2 /* back_camera_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C749E1C22E010007600A2 /* back_camera_btn@2x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74AE1C22E010007600A2 /* back_camera_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C749F1C22E010007600A2 /* back_camera_btn@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74AF1C22E010007600A2 /* flash_camera_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74A01C22E010007600A2 /* flash_camera_btn@2x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B01C22E010007600A2 /* flash_camera_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74A11C22E010007600A2 /* flash_camera_btn@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B11C22E010007600A2 /* login_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74A31C22E010007600A2 /* login_bg@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B21C22E010007600A2 /* login_code@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74A41C22E010007600A2 /* login_code@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B31C22E010007600A2 /* login_circle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74A51C22E010007600A2 /* login_circle@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B41C22E010007600A2 /* login_log@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74A61C22E010007600A2 /* login_log@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B51C22E010007600A2 /* login_pep@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74A71C22E010007600A2 /* login_pep@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B61C22E010007600A2 /* login_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74A81C22E010007600A2 /* login_right@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B71C22E010007600A2 /* login_rightSL@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74A91C22E010007600A2 /* login_rightSL@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B81C22E010007600A2 /* login_user@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74AA1C22E010007600A2 /* login_user@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74B91C22E010007600A2 /* login_userSL@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74AB1C22E010007600A2 /* login_userSL@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74BA1C22E010007600A2 /* login_ver@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A90C74AC1C22E010007600A2 /* login_ver@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A90C74BD1C22EAAC007600A2 /* LoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A90C74BC1C22EAAC007600A2 /* LoginTextField.m */; settings = {ASSET_TAGS = (); }; };
 		A910ACC61C1D56BF00F759D4 /* PHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A910ACC51C1D56BF00F759D4 /* PHTool.m */; settings = {ASSET_TAGS = (); }; };
 		A910ACCD1C1D60D800F759D4 /* UIGestureRecognizer+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = A910ACCC1C1D60D800F759D4 /* UIGestureRecognizer+YYAdd.m */; settings = {ASSET_TAGS = (); }; };
 		A910ACD01C1D60E600F759D4 /* UIControl+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = A910ACCF1C1D60E600F759D4 /* UIControl+YYAdd.m */; settings = {ASSET_TAGS = (); }; };
@@ -90,10 +104,6 @@
 		A9F8E3DD1C21148400A39506 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F8E3DC1C21148400A39506 /* AudioToolbox.framework */; };
 		A9F8E3DF1C21149B00A39506 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F8E3DE1C21149B00A39506 /* libxml2.tbd */; };
 		A9F8E3E11C2114A500A39506 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F8E3E01C2114A500A39506 /* libiconv.2.4.0.tbd */; };
-		A9F8E4071C2134D600A39506 /* back_camera_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E4031C2134D600A39506 /* back_camera_btn@2x.png */; settings = {ASSET_TAGS = (); }; };
-		A9F8E4081C2134D600A39506 /* back_camera_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E4041C2134D600A39506 /* back_camera_btn@3x.png */; settings = {ASSET_TAGS = (); }; };
-		A9F8E4091C2134D600A39506 /* flash_camera_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E4051C2134D600A39506 /* flash_camera_btn@2x.png */; settings = {ASSET_TAGS = (); }; };
-		A9F8E40A1C2134D600A39506 /* flash_camera_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E4061C2134D600A39506 /* flash_camera_btn@3x.png */; settings = {ASSET_TAGS = (); }; };
 		A9F8E41A1C21354A00A39506 /* CameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A9F8E40D1C21354A00A39506 /* CameraViewController.mm */; settings = {ASSET_TAGS = (); }; };
 		A9F8E41B1C21354A00A39506 /* OverView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F8E40F1C21354A00A39506 /* OverView.m */; settings = {ASSET_TAGS = (); }; };
 		A9F8E41C1C21354A00A39506 /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F8E4111C21354A00A39506 /* ResultViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -147,7 +157,6 @@
 		A903162F1C1D3D3900087A81 /* PHTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHTabBarButton.m; sourceTree = "<group>"; };
 		A903163B1C1D3E0A00087A81 /* PHLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHLoginController.h; sourceTree = "<group>"; };
 		A903163C1C1D3E0A00087A81 /* PHLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHLoginController.m; sourceTree = "<group>"; };
-		A903163D1C1D3E0A00087A81 /* PHLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHLoginController.xib; sourceTree = "<group>"; };
 		A90316401C1D3E5E00087A81 /* PHHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHHomeController.h; sourceTree = "<group>"; };
 		A90316411C1D3E5E00087A81 /* PHHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHHomeController.m; sourceTree = "<group>"; };
 		A90316421C1D3E5E00087A81 /* PHHomeController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHHomeController.xib; sourceTree = "<group>"; };
@@ -215,6 +224,22 @@
 		A90316CA1C1D513F00087A81 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		A90316CC1C1D514E00087A81 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		A90316CE1C1D51DA00087A81 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
+		A90C749E1C22E010007600A2 /* back_camera_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_camera_btn@2x.png"; sourceTree = "<group>"; };
+		A90C749F1C22E010007600A2 /* back_camera_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_camera_btn@3x.png"; sourceTree = "<group>"; };
+		A90C74A01C22E010007600A2 /* flash_camera_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_camera_btn@2x.png"; sourceTree = "<group>"; };
+		A90C74A11C22E010007600A2 /* flash_camera_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_camera_btn@3x.png"; sourceTree = "<group>"; };
+		A90C74A31C22E010007600A2 /* login_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@3x.png"; sourceTree = "<group>"; };
+		A90C74A41C22E010007600A2 /* login_code@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_code@3x.png"; sourceTree = "<group>"; };
+		A90C74A51C22E010007600A2 /* login_circle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_circle@3x.png"; sourceTree = "<group>"; };
+		A90C74A61C22E010007600A2 /* login_log@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_log@3x.png"; sourceTree = "<group>"; };
+		A90C74A71C22E010007600A2 /* login_pep@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_pep@3x.png"; sourceTree = "<group>"; };
+		A90C74A81C22E010007600A2 /* login_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_right@3x.png"; sourceTree = "<group>"; };
+		A90C74A91C22E010007600A2 /* login_rightSL@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_rightSL@3x.png"; sourceTree = "<group>"; };
+		A90C74AA1C22E010007600A2 /* login_user@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_user@3x.png"; sourceTree = "<group>"; };
+		A90C74AB1C22E010007600A2 /* login_userSL@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_userSL@3x.png"; sourceTree = "<group>"; };
+		A90C74AC1C22E010007600A2 /* login_ver@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_ver@3x.png"; sourceTree = "<group>"; };
+		A90C74BB1C22EAAC007600A2 /* LoginTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTextField.h; sourceTree = "<group>"; };
+		A90C74BC1C22EAAC007600A2 /* LoginTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTextField.m; sourceTree = "<group>"; };
 		A910ACC41C1D56BF00F759D4 /* PHTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHTool.h; sourceTree = "<group>"; };
 		A910ACC51C1D56BF00F759D4 /* PHTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHTool.m; sourceTree = "<group>"; };
 		A910ACCB1C1D60D800F759D4 /* UIGestureRecognizer+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+YYAdd.h"; sourceTree = "<group>"; };
@@ -247,10 +272,6 @@
 		A9F8E3DC1C21148400A39506 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A9F8E3DE1C21149B00A39506 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		A9F8E3E01C2114A500A39506 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
-		A9F8E4031C2134D600A39506 /* back_camera_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_camera_btn@2x.png"; sourceTree = "<group>"; };
-		A9F8E4041C2134D600A39506 /* back_camera_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_camera_btn@3x.png"; sourceTree = "<group>"; };
-		A9F8E4051C2134D600A39506 /* flash_camera_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_camera_btn@2x.png"; sourceTree = "<group>"; };
-		A9F8E4061C2134D600A39506 /* flash_camera_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_camera_btn@3x.png"; sourceTree = "<group>"; };
 		A9F8E40C1C21354A00A39506 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		A9F8E40D1C21354A00A39506 /* CameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CameraViewController.mm; sourceTree = "<group>"; };
 		A9F8E40E1C21354A00A39506 /* OverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverView.h; sourceTree = "<group>"; };
@@ -419,7 +440,6 @@
 			children = (
 				A903163B1C1D3E0A00087A81 /* PHLoginController.h */,
 				A903163C1C1D3E0A00087A81 /* PHLoginController.m */,
-				A903163D1C1D3E0A00087A81 /* PHLoginController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -434,6 +454,8 @@
 		A903161F1C1D3D3900087A81 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A90C74BB1C22EAAC007600A2 /* LoginTextField.h */,
+				A90C74BC1C22EAAC007600A2 /* LoginTextField.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -616,6 +638,34 @@
 			path = BMKMap;
 			sourceTree = "<group>";
 		};
+		A90C749D1C22E010007600A2 /* camer */ = {
+			isa = PBXGroup;
+			children = (
+				A90C749E1C22E010007600A2 /* back_camera_btn@2x.png */,
+				A90C749F1C22E010007600A2 /* back_camera_btn@3x.png */,
+				A90C74A01C22E010007600A2 /* flash_camera_btn@2x.png */,
+				A90C74A11C22E010007600A2 /* flash_camera_btn@3x.png */,
+			);
+			path = camer;
+			sourceTree = "<group>";
+		};
+		A90C74A21C22E010007600A2 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				A90C74A31C22E010007600A2 /* login_bg@3x.png */,
+				A90C74A41C22E010007600A2 /* login_code@3x.png */,
+				A90C74A51C22E010007600A2 /* login_circle@3x.png */,
+				A90C74A61C22E010007600A2 /* login_log@3x.png */,
+				A90C74A71C22E010007600A2 /* login_pep@3x.png */,
+				A90C74A81C22E010007600A2 /* login_right@3x.png */,
+				A90C74A91C22E010007600A2 /* login_rightSL@3x.png */,
+				A90C74AA1C22E010007600A2 /* login_user@3x.png */,
+				A90C74AB1C22E010007600A2 /* login_userSL@3x.png */,
+				A90C74AC1C22E010007600A2 /* login_ver@3x.png */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
 		A910ACCA1C1D60C500F759D4 /* YYCategory */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,10 +712,8 @@
 		A9F8E4021C2134D600A39506 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				A9F8E4031C2134D600A39506 /* back_camera_btn@2x.png */,
-				A9F8E4041C2134D600A39506 /* back_camera_btn@3x.png */,
-				A9F8E4051C2134D600A39506 /* flash_camera_btn@2x.png */,
-				A9F8E4061C2134D600A39506 /* flash_camera_btn@3x.png */,
+				A90C749D1C22E010007600A2 /* camer */,
+				A90C74A21C22E010007600A2 /* login */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -806,30 +854,39 @@
 			files = (
 				A90316041C1D3C9800087A81 /* LaunchScreen.storyboard in Resources */,
 				A90316441C1D3E5E00087A81 /* PHHomeController.xib in Resources */,
+				A90C74B11C22E010007600A2 /* login_bg@3x.png in Resources */,
+				A90C74BA1C22E010007600A2 /* login_ver@3x.png in Resources */,
 				A9F8E3CC1C21124100A39506 /* Address.txt in Resources */,
 				A9F8E4261C21360600A39506 /* wtproject.lsc in Resources */,
-				A9F8E4091C2134D600A39506 /* flash_camera_btn@2x.png in Resources */,
 				A9F8E3CF1C21124100A39506 /* IDCLASSIFIERANDROID.xml in Resources */,
-				A9F8E4081C2134D600A39506 /* back_camera_btn@3x.png in Resources */,
+				A90C74B61C22E010007600A2 /* login_right@3x.png in Resources */,
+				A90C74B21C22E010007600A2 /* login_code@3x.png in Resources */,
 				A9F8E3CE1C21124100A39506 /* IDCARDANDROID.xml in Resources */,
 				A9F8E41D1C21354A00A39506 /* ResultViewController.xib in Resources */,
-				A9F8E40A1C2134D600A39506 /* flash_camera_btn@3x.png in Resources */,
+				A90C74AF1C22E010007600A2 /* flash_camera_btn@2x.png in Resources */,
 				A9F8E3D21C21124100A39506 /* pntWTPENPDA.lib in Resources */,
 				A9F8E3D11C21124100A39506 /* OEMtest.txt in Resources */,
-				A9F8E4071C2134D600A39506 /* back_camera_btn@2x.png in Resources */,
 				A90316011C1D3C9800087A81 /* Assets.xcassets in Resources */,
 				A9F8E3CD1C21124100A39506 /* BrandModel.txt in Resources */,
-				A903163F1C1D3E0A00087A81 /* PHLoginController.xib in Resources */,
 				A9F8E3D51C21124100A39506 /* thocr_Driver_License.lib in Resources */,
+				A90C74AD1C22E010007600A2 /* back_camera_btn@2x.png in Resources */,
+				A90C74B91C22E010007600A2 /* login_userSL@3x.png in Resources */,
+				A90C74B71C22E010007600A2 /* login_rightSL@3x.png in Resources */,
 				A9F8E3D91C21124100A39506 /* THOCR_pspt.lib in Resources */,
+				A90C74B31C22E010007600A2 /* login_circle@3x.png in Resources */,
 				A9F8E3D41C21124100A39506 /* Special.txt in Resources */,
+				A90C74B81C22E010007600A2 /* login_user@3x.png in Resources */,
+				A90C74AE1C22E010007600A2 /* back_camera_btn@3x.png in Resources */,
 				A9F8E3D81C21124100A39506 /* THOCR_PDA.lib in Resources */,
+				A90C74B41C22E010007600A2 /* login_log@3x.png in Resources */,
 				A9F8E3D61C21124100A39506 /* THOCR_LP.lib in Resources */,
+				A90C74B01C22E010007600A2 /* flash_camera_btn@3x.png in Resources */,
 				A9F8E4211C21354A00A39506 /* ViewController.xib in Resources */,
 				A90316721C1D42D300087A81 /* MBProgressHUD.bundle in Resources */,
 				A9F8E3D31C21124100A39506 /* ProvName.txt in Resources */,
 				A9F8E3D71C21124100A39506 /* THOCR_Num_Char.lib in Resources */,
 				A90316CF1C1D51DA00087A81 /* mapapi.bundle in Resources */,
+				A90C74B51C22E010007600A2 /* login_pep@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +985,7 @@
 				A9F8E41F1C21354A00A39506 /* UIViewExt.m in Sources */,
 				A9F8E4301C21486600A39506 /* PHCompanyInfo.m in Sources */,
 				A9F8E4341C21489F00A39506 /* PHCourier.m in Sources */,
+				A90C74BD1C22EAAC007600A2 /* LoginTextField.m in Sources */,
 				A9F8E41A1C21354A00A39506 /* CameraViewController.mm in Sources */,
 				A90316771C1D42D300087A81 /* NSString+PHCategory.m in Sources */,
 				A90316731C1D42D300087A81 /* NSArray+MySeperateString.m in Sources */,
