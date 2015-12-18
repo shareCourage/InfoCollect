@@ -33,10 +33,20 @@
 
 @interface PHTool : NSObject
 
+/**
+ *  登录成功返回YES,反之返回NO
+ *
+ */
 + (BOOL)loginEnable;
 
 + (void)setRootViewController:(UIViewController *)vc;
 + (void)setHomeViewControllerForRoot;
 + (void)setLoginViewControllerForRoot;
 
+/**
+ *  根据高度判断是否是iPhone4s以下版本
+ *
+ */
++ (BOOL)isiPhone4s;
++ (BOOL)lowerThaniPhone5s;
 @end

@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ZBarSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,17 +37,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>24C051938DA4EFA89C13214E51902459</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2602F3D0DAC534568B6AD7EEA0DD1959</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5D5CEE4F9B5D98CAFD7F991A366101DD</key>
+		<key>B25235BB2170D1226438A0C075312D36</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AC7C7A15F9909C07EEAF740E90C97404</key>
+		<key>BF787B1F655FC0EB8584351DDA84EB7E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

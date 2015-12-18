@@ -28,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.hidden = NO;
     self.title = @"二维码/条形码";
     //初始化扫描界面
     [self setScanView];

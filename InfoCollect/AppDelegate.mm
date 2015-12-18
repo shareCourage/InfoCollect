@@ -29,6 +29,7 @@
     [self BMKSetUp];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self rootViewControllerInitial];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -38,6 +39,7 @@
         [PHTool setHomeViewControllerForRoot];
         [self loginInitial];
     } else {
+        [[PHUseInfo sharedPHUseInfo] setPropertyNil];
         [PHTool setLoginViewControllerForRoot];
     }
 }
@@ -59,6 +61,7 @@
         NSNumber *value = resultD[kArgu_success];
         if ([value boolValue]) {
             [[PHUseInfo sharedPHUseInfo] setPropertyValue:dict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:PHLoadedCourierInfoNotification object:nil];
         } else {
             [[PHUseInfo sharedPHUseInfo] setPropertyNil];
         }

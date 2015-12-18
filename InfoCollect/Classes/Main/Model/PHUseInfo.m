@@ -13,15 +13,9 @@
 @synthesize userName = _userName;
 @synthesize userCode = _userCode;
 @synthesize token = _token;
+@synthesize loginDate = _loginDate;
 singleton_implementation(PHUseInfo)
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _saveToLocal = YES;
-    }
-    return self;
-}
 
 - (NSString *)userName {
     if (!_userName) {
@@ -32,10 +26,8 @@ singleton_implementation(PHUseInfo)
 
 - (void)setUserName:(NSString *)userName {
     _userName = userName;
-    if (self.isSaveToLocal) {
-        [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"userNameForKey"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"userNameForKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -48,10 +40,8 @@ singleton_implementation(PHUseInfo)
 
 - (void)setUserCode:(NSString *)userCode {
     _userCode = userCode;
-    if (self.isSaveToLocal) {
-        [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCodeForKey"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCodeForKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -64,18 +54,29 @@ singleton_implementation(PHUseInfo)
 
 - (void)setToken:(NSString *)token {
     _token = token;
-    if (self.isSaveToLocal) {
-        [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"tokenForKey"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"tokenForKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)setLoginDate:(NSDate *)loginDate {
+    _loginDate = loginDate;
+    [[NSUserDefaults standardUserDefaults] setObject:loginDate forKey:@"loginDateForKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSDate *)loginDate {
+    if (!_loginDate) {
+        _loginDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginDateForKey"];
+    }
+    return _loginDate;
+}
 
 - (void)setPropertyNil {
     self.userName = nil;
     self.userCode = nil;
     self.token = nil;
     self.courier = nil;
+    self.loginDate = nil;
 }
 
 - (void)setPropertyValue:(NSDictionary *)value {

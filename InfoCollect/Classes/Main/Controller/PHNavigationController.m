@@ -32,7 +32,7 @@
     NSString *bgName = nil;
     if (kiOS7) { // 至少是iOS 7.0
         bgName = @"NavBar64";
-        navBar.tintColor = kRGBColor(157, 197, 236);// [UIColor grayColor];//改变返回键的颜色
+        navBar.tintColor = kSystemeColor;// [UIColor grayColor];//改变返回键的颜色
     } else { // 非iOS7
         bgName = @"NavBar";
     }
@@ -59,6 +59,7 @@
     itemAttrs[NSForegroundColorAttributeName] = [UIColor blackColor];
     itemAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:14];
     [item setTitleTextAttributes:itemAttrs forState:UIControlStateNormal];
+    [item setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
 }
 
 /**

@@ -19,8 +19,9 @@
 - (instancetype)initWithFrame:(CGRect)frame leftImageName:(NSString *)imageName selName:(NSString *)selName{
     self = [super initWithFrame:frame];
     if (self) {
+        self.textColor = [UIColor whiteColor];
         self.backgroundColor = [UIColor blueColor];
-        self.keyboardType = UIKeyboardTypeNumberPad;
+        self.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         self.leftViewMode = UITextFieldViewModeAlways;
         self.clearButtonMode = UITextFieldViewModeAlways;
         if (imageName.length != 0) {

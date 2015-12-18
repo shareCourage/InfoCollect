@@ -26,9 +26,9 @@ singleton_interface(PHUseInfo)
  */
 @property (nonatomic, copy) NSString *token;
 /**
- *  是否保存到本地
+ *  点击登录，登录成功保存的时间
  */
-@property (nonatomic, assign, getter = isSaveToLocal) BOOL saveToLocal;
+@property (nonatomic, strong) NSDate *loginDate;
 /**
  *  网络获取的快递员信息
  */

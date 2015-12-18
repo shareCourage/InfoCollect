@@ -31,6 +31,7 @@
 #define kWS(weakSelf) __weak __typeof(&*self)weakSelf = self;
 
 #define kSystemeColor          kRGBColor(161, 215, 84)
+#define kGrayColor             kRGBColor(246, 246, 247)
 #define kDefaultColor          kRGBColor(156, 195, 234)
 #define kHeightOfNavigationBar 64
 #define kHeightOfTabBar        49

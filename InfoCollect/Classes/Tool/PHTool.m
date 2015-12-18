@@ -5,7 +5,7 @@
 //  Created by Kowloon on 15/12/13.
 //  Copyright © 2015年 Goome. All rights reserved.
 //
-
+#define kLoginExperiedTime (12 * 60 * 60)
 #import "PHTool.h"
 #import "AppDelegate.h"
 #import "PHNavigationController.h"
@@ -15,12 +15,16 @@
 @implementation PHTool
 
 + (BOOL)loginEnable {
-    NSString *userName = [PHUseInfo sharedPHUseInfo].userName;
-    NSString *userCode = [PHUseInfo sharedPHUseInfo].userCode;
-    if (userName.length != 0 && userCode.length != 0) {
+    NSDate *loginDate = [PHUseInfo sharedPHUseInfo].loginDate;
+    if (!loginDate) return NO;//表示从来没有登录过
+    NSDate *nowDate = [NSDate date];
+    NSTimeInterval value = [nowDate timeIntervalSinceDate:loginDate];
+    PHLog(@"%@",@(value));
+    if (value > kLoginExperiedTime) {
+        return NO;
+    } else {
         return YES;
     }
-    return NO;
 }
 
 + (void)setRootViewController:(UIViewController *)vc {
@@ -39,6 +43,18 @@
     PHLoginController *login = [[PHLoginController alloc] init];
     login.title = @"登录";
     [self setRootViewController:login];
+}
+
++ (BOOL)isiPhone4s {
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    if (height > 480) return NO;
+    return YES;
+}
+
++ (BOOL)lowerThaniPhone5s {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    if (width > 320) return NO;
+    return YES;
 }
 
 @end

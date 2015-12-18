@@ -15,6 +15,7 @@
                   textColor:(UIColor *)color
               textAlignment:(NSTextAlignment)alignment
                        font:(UIFont *)font;
+- (void)setSystemFontOfValue:(CGFloat)value;
 - (void)setSystemFontOf12;
 - (void)setSystemFontOf11;
 - (void)setSystemFontOf10;

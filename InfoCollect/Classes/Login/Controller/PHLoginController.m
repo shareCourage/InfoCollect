@@ -41,7 +41,9 @@
     
     CGFloat height = 35;
     
-    LoginTextField *userNameTF = [[LoginTextField alloc] initWithFrame:CGRectMake(0, 20, centerW, height) leftImageName:@"login_userSL@3x" selName:@"login_user@3x"];
+    LoginTextField *userNameTF = [[LoginTextField alloc] initWithFrame:CGRectMake(0, 0, centerW, height) leftImageName:@"login_userSL" selName:@"login_user"];
+    CGFloat userNameY = centerW / 2 - height - height / 2;
+    userNameTF.center = CGPointMake(centerW / 2, userNameY);
     userNameTF.text = @"test";
     userNameTF.backgroundColor = [UIColor clearColor];
     userNameTF.textAlignment = NSTextAlignmentCenter;
@@ -49,8 +51,9 @@
     [centerV addSubview:userNameTF];
     self.userNameTF = userNameTF;
     
-    CGFloat codeY = CGRectGetMaxY(userNameTF.frame) + 20;
-    LoginTextField *userCodeTF = [[LoginTextField alloc] initWithFrame:CGRectMake(0, codeY, centerW, height) leftImageName:@"login_userSL@3x" selName:@"login_code@3x"];
+    CGFloat codeY = userNameTF.centerY + height + height / 2;
+    LoginTextField *userCodeTF = [[LoginTextField alloc] initWithFrame:CGRectMake(0, 0, centerW, height) leftImageName:@"login_userSL" selName:@"login_code"];
+    userCodeTF.center = CGPointMake(centerW / 2, codeY);
     userCodeTF.text = @"jxea";
     userCodeTF.backgroundColor = [UIColor clearColor];
     userCodeTF.textAlignment = NSTextAlignmentCenter;
@@ -62,8 +65,8 @@
     CGFloat sureY = 0;
     CGFloat sureW = 60;
     CGFloat sureH = sureW;
-    UIButton *sureBtn = [UIButton buttonWithFrame:CGRectMake(sureX, sureY, sureW, sureH) target:self action:@selector(loginClick) normalImage:[UIImage imageNamed:@"login_rightSL@3x"] selectedImage:[UIImage imageNamed:@"login_right@3x"]];
-    sureBtn.center = CGPointMake(centerW / 2, CGRectGetMaxY(userCodeTF.frame) + 20 + sureW / 2);
+    UIButton *sureBtn = [UIButton buttonWithFrame:CGRectMake(sureX, sureY, sureW, sureH) target:self action:@selector(loginClick) normalImage:[UIImage imageNamed:@"login_rightSL"] selectedImage:[UIImage imageNamed:@"login_right"]];
+    sureBtn.center = CGPointMake(centerW / 2, CGRectGetMaxY(userCodeTF.frame) + 30 + sureW / 2);
     [centerV addSubview:sureBtn];
 }
 
@@ -102,6 +105,7 @@
             [PHUseInfo sharedPHUseInfo].userName = [param objectForKey:kArgu_identityCardId];
             [PHUseInfo sharedPHUseInfo].userCode = [param objectForKey:kArgu_pwd];
             [[PHUseInfo sharedPHUseInfo] setPropertyValue:dict];
+            [PHUseInfo sharedPHUseInfo].loginDate = [NSDate date];
             [self loginState:YES];
         } else {
             [MBProgressHUD showError:@"登录失败" toView:self.view];
@@ -115,13 +119,13 @@
 - (void)layerInitial {
     CALayer *bgLayer = [CALayer layer];
     bgLayer.frame = self.view.bounds;
-    bgLayer.contents = (__bridge id)[UIImage imageNamed: @"login_bg@3x"].CGImage;
+    bgLayer.contents = (__bridge id)[UIImage imageNamed: @"login_bg"].CGImage;
     [self.view.layer addSublayer:bgLayer];
     
     CALayer *logLayer = [CALayer layer];
     logLayer.frame = CGRectMake(0, 0, kWidthOfScreen, 45);
     logLayer.position = CGPointMake(kWidthOfScreen / 2, 60);
-    logLayer.contents = (__bridge id)[UIImage imageNamed: @"login_log@3x"].CGImage;
+    logLayer.contents = (__bridge id)[UIImage imageNamed: @"login_log"].CGImage;
     
     [bgLayer addSublayer:logLayer];
     
@@ -131,7 +135,7 @@
     CGFloat centerW = kWidthOfScreen - padding;
     centerLayer.frame = CGRectMake(0, 0, centerW, centerW);
     centerLayer.position = CGPointMake(kWidthOfScreen / 2, kHeightOfScreen / 2);
-    centerLayer.contents = (__bridge id)[UIImage imageNamed:@"login_circle@3x"].CGImage;
+    centerLayer.contents = (__bridge id)[UIImage imageNamed:@"login_circle"].CGImage;
     [bgLayer addSublayer:centerLayer];
     
     CALayer *personLayer = [CALayer layer];
@@ -141,7 +145,7 @@
     CGFloat pY = kHeightOfScreen / 2;
     CGPoint pPoint = CGPointMake(pX, pY);
     personLayer.position = pPoint;
-    personLayer.contents = (__bridge id)[UIImage imageNamed:@"login_pep@3x"].CGImage;
+    personLayer.contents = (__bridge id)[UIImage imageNamed:@"login_pep"].CGImage;
     [bgLayer addSublayer:personLayer];
     
     CALayer *vehLayer = [CALayer layer];
@@ -151,7 +155,7 @@
     CGFloat vY = kHeightOfScreen / 2;
     CGPoint vPoint = CGPointMake(vX, vY);
     vehLayer.position = vPoint;
-    vehLayer.contents = (__bridge id)[UIImage imageNamed:@"login_ver@3x"].CGImage;
+    vehLayer.contents = (__bridge id)[UIImage imageNamed:@"login_ver"].CGImage;
     [bgLayer addSublayer:vehLayer];
     
     

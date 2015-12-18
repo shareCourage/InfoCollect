@@ -21,8 +21,14 @@
     [super viewDidLoad];
     self.title = @"信息采集";
     self.view.backgroundColor = [UIColor purpleColor];
-    
+    self.navigationController.navigationBar.hidden = NO;
+
     [self tableViewInitial];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+    
 }
 
 - (void)tableViewInitial {
