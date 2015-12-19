@@ -15,6 +15,7 @@
 #define PHLog(...)
 #endif
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define kRedColor kRGBColor(225,108,120)
 #define kRGBColor(r,g,b)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
 #define kRGBAColor(r,g,b,a)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
@@ -30,7 +31,7 @@
 
 #define kWS(weakSelf) __weak __typeof(&*self)weakSelf = self;
 
-#define kSystemeColor          kRGBColor(161, 215, 84)
+#define kSystemeColor          UIColorFromRGB(0x7ed538) 
 #define kGrayColor             kRGBColor(246, 246, 247)
 #define kDefaultColor          kRGBColor(156, 195, 234)
 #define kHeightOfNavigationBar 64

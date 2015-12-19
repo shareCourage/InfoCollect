@@ -10,4 +10,7 @@
 
 @interface PHZBarViewController : PHViewController
 
+- (instancetype)initWithOption:(void (^)(NSString *orderNum))option;
+
+
 @end

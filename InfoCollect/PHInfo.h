@@ -10,6 +10,7 @@
 #define PHInfo_h
 
 static NSString * const PHLoadedCourierInfoNotification = @"PHLoadedCourierInfoNotification";
+static NSString * const PHSaveIdentifyInfoNotification = @"PHSaveIdentifyInfoNotification";
 
 static NSString *kUrl_Host    = @"http://61.164.44.165:39175";
 #define kUrl_appRequest         [kUrl_Host stringByAppendingPathComponent:@"appRequest"]

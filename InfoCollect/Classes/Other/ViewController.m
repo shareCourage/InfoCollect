@@ -245,7 +245,7 @@
             //识别结果不为空，跳转到结果展示页面
             ResultViewController *rvc = [[ResultViewController alloc] initWithNibName:@"ResultViewController" bundle:nil];
             NSLog(@"allresult = %@", allResult);
-            rvc.resultString = allResult;
+            rvc.resultArray = nil;
             [self.navigationController pushViewController:rvc animated:YES];
         }
     }

@@ -26,22 +26,23 @@
  */
 + (void)initialize
 {
+    
     // 设置导航栏主题
     UINavigationBar *navBar = [UINavigationBar appearance];
     // 设置背景图片
     NSString *bgName = nil;
     if (kiOS7) { // 至少是iOS 7.0
-        bgName = @"NavBar64";
-        navBar.tintColor = kSystemeColor;// [UIColor grayColor];//改变返回键的颜色
+        bgName = @"naviBg";
+        navBar.tintColor = [UIColor whiteColor];// [UIColor grayColor];//改变返回键的颜色
     } else { // 非iOS7
-        bgName = @"NavBar";
+        bgName = @"naviBg";
     }
-    [navBar setBackgroundImage:[UIImage imageNamed:bgName] forBarMetrics:UIBarMetricsDefault];
+    [navBar setBackgroundImage:[UIImage resizedImageWithName:bgName] forBarMetrics:UIBarMetricsDefault];
     
     // 设置标题文字颜色
     NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
     if (kiOS7) {
-        attrs[NSForegroundColorAttributeName] = [UIColor blackColor];
+        attrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
         attrs[NSFontAttributeName] = [UIFont systemFontOfSize:18];
     }
     else{

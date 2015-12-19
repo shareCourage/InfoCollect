@@ -45,5 +45,9 @@ singleton_interface(PHUseInfo)
  *  快递单号
  */
 @property (nonatomic, copy) NSString *courierNo;
+/**
+ *  扫描身份证获取的信息
+ */
+@property (nonatomic, strong) NSArray *identityInfo;
 
 @end

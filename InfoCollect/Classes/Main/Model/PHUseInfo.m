@@ -71,6 +71,12 @@ singleton_implementation(PHUseInfo)
     return _loginDate;
 }
 
+- (void)setIdentityInfo:(NSArray *)identityInfo {
+    _identityInfo = identityInfo;
+    if (identityInfo.count == 0) return;
+    [[NSNotificationCenter defaultCenter] postNotificationName:PHSaveIdentifyInfoNotification object:nil];
+}
+
 - (void)setPropertyNil {
     self.userName = nil;
     self.userCode = nil;

@@ -10,5 +10,9 @@
 #import "PHViewController.h"
 
 @interface PHHomeController : PHViewController
+/**
+ *  加载头像、公司名称等信息
+ */
+- (void)loadCourierInfoNotification;
 
 @end

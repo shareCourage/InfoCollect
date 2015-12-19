@@ -54,9 +54,10 @@
     //直线宽度
     CGContextSetLineWidth(context,0.3f);
     //设置颜色
-    CGContextSetStrokeColorWithColor(context, kGrayColor.CGColor);
+    CGContextSetStrokeColorWithColor(context, kSystemeColor.CGColor);
     //开始绘制
     CGContextBeginPath(context);
+    //画笔移动到点(31,170)
     CGContextMoveToPoint(context,0, rect.size.height);
     //下一点
     CGContextAddLineToPoint(context,rect.size.width, rect.size.height);

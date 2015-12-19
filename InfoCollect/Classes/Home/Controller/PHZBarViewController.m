@@ -22,9 +22,17 @@
     UIView *_scanView;
     ZBarReaderView *_readerView;
 }
+@property (nonatomic, copy) void (^option) (NSString *orderNum);
 @end
 
 @implementation PHZBarViewController
+- (instancetype)initWithOption:(void (^)(NSString *))option {
+    self = [super init];
+    if (self) {
+        self.option = option;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +62,7 @@
     NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
     
     [PHUseInfo sharedPHUseInfo].courierNo = symbolStr;
+    if (self.option) self.option(symbolStr);
     [self.navigationController popViewControllerAnimated:YES];
     
     //判断是否包含 头'http:'

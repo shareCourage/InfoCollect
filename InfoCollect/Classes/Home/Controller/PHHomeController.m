@@ -13,6 +13,7 @@
 
 #import "PHCourier.h"
 #import "PHLabelView.h"
+#import "PHSettingController.h"
 
 @interface PHHomeController ()
 
@@ -26,20 +27,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的信息";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadCourierInfoNotification) name:PHLoadedCourierInfoNotification object:nil];
     [self layerInitial];
+    self.navigationController.navigationBar.translucent = YES;
     
-    UIButton *setting = [UIButton buttonWithType:UIButtonTypeCustom];
-    [setting addTarget:self action:@selector(settingClick) forControlEvents:UIControlEventTouchUpInside];
-    setting.frame = CGRectMake(kWidthOfScreen - 45, 25, 40, 40);
-    [setting setImage:[UIImage imageNamed:@"home_setting"] forState:UIControlStateNormal];
-    [self.view addSubview:setting];
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"home_setting"] style:UIBarButtonItemStyleDone target:self action:@selector(settingClick)];
+    self.navigationItem.rightBarButtonItem = right;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
-
+//    self.navigationController.navigationBar.hidden = YES;
 }
 
 
@@ -80,7 +79,7 @@
     
     UIButton *get = [UIButton buttonWithType:UIButtonTypeSystem];
     [get setTitle:@"揽件" forState:UIControlStateNormal];
-    [get setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [get setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     get.backgroundColor = kSystemeColor;
     CGFloat getH = 40;
     get.frame = CGRectMake(0, 0, width, getH);
@@ -107,7 +106,6 @@
     
     CGFloat oneH = contentH / 2;
     UIView *oneView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, contentW, oneH)];
-//    oneView.backgroundColor = [UIColor blueColor];
     CGFloat oneY = oneH / 2;
     oneView.center = CGPointMake(contentW / 2, oneY);
     [contentView addSubview:oneView];
@@ -156,7 +154,7 @@
         [labels addObject:labelView];
     }
     self.labels = labels;
-    
+    [self loadCourierInfoNotification];
 }
 #pragma mark - Target
 
@@ -166,16 +164,18 @@
     NSMutableArray * viewControllers = [self.navigationController.viewControllers mutableCopy];
     [viewControllers insertObject:infoCollect atIndex:1];
     [viewControllers insertObject:zbar atIndex:2];
-    [self.navigationController setViewControllers:viewControllers animated:YES];
-    
+//    [self.navigationController setViewControllers:viewControllers animated:YES];
+    [self.navigationController pushViewController:infoCollect animated:YES];
     //    [self pushToCamerVC];
 }
 
 
 - (void)loadCourierInfoNotification {
     NSString *dataStr = [PHUseInfo sharedPHUseInfo].courier.photo;
+    if (!dataStr) return;
     NSData *data = [[NSData alloc] initWithBase64EncodedString:dataStr options:0];
     UIImage *image = [UIImage imageWithData:data];
+    if (!image) return;
     self.courierIcon.image = image;
     
     PHLabelView *labelView = 0;
@@ -206,6 +206,8 @@
 
 - (void)settingClick {
     PHLog(@"settingClick");
+    PHSettingController *setting = [[PHSettingController alloc] init];
+    [self.navigationController pushViewController:setting animated:YES];
 }
 
 @end

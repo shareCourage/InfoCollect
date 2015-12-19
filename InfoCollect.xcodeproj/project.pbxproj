@@ -120,6 +120,17 @@
 		A9D245FE1C243B8900521464 /* home_scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D245E81C243B8900521464 /* home_scan@3x.png */; settings = {ASSET_TAGS = (); }; };
 		A9D245FF1C243B8900521464 /* home_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D245E91C243B8900521464 /* home_setting@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A9D246001C243B8900521464 /* home_setting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D245EA1C243B8900521464 /* home_setting@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A9D246061C252FBE00521464 /* PHBaseSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246051C252FBE00521464 /* PHBaseSettingViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A9D246091C2530E200521464 /* PHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246081C2530E200521464 /* PHTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		A9D246141C2530F100521464 /* PHSettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D2460C1C2530F100521464 /* PHSettingGroup.m */; settings = {ASSET_TAGS = (); }; };
+		A9D246151C2530F100521464 /* PHSettingArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D2460F1C2530F100521464 /* PHSettingArrowItem.m */; settings = {ASSET_TAGS = (); }; };
+		A9D246161C2530F100521464 /* PHSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246111C2530F100521464 /* PHSettingItem.m */; settings = {ASSET_TAGS = (); }; };
+		A9D246171C2530F100521464 /* PHSettingSwitchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246131C2530F100521464 /* PHSettingSwitchItem.m */; settings = {ASSET_TAGS = (); }; };
+		A9D2461A1C25318500521464 /* PHSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246191C25318500521464 /* PHSettingController.m */; settings = {ASSET_TAGS = (); }; };
+		A9D2461F1C253E9300521464 /* naviBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D2461D1C253E9300521464 /* naviBg@2x.png */; settings = {ASSET_TAGS = (); }; };
+		A9D246201C253E9300521464 /* naviBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D2461E1C253E9300521464 /* naviBg@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A9D246231C25556600521464 /* PHTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246221C25556600521464 /* PHTextViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		A9D246261C255DD700521464 /* PHSettingTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246251C255DD700521464 /* PHSettingTextItem.m */; settings = {ASSET_TAGS = (); }; };
 		A9F8E3CC1C21124100A39506 /* Address.txt in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E3BC1C21124100A39506 /* Address.txt */; settings = {ASSET_TAGS = (); }; };
 		A9F8E3CD1C21124100A39506 /* BrandModel.txt in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E3BD1C21124100A39506 /* BrandModel.txt */; settings = {ASSET_TAGS = (); }; };
 		A9F8E3CE1C21124100A39506 /* IDCARDANDROID.xml in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E3BE1C21124100A39506 /* IDCARDANDROID.xml */; settings = {ASSET_TAGS = (); }; };
@@ -321,6 +332,26 @@
 		A9D245E81C243B8900521464 /* home_scan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_scan@3x.png"; sourceTree = "<group>"; };
 		A9D245E91C243B8900521464 /* home_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_setting@2x.png"; sourceTree = "<group>"; };
 		A9D245EA1C243B8900521464 /* home_setting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_setting@3x.png"; sourceTree = "<group>"; };
+		A9D246041C252FBE00521464 /* PHBaseSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHBaseSettingViewController.h; sourceTree = "<group>"; };
+		A9D246051C252FBE00521464 /* PHBaseSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHBaseSettingViewController.m; sourceTree = "<group>"; };
+		A9D246071C2530E200521464 /* PHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHTableViewCell.h; sourceTree = "<group>"; };
+		A9D246081C2530E200521464 /* PHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHTableViewCell.m; sourceTree = "<group>"; };
+		A9D2460B1C2530F100521464 /* PHSettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHSettingGroup.h; sourceTree = "<group>"; };
+		A9D2460C1C2530F100521464 /* PHSettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHSettingGroup.m; sourceTree = "<group>"; };
+		A9D2460E1C2530F100521464 /* PHSettingArrowItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHSettingArrowItem.h; sourceTree = "<group>"; };
+		A9D2460F1C2530F100521464 /* PHSettingArrowItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHSettingArrowItem.m; sourceTree = "<group>"; };
+		A9D246101C2530F100521464 /* PHSettingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHSettingItem.h; sourceTree = "<group>"; };
+		A9D246111C2530F100521464 /* PHSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHSettingItem.m; sourceTree = "<group>"; };
+		A9D246121C2530F100521464 /* PHSettingSwitchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHSettingSwitchItem.h; sourceTree = "<group>"; };
+		A9D246131C2530F100521464 /* PHSettingSwitchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHSettingSwitchItem.m; sourceTree = "<group>"; };
+		A9D246181C25318500521464 /* PHSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHSettingController.h; sourceTree = "<group>"; };
+		A9D246191C25318500521464 /* PHSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHSettingController.m; sourceTree = "<group>"; };
+		A9D2461D1C253E9300521464 /* naviBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "naviBg@2x.png"; sourceTree = "<group>"; };
+		A9D2461E1C253E9300521464 /* naviBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "naviBg@3x.png"; sourceTree = "<group>"; };
+		A9D246211C25556600521464 /* PHTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHTextViewCell.h; sourceTree = "<group>"; };
+		A9D246221C25556600521464 /* PHTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHTextViewCell.m; sourceTree = "<group>"; };
+		A9D246241C255DD700521464 /* PHSettingTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHSettingTextItem.h; sourceTree = "<group>"; };
+		A9D246251C255DD700521464 /* PHSettingTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHSettingTextItem.m; sourceTree = "<group>"; };
 		A9F8E3BC1C21124100A39506 /* Address.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Address.txt; sourceTree = "<group>"; };
 		A9F8E3BD1C21124100A39506 /* BrandModel.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BrandModel.txt; sourceTree = "<group>"; };
 		A9F8E3BE1C21124100A39506 /* IDCARDANDROID.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = IDCARDANDROID.xml; sourceTree = "<group>"; };
@@ -597,6 +628,7 @@
 				A910ACD21C1D6B6100F759D4 /* PHZBarViewController.m */,
 				A9F8E4351C21579F00A39506 /* PHInfoCollectController.h */,
 				A9F8E4361C21579F00A39506 /* PHInfoCollectController.m */,
+				A9D2461B1C25328C00521464 /* Setting */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -604,6 +636,8 @@
 		A90316391C1D3D9700087A81 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A9D2460A1C2530F100521464 /* Group */,
+				A9D2460D1C2530F100521464 /* Item */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -611,8 +645,12 @@
 		A903163A1C1D3D9700087A81 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A9D246071C2530E200521464 /* PHTableViewCell.h */,
+				A9D246081C2530E200521464 /* PHTableViewCell.m */,
 				A9D245A41C242C4000521464 /* PHLabelView.h */,
 				A9D245A51C242C4000521464 /* PHLabelView.m */,
+				A9D246211C25556600521464 /* PHTextViewCell.h */,
+				A9D246221C25556600521464 /* PHTextViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -788,6 +826,50 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		A9D2460A1C2530F100521464 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				A9D2460B1C2530F100521464 /* PHSettingGroup.h */,
+				A9D2460C1C2530F100521464 /* PHSettingGroup.m */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		A9D2460D1C2530F100521464 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				A9D2460E1C2530F100521464 /* PHSettingArrowItem.h */,
+				A9D2460F1C2530F100521464 /* PHSettingArrowItem.m */,
+				A9D246101C2530F100521464 /* PHSettingItem.h */,
+				A9D246111C2530F100521464 /* PHSettingItem.m */,
+				A9D246121C2530F100521464 /* PHSettingSwitchItem.h */,
+				A9D246131C2530F100521464 /* PHSettingSwitchItem.m */,
+				A9D246241C255DD700521464 /* PHSettingTextItem.h */,
+				A9D246251C255DD700521464 /* PHSettingTextItem.m */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		A9D2461B1C25328C00521464 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A9D246041C252FBE00521464 /* PHBaseSettingViewController.h */,
+				A9D246051C252FBE00521464 /* PHBaseSettingViewController.m */,
+				A9D246181C25318500521464 /* PHSettingController.h */,
+				A9D246191C25318500521464 /* PHSettingController.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
+		A9D2461C1C253E9300521464 /* navi */ = {
+			isa = PBXGroup;
+			children = (
+				A9D2461D1C253E9300521464 /* naviBg@2x.png */,
+				A9D2461E1C253E9300521464 /* naviBg@3x.png */,
+			);
+			path = navi;
+			sourceTree = "<group>";
+		};
 		A9F8E3BB1C21124100A39506 /* IDCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -823,6 +905,7 @@
 		A9F8E4021C2134D600A39506 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				A9D2461C1C253E9300521464 /* navi */,
 				A9D2459A1C23DB4100521464 /* Home */,
 				A90C749D1C22E010007600A2 /* camer */,
 				A90C74A21C22E010007600A2 /* login */,
@@ -1023,9 +1106,11 @@
 				A9F8E4211C21354A00A39506 /* ViewController.xib in Resources */,
 				A9D245F11C243B8900521464 /* home_decorate@2x.png in Resources */,
 				A9D245EF1C243B8900521464 /* home_backArrow@2x.png in Resources */,
+				A9D2461F1C253E9300521464 /* naviBg@2x.png in Resources */,
 				A9D245F61C243B8900521464 /* home_deleteSL@3x.png in Resources */,
 				A90316721C1D42D300087A81 /* MBProgressHUD.bundle in Resources */,
 				A9F8E3D31C21124100A39506 /* ProvName.txt in Resources */,
+				A9D246201C253E9300521464 /* naviBg@3x.png in Resources */,
 				A9F8E3D71C21124100A39506 /* THOCR_Num_Char.lib in Resources */,
 				A90316CF1C1D51DA00087A81 /* mapapi.bundle in Resources */,
 				A9D245FC1C243B8900521464 /* home_per@3x.png in Resources */,
@@ -1103,6 +1188,7 @@
 				A90316431C1D3E5E00087A81 /* PHHomeController.m in Sources */,
 				A90316811C1D42D300087A81 /* UIViewController+PHCategory.m in Sources */,
 				A903167B1C1D42D300087A81 /* UIImage+PHCategory.m in Sources */,
+				A9D246061C252FBE00521464 /* PHBaseSettingViewController.m in Sources */,
 				A9F8E4201C21354A00A39506 /* ViewController.m in Sources */,
 				A9F8E41B1C21354A00A39506 /* OverView.m in Sources */,
 				A90316351C1D3D3900087A81 /* PHTabBar.m in Sources */,
@@ -1117,21 +1203,28 @@
 				A90316A21C1D488500087A81 /* EBNetworkRequest.m in Sources */,
 				A910ACD01C1D60E600F759D4 /* UIControl+YYAdd.m in Sources */,
 				A90316341C1D3D3900087A81 /* PHViewController.m in Sources */,
+				A9D246091C2530E200521464 /* PHTableViewCell.m in Sources */,
 				A903167A1C1D42D300087A81 /* UIColor+PHCategory.m in Sources */,
 				A90316741C1D42D300087A81 /* NSDate+PHCategory.m in Sources */,
 				A90315F91C1D3C9800087A81 /* AppDelegate.mm in Sources */,
+				A9D246161C2530F100521464 /* PHSettingItem.m in Sources */,
 				A9F8E4311C21486600A39506 /* PHUseInfo.m in Sources */,
+				A9D246231C25556600521464 /* PHTextViewCell.m in Sources */,
+				A9D246261C255DD700521464 /* PHSettingTextItem.m in Sources */,
 				A90316781C1D42D300087A81 /* UIButton+EBButton.m in Sources */,
 				A910ACD41C1D6B6100F759D4 /* PHZBarViewController.m in Sources */,
+				A9D246171C2530F100521464 /* PHSettingSwitchItem.m in Sources */,
 				A90316751C1D42D300087A81 /* NSDictionary+PHCategory.m in Sources */,
 				A90316761C1D42D300087A81 /* NSNumber+PHCategory.m in Sources */,
 				A9F8E4371C21579F00A39506 /* PHInfoCollectController.m in Sources */,
 				A903167F1C1D42D300087A81 /* UITextField+PHCategory.m in Sources */,
 				A9F8E41F1C21354A00A39506 /* UIViewExt.m in Sources */,
 				A9F8E4301C21486600A39506 /* PHCompanyInfo.m in Sources */,
+				A9D2461A1C25318500521464 /* PHSettingController.m in Sources */,
 				A9F8E4341C21489F00A39506 /* PHCourier.m in Sources */,
 				A90C74BD1C22EAAC007600A2 /* LoginTextField.m in Sources */,
 				A9F8E41A1C21354A00A39506 /* CameraViewController.mm in Sources */,
+				A9D246141C2530F100521464 /* PHSettingGroup.m in Sources */,
 				A90316771C1D42D300087A81 /* NSString+PHCategory.m in Sources */,
 				A90316731C1D42D300087A81 /* NSArray+MySeperateString.m in Sources */,
 				A903167C1C1D42D300087A81 /* UILabel+PHCategory.m in Sources */,
@@ -1141,6 +1234,7 @@
 				A9F8E41E1C21354A00A39506 /* Type.m in Sources */,
 				A90315F61C1D3C9800087A81 /* main.m in Sources */,
 				A9F8E41C1C21354A00A39506 /* ResultViewController.m in Sources */,
+				A9D246151C2530F100521464 /* PHSettingArrowItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

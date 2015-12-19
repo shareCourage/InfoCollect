@@ -6,12 +6,10 @@
 //  Copyright (c) 2015年 wintone. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "PHViewController.h"
 
-@interface ResultViewController : UIViewController
+@interface ResultViewController : PHViewController
 
-@property (strong, nonatomic) NSString *resultString;
-
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) NSArray *resultArray;
 
 @end

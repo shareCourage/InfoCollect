@@ -78,6 +78,7 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
     //移除聚焦监听
     AVCaptureDevice*camDevice =[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     [camDevice removeObserver:self forKeyPath:@"adjustingFocus"];
@@ -106,7 +107,7 @@
     self.cardRecog = [[WintoneCardOCR alloc] init];
     /*提示：该开发码和项目中的授权仅为演示用，客户开发时请替换该开发码及项目中Copy Bundle Resources 中的.lsc授权文件*/
     int intRecog = [self.cardRecog InitIDCardWithDevcode:Argu_KeyOfIDCard];
-    NSLog(@"ingRecog = %d",intRecog);
+    PHLog(@"ingRecog = %d",intRecog);
     //设置检边参数,根据识别的图像在整张图上的位置设置,建议不要改动
     [_cardRecog setROIWithLeft:225 Top:100 Right:1024 Bottom:618];//图像分辨率1280*720
     //根据证件类型设置剪边
@@ -299,7 +300,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             if (_mrzType != 0) {
                 //加载图片
                 int loadMRZ = [self.cardRecog loadMRZImageWithBuffer:baseAddress Width:width Height:height];
-                NSLog(@"%d, loadMRZ = %d", mrzType, loadMRZ);
+                PHLog(@"%d, loadMRZ = %d", mrzType, loadMRZ);
                 // 马上停止取景
                 [_session stopRunning];
                 //识别图片
@@ -321,7 +322,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 {
                     //加载图像
                     int load = [self.cardRecog loadImageWithBuffer:baseAddress Width:width Height:height];
-                    NSLog(@"load = %d",load);
+                    PHLog(@"load = %d",load);
                 
                     // 马上停止取景
                     [_session stopRunning];
@@ -336,13 +337,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     CVPixelBufferUnlockBaseAddress(imageBuffer,0);
 }
 
-#pragma mark - 识别
+#pragma mark - 识别结果。。。
 // 找边成功开始识别
 -(void)readyToRecog
 {
     if (self.recogType != 3000) {
         int crop = [self.cardRecog CropBySideLine];
-        NSLog(@"crop = %d", crop);
+        PHLog(@"crop = %d", crop);
     }
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *caches = paths[0];
@@ -351,24 +352,25 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     //将裁切好的全幅面保存到imagepath里
     int save = [self.cardRecog saveImage:imagepath];
-    NSLog(@"save = %d", save);
+    PHLog(@"save = %d", save);
     
     if (self.recogType == 3000) {
         //识别机读码
         int recog = [self.cardRecog recogIDCardWithMainID:_mrzType];
-        NSLog(@"recog:%d",recog);
+        PHLog(@"recog:%d",recog);
     }else if(self.recogType == 2){
         //自动判断二代证正反面
         int sum = [self.cardRecog autoRecogChineseID];
-        NSLog(@"sum = %d", sum);
+        PHLog(@"sum = %d", sum);
     }else{
         //识别非机读码证件
         int recog = [self.cardRecog recogIDCardWithMainID:self.recogType];
-        NSLog(@"recog:%d",recog);
+        PHLog(@"recog:%d",recog);
     }
    
     //获取识别结果
     NSString *allResult = @"";
+    NSMutableArray *array = [NSMutableArray array];
     if (self.recogType != 3000) {
         //将裁切好的头像保存到headImagePath
         [self.cardRecog saveHeaderImage:headImagePath];
@@ -378,10 +380,12 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             NSString *field = [self.cardRecog GetFieldNameWithIndex:i];
             //获取字段结果
             NSString *result = [self.cardRecog GetRecogResultWithIndex:i];
-            NSLog(@"%@:%@\n",field, result);
+            PHLog(@"%@:%@\n",field, result);
             if(field != NULL){
                 allResult = [allResult stringByAppendingString:[NSString stringWithFormat:@"%@:%@\n", field, result]];
             }
+            NSDictionary *para = @{field ? field : @"乱码key"  : result ? result : @"乱码"};
+            [array addObject:para];
         }
     }else{
         int mrzCount = _mrzType == 1033 ?4:3;
@@ -401,8 +405,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     if (![allResult isEqualToString:@""]) {
         //识别结果不为空，跳转到结果展示页面
         ResultViewController *rvc = [[ResultViewController alloc] initWithNibName:@"ResultViewController" bundle:nil];
-        NSLog(@"allresult = %@", allResult);
-        rvc.resultString = allResult;
+        PHLog(@"allresult = %@", allResult);
+        rvc.resultArray = array;
         [self.navigationController pushViewController:rvc animated:YES];
     }else{
         //识别结果为空，重新识别
@@ -436,7 +440,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             [device setFocusMode:AVCaptureFocusModeAutoFocus];
             [device unlockForConfiguration];
         } else {
-            NSLog(@"Error: %@", error);
+            PHLog(@"Error: %@", error);
         }
     }
 }
@@ -444,7 +448,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 #pragma mark - ButtonAction
 //返回按钮按钮点击事件
 - (void)backAction{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //闪光灯按钮点击事件
@@ -452,7 +456,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     AVCaptureDevice *device = [self cameraWithPosition:AVCaptureDevicePositionBack];
     if (![device hasTorch]) {
-        //        NSLog(@"no torch");
+        //        PHLog(@"no torch");
     }else{
         [device lockForConfiguration:nil];
         if (!_on) {

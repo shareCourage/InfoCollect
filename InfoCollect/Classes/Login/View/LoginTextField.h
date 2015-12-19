@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong, readonly) NSString *leftImageName;
 @property (nonatomic, strong, readonly) NSString *leftSelImageName;
+@property (nonatomic, strong) UIColor *lineColor;
 
 - (instancetype)initWithLeftImageName:(NSString *)imageName selName:(NSString *)selName;
 - (instancetype)initWithFrame:(CGRect)frame leftImageName:(NSString *)imageName selName:(NSString *)selName;
