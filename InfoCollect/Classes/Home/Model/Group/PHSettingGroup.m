@@ -10,7 +10,7 @@
 
 @implementation PHSettingGroup
 
-+(instancetype)settingGoup
++(instancetype)group
 {
     return [[self alloc] init];
 }

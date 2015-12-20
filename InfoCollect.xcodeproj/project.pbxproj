@@ -131,6 +131,12 @@
 		A9D246201C253E9300521464 /* naviBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D2461E1C253E9300521464 /* naviBg@3x.png */; settings = {ASSET_TAGS = (); }; };
 		A9D246231C25556600521464 /* PHTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246221C25556600521464 /* PHTextViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		A9D246261C255DD700521464 /* PHSettingTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246251C255DD700521464 /* PHSettingTextItem.m */; settings = {ASSET_TAGS = (); }; };
+		A9D246291C26823500521464 /* PHTextHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246281C26823500521464 /* PHTextHeaderView.m */; settings = {ASSET_TAGS = (); }; };
+		A9D2462C1C26869400521464 /* PHRightViewGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D2462B1C26869400521464 /* PHRightViewGroup.m */; settings = {ASSET_TAGS = (); }; };
+		A9D2462F1C26901300521464 /* PHImagesViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D2462E1C26901300521464 /* PHImagesViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		A9D246321C26B66800521464 /* PHCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D246311C26B66800521464 /* PHCityPickerView.m */; settings = {ASSET_TAGS = (); }; };
+		A9D246341C26B67C00521464 /* PHCityPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9D246331C26B67C00521464 /* PHCityPickerView.xib */; settings = {ASSET_TAGS = (); }; };
+		A9D246371C26BAE000521464 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9D246361C26BAE000521464 /* city.plist */; settings = {ASSET_TAGS = (); }; };
 		A9F8E3CC1C21124100A39506 /* Address.txt in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E3BC1C21124100A39506 /* Address.txt */; settings = {ASSET_TAGS = (); }; };
 		A9F8E3CD1C21124100A39506 /* BrandModel.txt in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E3BD1C21124100A39506 /* BrandModel.txt */; settings = {ASSET_TAGS = (); }; };
 		A9F8E3CE1C21124100A39506 /* IDCARDANDROID.xml in Resources */ = {isa = PBXBuildFile; fileRef = A9F8E3BE1C21124100A39506 /* IDCARDANDROID.xml */; settings = {ASSET_TAGS = (); }; };
@@ -352,6 +358,16 @@
 		A9D246221C25556600521464 /* PHTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHTextViewCell.m; sourceTree = "<group>"; };
 		A9D246241C255DD700521464 /* PHSettingTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHSettingTextItem.h; sourceTree = "<group>"; };
 		A9D246251C255DD700521464 /* PHSettingTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHSettingTextItem.m; sourceTree = "<group>"; };
+		A9D246271C26823500521464 /* PHTextHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHTextHeaderView.h; sourceTree = "<group>"; };
+		A9D246281C26823500521464 /* PHTextHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHTextHeaderView.m; sourceTree = "<group>"; };
+		A9D2462A1C26869400521464 /* PHRightViewGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHRightViewGroup.h; sourceTree = "<group>"; };
+		A9D2462B1C26869400521464 /* PHRightViewGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHRightViewGroup.m; sourceTree = "<group>"; };
+		A9D2462D1C26901300521464 /* PHImagesViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHImagesViewCell.h; sourceTree = "<group>"; };
+		A9D2462E1C26901300521464 /* PHImagesViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHImagesViewCell.m; sourceTree = "<group>"; };
+		A9D246301C26B66800521464 /* PHCityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHCityPickerView.h; sourceTree = "<group>"; };
+		A9D246311C26B66800521464 /* PHCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHCityPickerView.m; sourceTree = "<group>"; };
+		A9D246331C26B67C00521464 /* PHCityPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHCityPickerView.xib; sourceTree = "<group>"; };
+		A9D246361C26BAE000521464 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		A9F8E3BC1C21124100A39506 /* Address.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Address.txt; sourceTree = "<group>"; };
 		A9F8E3BD1C21124100A39506 /* BrandModel.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BrandModel.txt; sourceTree = "<group>"; };
 		A9F8E3BE1C21124100A39506 /* IDCARDANDROID.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = IDCARDANDROID.xml; sourceTree = "<group>"; };
@@ -651,6 +667,13 @@
 				A9D245A51C242C4000521464 /* PHLabelView.m */,
 				A9D246211C25556600521464 /* PHTextViewCell.h */,
 				A9D246221C25556600521464 /* PHTextViewCell.m */,
+				A9D246271C26823500521464 /* PHTextHeaderView.h */,
+				A9D246281C26823500521464 /* PHTextHeaderView.m */,
+				A9D2462D1C26901300521464 /* PHImagesViewCell.h */,
+				A9D2462E1C26901300521464 /* PHImagesViewCell.m */,
+				A9D246301C26B66800521464 /* PHCityPickerView.h */,
+				A9D246311C26B66800521464 /* PHCityPickerView.m */,
+				A9D246331C26B67C00521464 /* PHCityPickerView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -831,6 +854,8 @@
 			children = (
 				A9D2460B1C2530F100521464 /* PHSettingGroup.h */,
 				A9D2460C1C2530F100521464 /* PHSettingGroup.m */,
+				A9D2462A1C26869400521464 /* PHRightViewGroup.h */,
+				A9D2462B1C26869400521464 /* PHRightViewGroup.m */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -870,6 +895,14 @@
 			path = navi;
 			sourceTree = "<group>";
 		};
+		A9D246351C26BAE000521464 /* City */ = {
+			isa = PBXGroup;
+			children = (
+				A9D246361C26BAE000521464 /* city.plist */,
+			);
+			path = City;
+			sourceTree = "<group>";
+		};
 		A9F8E3BB1C21124100A39506 /* IDCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -897,6 +930,7 @@
 		A9F8E3E21C2114E400A39506 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A9D246351C26BAE000521464 /* City */,
 				A9F8E4021C2134D600A39506 /* Image */,
 			);
 			path = Resources;
@@ -1068,6 +1102,7 @@
 				A9F8E3CE1C21124100A39506 /* IDCARDANDROID.xml in Resources */,
 				A9D245D11C243B7F00521464 /* login_rightSL@2x.png in Resources */,
 				A9F8E41D1C21354A00A39506 /* ResultViewController.xib in Resources */,
+				A9D246371C26BAE000521464 /* city.plist in Resources */,
 				A90C74AF1C22E010007600A2 /* flash_camera_btn@2x.png in Resources */,
 				A9F8E3D21C21124100A39506 /* pntWTPENPDA.lib in Resources */,
 				A9F8E3D11C21124100A39506 /* OEMtest.txt in Resources */,
@@ -1077,6 +1112,7 @@
 				A9F8E3D51C21124100A39506 /* thocr_Driver_License.lib in Resources */,
 				A9D245FD1C243B8900521464 /* home_scan@2x.png in Resources */,
 				A90C74AD1C22E010007600A2 /* back_camera_btn@2x.png in Resources */,
+				A9D246341C26B67C00521464 /* PHCityPickerView.xib in Resources */,
 				A90C74B91C22E010007600A2 /* login_userSL@3x.png in Resources */,
 				A9D246001C243B8900521464 /* home_setting@3x.png in Resources */,
 				A9D245FE1C243B8900521464 /* home_scan@3x.png in Resources */,
@@ -1188,12 +1224,14 @@
 				A90316431C1D3E5E00087A81 /* PHHomeController.m in Sources */,
 				A90316811C1D42D300087A81 /* UIViewController+PHCategory.m in Sources */,
 				A903167B1C1D42D300087A81 /* UIImage+PHCategory.m in Sources */,
+				A9D2462F1C26901300521464 /* PHImagesViewCell.m in Sources */,
 				A9D246061C252FBE00521464 /* PHBaseSettingViewController.m in Sources */,
 				A9F8E4201C21354A00A39506 /* ViewController.m in Sources */,
 				A9F8E41B1C21354A00A39506 /* OverView.m in Sources */,
 				A90316351C1D3D3900087A81 /* PHTabBar.m in Sources */,
 				A90316331C1D3D3900087A81 /* PHTableViewController.m in Sources */,
 				A90316801C1D42D300087A81 /* UIView+PHLayout.m in Sources */,
+				A9D246291C26823500521464 /* PHTextHeaderView.m in Sources */,
 				A90316A51C1D488500087A81 /* PHKeyValueObserver.m in Sources */,
 				A90316321C1D3D3900087A81 /* PHTabBarController.m in Sources */,
 				A903163E1C1D3E0A00087A81 /* PHLoginController.m in Sources */,
@@ -1210,6 +1248,7 @@
 				A9D246161C2530F100521464 /* PHSettingItem.m in Sources */,
 				A9F8E4311C21486600A39506 /* PHUseInfo.m in Sources */,
 				A9D246231C25556600521464 /* PHTextViewCell.m in Sources */,
+				A9D2462C1C26869400521464 /* PHRightViewGroup.m in Sources */,
 				A9D246261C255DD700521464 /* PHSettingTextItem.m in Sources */,
 				A90316781C1D42D300087A81 /* UIButton+EBButton.m in Sources */,
 				A910ACD41C1D6B6100F759D4 /* PHZBarViewController.m in Sources */,
@@ -1234,6 +1273,7 @@
 				A9F8E41E1C21354A00A39506 /* Type.m in Sources */,
 				A90315F61C1D3C9800087A81 /* main.m in Sources */,
 				A9F8E41C1C21354A00A39506 /* ResultViewController.m in Sources */,
+				A9D246321C26B66800521464 /* PHCityPickerView.m in Sources */,
 				A9D246151C2530F100521464 /* PHSettingArrowItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

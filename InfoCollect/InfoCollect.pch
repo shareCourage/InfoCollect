@@ -41,6 +41,8 @@
 #define kSystemFontSize        [UIFont systemFontSize]         /* 14px */
 #define kpageSize              5
 #define kMapLineWidth          8.0
+#define kMaxImages             9
+#define kPhotoHeight           100
 
 #define Argu_KeyOfUMeng             @"566d0aabe0f55a3501003682"
 #define Argu_KeyOfBMK               @"1A9ddhPEj7V75AGlVbOqTAz4"

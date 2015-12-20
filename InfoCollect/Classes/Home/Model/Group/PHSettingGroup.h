@@ -26,5 +26,5 @@
  */
 @property(nonatomic, assign, getter = isOpened)BOOL opened;
 
-+ (instancetype)settingGoup;
++ (instancetype)group;
 @end

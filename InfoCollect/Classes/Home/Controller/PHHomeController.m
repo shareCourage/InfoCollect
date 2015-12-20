@@ -159,12 +159,12 @@
 #pragma mark - Target
 
 - (void)getClick {
-    PHZBarViewController *zbar = [[PHZBarViewController alloc] init];
-    PHInfoCollectController *infoCollect = [[PHInfoCollectController alloc] init];
-    NSMutableArray * viewControllers = [self.navigationController.viewControllers mutableCopy];
-    [viewControllers insertObject:infoCollect atIndex:1];
-    [viewControllers insertObject:zbar atIndex:2];
+//    PHZBarViewController *zbar = [[PHZBarViewController alloc] init];
+//    NSMutableArray * viewControllers = [self.navigationController.viewControllers mutableCopy];
+//    [viewControllers insertObject:infoCollect atIndex:1];
+//    [viewControllers insertObject:zbar atIndex:2];
 //    [self.navigationController setViewControllers:viewControllers animated:YES];
+    PHInfoCollectController *infoCollect = [[PHInfoCollectController alloc] init];
     [self.navigationController pushViewController:infoCollect animated:YES];
     //    [self pushToCamerVC];
 }

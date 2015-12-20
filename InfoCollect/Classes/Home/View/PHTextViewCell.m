@@ -76,6 +76,7 @@
 - (void)setTextItem:(PHSettingTextItem *)textItem {
     _textItem = textItem;
     if (!textItem) return;
+    self.textView.editable = !textItem.option ? YES : NO;
     [self setupUI];
     [self setupData];
 }
