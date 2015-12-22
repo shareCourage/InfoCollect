@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MAMapKit/MAMapKit.h>
 #import "Singleton.h"
 @class PHCourier;
 
@@ -49,5 +50,12 @@ singleton_interface(PHUseInfo)
  *  扫描身份证获取的信息
  */
 @property (nonatomic, strong) NSArray *identityInfo;
+
+/**
+ *  高德地图
+ */
+@property (nonatomic, strong, readonly) MAMapView *maMapView;
+@property (nonatomic, assign) CLLocationCoordinate2D userLocation;
+
 
 @end

@@ -8,7 +8,6 @@
 
 #import "PHHomeController.h"
 #import "PHZBarViewController.h"
-#import "CameraViewController.h"
 #import "PHInfoCollectController.h"
 
 #import "PHCourier.h"
@@ -39,12 +38,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 //    self.navigationController.navigationBar.hidden = YES;
-}
-
-
-- (void)pushToCamerVC {
-    CameraViewController *vc = [[CameraViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Common Init
@@ -166,33 +159,33 @@
 //    [self.navigationController setViewControllers:viewControllers animated:YES];
     PHInfoCollectController *infoCollect = [[PHInfoCollectController alloc] init];
     [self.navigationController pushViewController:infoCollect animated:YES];
-    //    [self pushToCamerVC];
 }
 
 
 - (void)loadCourierInfoNotification {
     NSString *dataStr = [PHUseInfo sharedPHUseInfo].courier.photo;
-    if (!dataStr) return;
-    NSData *data = [[NSData alloc] initWithBase64EncodedString:dataStr options:0];
-    UIImage *image = [UIImage imageWithData:data];
-    if (!image) return;
-    self.courierIcon.image = image;
+    if (dataStr) {
+        NSData *data = [[NSData alloc] initWithBase64EncodedString:dataStr options:0];
+        UIImage *image = [UIImage imageWithData:data];
+        if (!image) return;
+        self.courierIcon.image = image;
+    }
     
     PHLabelView *labelView = 0;
     for (NSUInteger i = 0; i < 4; i ++) {
         labelView = i < self.labels.count ? [self.labels objectAtIndex:i] : nil;
         switch (i) {
             case 0:
-                labelView.contentStr = [labelView.contentStr stringByAppendingString:[PHUseInfo sharedPHUseInfo].courier.companyName];
+                labelView.contentStr = [labelView.contentStr stringByAppendingString:[PHUseInfo sharedPHUseInfo].courier.companyName ? : @""];
                 break;
             case 1:
-                labelView.contentStr = [labelView.contentStr stringByAppendingString:[PHUseInfo sharedPHUseInfo].courier.branch];
+                labelView.contentStr = [labelView.contentStr stringByAppendingString:[PHUseInfo sharedPHUseInfo].courier.branch ? : @""];
                 break;
             case 2:
-                labelView.contentStr = [labelView.contentStr stringByAppendingString:[PHUseInfo sharedPHUseInfo].courier.phone];
+                labelView.contentStr = [labelView.contentStr stringByAppendingString:[PHUseInfo sharedPHUseInfo].courier.phone ? : @""];
                 break;
             case 3:
-                labelView.contentStr = [labelView.contentStr stringByAppendingString:[PHUseInfo sharedPHUseInfo].courier.name];
+                labelView.contentStr = [labelView.contentStr stringByAppendingString:[PHUseInfo sharedPHUseInfo].courier.name ? : @""];
                 break;
             default:
                 break;

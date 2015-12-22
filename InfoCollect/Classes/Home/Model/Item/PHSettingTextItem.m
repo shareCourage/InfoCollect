@@ -16,6 +16,7 @@
         _labelTitle = labelTitle;
         _accessoryName = accessoryName;
         _keyboardType = UIKeyboardTypeDefault;
+        _textFEnable = YES;
     }
     return self;
 }

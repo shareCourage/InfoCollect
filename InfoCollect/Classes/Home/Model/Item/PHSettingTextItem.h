@@ -15,6 +15,9 @@ typedef void (^PHSettingItemOption)();
 @property (nonatomic, copy, readonly) NSString *labelTitle;
 @property (nonatomic, copy, readonly) NSString *accessoryName;
 @property (nonatomic, assign) UIKeyboardType keyboardType;
+@property (nonatomic, assign, getter=isTextFEnable) BOOL textFEnable;
+
+@property (nonatomic, copy) NSString *textFTitle;
 
 - (instancetype)initWithLabelTitle:(NSString *)labelTitle accessoryName:(NSString *)accessoryName;
 + (instancetype)itemWithLabelTitle:(NSString *)labelTitle accessoryName:(NSString *)accessoryName;

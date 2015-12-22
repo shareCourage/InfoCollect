@@ -44,9 +44,14 @@
 #define kMaxImages             9
 #define kPhotoHeight           100
 
-#define Argu_KeyOfUMeng             @"566d0aabe0f55a3501003682"
-#define Argu_KeyOfBMK               @"1A9ddhPEj7V75AGlVbOqTAz4"
-#define Argu_KeyOfIDCard            @"5P2T5BEE6LEV5L2"
+
+#define Argu_KeyOfAMap              @"163c0486f490bf1c8c84ed7c1a8a9507" //@"d92098548b2ee92426047c7b34126ae9" //更换bundleID后，需要换掉
+#define Argu_KeyOfUMeng             @"566d0aabe0f55a3501003682" //不与bundleID绑定
+#define Argu_KeyOfBMK               @"1A9ddhPEj7V75AGlVbOqTAz4" //1222暂时放弃使用百度地图
+#define Argu_KeyOfIDCard            @"5P2T5BEE6LEV5L2"  //不与bundleID绑定
+
+//bundleID: com.phh.infoCollect
+
 #endif /* InfoCollect_pch */
 
 #ifdef __OBJC__

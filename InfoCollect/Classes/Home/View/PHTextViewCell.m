@@ -12,13 +12,18 @@
 @interface PHTextViewCell ()
 
 @property (nonatomic, weak) UILabel *leftL;
-@property (nonatomic, weak) UITextView *textView;
+@property (nonatomic, weak) UITextField *textView;
 @end
 
 
 @implementation PHTextViewCell
 @synthesize textVTitle = _textVTitle;
-- (void)setTextVTitle:(NSString *)textVTitle {
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)setTextVTitle:(NSString *)textVTitle {//这个方法是给从textField外部赋值用的
     _textVTitle = textVTitle;
     self.textView.text = textVTitle;
 }
@@ -43,13 +48,15 @@
     [self.contentView addSubview:leftL];
     self.leftL = leftL;
     
-    UITextView *textView = [[UITextView alloc] init];
+    UITextField *textView = [[UITextField alloc] init];
     textView.font = [UIFont systemFontOfSize:16];
     textView.textAlignment = NSTextAlignmentNatural;
-    textView.scrollEnabled = NO;
+//    textView.scrollEnabled = NO;
     textView.keyboardType = UIKeyboardTypeNumberPad;
     [self.contentView addSubview:textView];
     self.textView = textView;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tfDidChangedNotification) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
 - (void)layoutSubviews {
@@ -76,7 +83,8 @@
 - (void)setTextItem:(PHSettingTextItem *)textItem {
     _textItem = textItem;
     if (!textItem) return;
-    self.textView.editable = !textItem.option ? YES : NO;
+//    self.textView.editable = !textItem.option ? YES : NO;
+    self.textView.enabled = textItem.isTextFEnable;
     [self setupUI];
     [self setupData];
 }
@@ -96,6 +104,13 @@
 
 - (void)setupData {
     self.leftL.text = self.textItem.labelTitle;
+    
+    self.textView.text = self.textItem.textFTitle;
+}
+
+#pragma mark - Notification
+- (void)tfDidChangedNotification {
+    self.textItem.textFTitle = self.textView.text;
 }
 
 @end

@@ -33,6 +33,9 @@
 
 @interface PHTool : NSObject
 
+
++ (BOOL)locationEnable;
+
 /**
  *  登录成功返回YES,反之返回NO
  *

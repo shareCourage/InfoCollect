@@ -14,6 +14,17 @@
 
 @implementation PHTool
 
++ (BOOL)locationEnable {
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    BOOL enable = NO;
+    if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        enable = YES;
+    } else {
+        enable = NO;
+    }
+    return enable;
+}
+
 + (BOOL)loginEnable {
     NSDate *loginDate = [PHUseInfo sharedPHUseInfo].loginDate;
     if (!loginDate) return NO;//表示从来没有登录过

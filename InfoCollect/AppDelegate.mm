@@ -7,6 +7,10 @@
 //
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>
 
+//高德地图
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+
 //UMeng
 #import "MobClick.h"
 #import "MobClickSocialAnalytics.h"
@@ -27,6 +31,7 @@
     // Override point for customization after application launch.
     [self UMengSetUp];
     [self BMKSetUp];
+    [self AMapSetUp];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self rootViewControllerInitial];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -85,6 +90,11 @@
     } else {
         PHLog(@"manager start success!");
     }
+}
+
+- (void)AMapSetUp {
+    [MAMapServices sharedServices].apiKey = Argu_KeyOfAMap;//高德地图key验证
+    [AMapSearchServices sharedServices].apiKey = Argu_KeyOfAMap;//高德地图key验证
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

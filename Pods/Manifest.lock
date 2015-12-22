@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Masonry (0.6.2)
   - MBProgressHUD (0.9.1)
   - MJExtension (2.5.0)
   - SDWebImage (3.7.3):
@@ -29,6 +30,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.4)
+  - Masonry (~> 0.6.2)
   - MBProgressHUD (~> 0.9.1)
   - MJExtension (~> 2.5.0)
   - SDWebImage (~> 3.7.3)
@@ -36,6 +38,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MJExtension: 002dbd55e0d66ff0808dc74e014437d25c0220ac
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84

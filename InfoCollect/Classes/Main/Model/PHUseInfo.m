@@ -16,6 +16,18 @@
 @synthesize loginDate = _loginDate;
 singleton_implementation(PHUseInfo)
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _maMapView = [[MAMapView alloc] init];
+        _maMapView.showsUserLocation = YES;
+        _maMapView.allowsBackgroundLocationUpdates = YES;
+        _maMapView.userTrackingMode = MAUserTrackingModeFollow;
+
+    }
+    return self;
+}
+
 
 - (NSString *)userName {
     if (!_userName) {

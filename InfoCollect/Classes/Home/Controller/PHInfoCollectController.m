@@ -16,6 +16,7 @@
 
 #import "PHZBarViewController.h"
 #import "CameraViewController.h"
+#import "EBSelectPositionController.h"
 
 
 @interface PHInfoCollectController () <UITableViewDataSource, UITableViewDelegate, PHTextHeaderViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHImagesViewCellDelegate, UIScrollViewDelegate>
@@ -24,9 +25,13 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSArray *groupHeader;
 
-@property (nonatomic, copy) NSString *orderNumer;
+@property (nonatomic, copy) NSString *orderNumer;//扫描获取的订单号
+@property (nonatomic, copy) NSString *senderAddress;//寄件人位置
+@property (nonatomic, assign) CLLocationCoordinate2D senderCoord;//寄件人经纬度
 
-@property (nonatomic, strong) NSMutableArray *goodsImages;
+@property (nonatomic, strong) NSMutableArray *goodsImages;//拍照返回照片数组
+
+@property (nonatomic, assign) CGRect selectCellFrame;//当前编辑的cell frame值
 @end
 
 @implementation PHInfoCollectController
@@ -73,6 +78,7 @@
     };
     PHSettingTextItem *b = [PHSettingTextItem itemWithLabelTitle:goods[1]];
     PHSettingTextItem *c = [PHSettingTextItem itemWithLabelTitle:goods[2]];
+    c.keyboardType = UIKeyboardTypeNumberPad;
     group.items = @[a,b,c];
     return group;
 }
@@ -81,6 +87,7 @@
     group.header = self.groupHeader[1];
     NSArray *senders = @[@"寄件人姓名",@"寄件人位置",@"寄件人具体位置",@"寄件人电话"];
     PHSettingTextItem *a = [PHSettingTextItem itemWithLabelTitle:senders[0] accessoryName:@"home_scan"];
+    a.textFEnable = NO;
     kWS(ws);
     a.option = ^{
         //...
@@ -89,8 +96,16 @@
         
     };
     PHSettingTextItem *b = [PHSettingTextItem itemWithLabelTitle:senders[1] accessoryName:@"home_location"];
+    b.textFEnable = NO;
     b.option = ^{
-    
+        EBSelectPositionController *position = [[EBSelectPositionController alloc] initWithExtraOption:^(NSString *title, NSString *district, CLLocationCoordinate2D coord) {
+            __strong typeof(&*self) strongSelf = ws;
+            PHTextViewCell *cell = [ws.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+            cell.textVTitle = title;
+            strongSelf.senderAddress = title;
+            strongSelf.senderCoord = coord;
+        }];
+        [ws.navigationController pushViewController:position animated:YES];
     };
     PHSettingTextItem *c = [PHSettingTextItem itemWithLabelTitle:senders[2]];
     PHSettingTextItem *d = [PHSettingTextItem itemWithLabelTitle:senders[3]];
@@ -105,10 +120,13 @@
     NSArray *recipers = @[@"收件人姓名",@"收件人地址",@"收件人具体位置",@"收件人电话"];
     PHSettingTextItem *a = [PHSettingTextItem itemWithLabelTitle:recipers[0]];
     PHSettingTextItem *b = [PHSettingTextItem itemWithLabelTitle:recipers[1] accessoryName:@"home_arrow"];
+    b.textFEnable = NO;
     kWS(ws);
     b.option = ^{
         [PHCityPickerView showPickerAddToView:ws.view completion:^(NSString *province, NSString *city, NSString *town) {
             PHLog(@"%@%@%@",province,city,town);
+            PHTextViewCell *cell = [ws.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
+            cell.textVTitle = [NSString stringWithFormat:@"%@%@%@",province,city,town];
         }];
     };
     PHSettingTextItem *c = [PHSettingTextItem itemWithLabelTitle:recipers[2]];
@@ -126,7 +144,7 @@
 }
 
 - (void)tableViewInitial {
-    CGFloat commitH = 50;
+    CGFloat commitH = [PHTool isiPhone4s] ? 40 : 50;
     CGFloat tvX = 0;
     CGFloat tvY = 0;
     CGFloat tvW = kWidthOfScreen;
@@ -155,18 +173,6 @@
     PHLog(@"commitClick");
 }
 
-- (void)getIdentityNotification {
-    PHTextViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-    for (NSDictionary *dict in [PHUseInfo sharedPHUseInfo].identityInfo) {
-        [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            if ([key isEqualToString:@"姓名"]) {
-                cell.textVTitle = obj;
-                return;
-            }
-        }];
-    }
-}
-
 #pragma mark - Super
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -178,7 +184,16 @@
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(id sender) {
         [ws.view endEditing:YES];
     }]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getIdentityNotification) name:PHSaveIdentifyInfoNotification object:nil];
+    [self.navigationController.navigationBar addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(id sender) {
+        [ws.view endEditing:YES];
+    }]];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [center addObserver:self selector:@selector(getIdentityNotification) name:PHSaveIdentifyInfoNotification object:nil];
+    [center addObserver:self selector:@selector(textFieldDidBeginNotification:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    [center addObserver:self selector:@selector(textFieldDidEndNotification:) name:UITextFieldTextDidEndEditingNotification object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -186,6 +201,52 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
+#pragma mark - Notification
+- (void)textFieldDidBeginNotification:(NSNotification *)notification {
+    UITextField *tf = (UITextField *)notification.object;
+    CGPoint pnt = [self.tableView convertPoint:tf.bounds.origin fromView:tf];
+    NSIndexPath *path = [self.tableView indexPathForRowAtPoint:pnt];
+    PHTextViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+    CGRect frame = [cell convertRect:cell.bounds toView:nil];
+    self.selectCellFrame = frame;
+}
+
+- (void)textFieldDidEndNotification:(NSNotification *)notification {
+//    PHLog(@"%@",notification.object);
+}
+
+- (void)keyBoardWillShow:(NSNotification *)notification {
+    CGFloat cellMaxY = CGRectGetMaxY(self.selectCellFrame);
+    CGFloat heightFromBottom = kHeightOfScreen - cellMaxY;
+    NSDictionary *userInfo = notification.userInfo;
+    NSValue *frameValue = userInfo[@"UIKeyboardFrameEndUserInfoKey"];
+    CGSize keyboardSize = [frameValue CGRectValue].size;
+    CGFloat keyBoardH = keyboardSize.height;//186
+    CGFloat value = keyBoardH - heightFromBottom;
+    CGFloat height = 0;
+    if (value > 0) height = value;
+    [UIView animateWithDuration:0.3f animations:^{
+        self.view.bounds = CGRectMake(0, height, self.view.width, self.view.height);
+    }];
+    
+}
+- (void)keyBoardWillHide:(NSNotification *)notification {
+    [UIView animateWithDuration:0.3f animations:^{
+        self.view.bounds = CGRectMake(0, 0, self.view.width, self.view.height);
+    }];
+}
+
+- (void)getIdentityNotification {
+    PHTextViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    for (NSDictionary *dict in [PHUseInfo sharedPHUseInfo].identityInfo) {
+        [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            if ([key isEqualToString:@"姓名"]) {
+                cell.textVTitle = obj;
+                return;
+            }
+        }];
+    }
+}
 #pragma mark - UITableView
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
