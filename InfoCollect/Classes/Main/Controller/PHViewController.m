@@ -26,7 +26,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewControllerDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewControllerDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewControllerWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+    [self.navigationItem setHidesBackButton:YES];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"home_backArrow"] style:UIBarButtonItemStyleDone target:self action:@selector(backClick)];
+    self.navigationItem.leftBarButtonItem = left;
+    _leftBarItem = left;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
+- (void)backClick {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.appearRefresh = YES;

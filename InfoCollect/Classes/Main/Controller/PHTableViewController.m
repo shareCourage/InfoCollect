@@ -38,6 +38,12 @@
     backgroundImageView.image = image;
     self.tableView.backgroundView = backgroundImageView;
     self.backgroundImageView = backgroundImageView;
+    [self.navigationItem setHidesBackButton:YES];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"home_backArrow"] style:UIBarButtonItemStyleDone target:self action:@selector(backClick)];
+    self.navigationItem.leftBarButtonItem = left;
+}
+- (void)backClick {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

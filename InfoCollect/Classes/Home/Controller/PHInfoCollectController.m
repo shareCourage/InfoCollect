@@ -21,7 +21,7 @@
 
 @interface PHInfoCollectController () <UITableViewDataSource, UITableViewDelegate, PHTextHeaderViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHImagesViewCellDelegate, UIScrollViewDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSArray *groupHeader;
 
@@ -32,12 +32,35 @@
 @property (nonatomic, strong) NSMutableArray *goodsImages;//拍照返回照片数组
 
 @property (nonatomic, assign) CGRect selectCellFrame;//当前编辑的cell frame值
-@end
+@property (nonatomic, strong) PHCityPickerView *cityPicker;
 
+@end
+/**
+ *  必须的参数
+ 快件单号   寄件人电话    收件人姓名   收件人电话   收件人地址   物品类型
+ */
 @implementation PHInfoCollectController
 - (void)dealloc {
     self.tableView.delegate = nil;//处理因为scrollViewDelegate引发的野指针的问题
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (PHCityPickerView *)cityPicker {
+    if (!_cityPicker) {
+        kWS(ws);
+        _cityPicker = [PHCityPickerView cityPickerAddToView:self.view completion:^(NSString *province, NSString *city, NSString *town) {
+            PHLog(@"%@%@%@",province,city,town);
+            NSString *string = [NSString stringWithFormat:@"%@%@%@",province,city,town];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:2];
+            PHTextViewCell *cell = [ws.tableView cellForRowAtIndexPath:indexPath];
+            cell.textVTitle = string;
+            PHSettingGroup *group = [ws.dataSource objectAtIndex:indexPath.section];
+            PHSettingTextItem *item = [group.items objectAtIndex:indexPath.row];
+            item.textFTitle = string;
+            [ws.view endEditing:YES];
+        }];
+    }
+    return _cityPicker;
 }
 
 - (NSMutableArray *)goodsImages {
@@ -123,11 +146,7 @@
     b.textFEnable = NO;
     kWS(ws);
     b.option = ^{
-        [PHCityPickerView showPickerAddToView:ws.view completion:^(NSString *province, NSString *city, NSString *town) {
-            PHLog(@"%@%@%@",province,city,town);
-            PHTextViewCell *cell = [ws.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
-            cell.textVTitle = [NSString stringWithFormat:@"%@%@%@",province,city,town];
-        }];
+        [ws.cityPicker show];
     };
     PHSettingTextItem *c = [PHSettingTextItem itemWithLabelTitle:recipers[2]];
     PHSettingTextItem *d = [PHSettingTextItem itemWithLabelTitle:recipers[3]];
@@ -151,7 +170,7 @@
     CGFloat tvH = kHeightOfScreen - commitH;
     CGRect tvF = CGRectMake(tvX, tvY, tvW, tvH);
     UITableView *tableView = [[UITableView alloc] initWithFrame:tvF style:UITableViewStyleGrouped];
-    tableView.allowsSelection = NO;
+//    tableView.allowsSelection = NO;
     tableView.dataSource = self;
     tableView.delegate = self;
     if (kiOS7) [tableView setSeparatorInset:UIEdgeInsetsZero];
@@ -183,9 +202,11 @@
     kWS(ws);
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(id sender) {
         [ws.view endEditing:YES];
+        [ws.cityPicker hide];
     }]];
     [self.navigationController.navigationBar addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(id sender) {
         [ws.view endEditing:YES];
+        [ws.cityPicker hide];
     }]];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -318,6 +339,10 @@
 
 #pragma mark - PHTextHeaderViewDelegate
 - (void)headerViewDidClickRightBtn:(PHTextHeaderView *)headerView {
+    if (self.goodsImages.count >= kMaxImages) {
+        [MBProgressHUD showError:@"图片已经达到最大数量" toView:self.view];
+        return;
+    }
     [self presentImagePickerController];
 }
 - (void)presentImagePickerController {

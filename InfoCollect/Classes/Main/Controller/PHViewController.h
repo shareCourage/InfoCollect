@@ -25,4 +25,7 @@
 
 @property (nonatomic, assign, getter = isAppearRefresh) BOOL appearRefresh;
 
+
+@property (nonatomic, weak, readonly) UIBarButtonItem *leftBarItem;
+
 @end

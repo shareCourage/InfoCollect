@@ -58,6 +58,12 @@
 
 - (CGSize)boundingRectWithSize:(CGSize)size font:(UIFont *)font;
 - (CGSize)stringSizeWithFont:(UIFont *)font height:(CGFloat)height;
+
+/**
+ *  是否包含中文
+ *
+ */
+- (BOOL)isContainChinese;
 @end
 
 

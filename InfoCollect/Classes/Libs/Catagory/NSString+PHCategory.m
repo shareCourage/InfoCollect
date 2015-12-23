@@ -265,6 +265,16 @@ static NSString *token = @"Itisgoomesimplifiedappprivatekeyandcouldnotbegetbysom
     return returnSize;
 }
 
+- (BOOL)isContainChinese {
+    for( NSUInteger i = 0; i < [self length]; i ++ ) {
+        NSUInteger a = [self characterAtIndex:i];
+        if( a > 0x4e00 && a < 0x9fff) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 @end
 
 

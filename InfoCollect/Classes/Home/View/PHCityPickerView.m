@@ -23,6 +23,8 @@
 @property (nonatomic, copy) NSString *cityStr;
 @property (nonatomic, copy) NSString *townStr;
 
+@property (nonatomic, assign, getter=isHideRemove) BOOL hideRemove;
+
 @end
 
 @implementation PHCityPickerView
@@ -36,15 +38,20 @@
     if (!_provinceArray) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"plist"];
         _pickerDic = [[NSDictionary alloc] initWithContentsOfFile:path];
-        _provinceArray = [_pickerDic allKeys];
-        _selectedArray = [_pickerDic objectForKey:[[_pickerDic allKeys] objectAtIndex:0]];
+        PHLog(@"---------> \n %@", _pickerDic);
+        _provinceArray = [_pickerDic allKeys];//所有的省份名字
+        NSString *firstProvice = [_provinceArray objectAtIndex:0];//第0个省份名字
+        _selectedArray = [_pickerDic objectForKey:firstProvice];//将第0个省份的具体信息取出来
         if (_selectedArray.count > 0) {
-            _cityArray = [[_selectedArray objectAtIndex:0] allKeys];
+            NSDictionary *cityDict = [_selectedArray objectAtIndex:0];//将该省份的信息取出来
+            _cityArray = [cityDict allKeys];//再取出key，就是该省份的所有城市列表
         }
         if (_cityArray.count > 0) {
             _townArray = [[_selectedArray objectAtIndex:0] objectForKey:[_cityArray objectAtIndex:0]];
         }
-
+        self.proviceStr = [self.provinceArray firstObject];
+        self.cityStr = [self.cityArray firstObject];
+        self.townStr = [self.townArray firstObject];
     }
     return _provinceArray;
 }
@@ -54,7 +61,7 @@
     [self hide];
 }
 
-+ (instancetype)showPickerAddToView:(UIView *)view completion:(void (^)(NSString *, NSString *, NSString *))option{
++ (instancetype)cityPickerAddToView:(UIView *)view completion:(void (^)(NSString *, NSString *, NSString *))option{
     PHCityPickerView *picker = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] firstObject];
     picker.completion = option;
     picker.frame = CGRectMake(0, view.height, view.width, kHeight);
@@ -63,12 +70,13 @@
     [picker show];
     return picker;
 }
-
-+ (instancetype)showPickerAddToView:(UIView *)view {
-    return [self showPickerAddToView:view completion:nil];
++ (instancetype)cityPickerAddToView:(UIView *)view hideRemove:(BOOL)remove completion:(void (^)(NSString *province, NSString *city, NSString *town))option {
+    PHCityPickerView *picker = [self cityPickerAddToView:view completion:option];
+    picker.hideRemove = remove;
+    return picker;
 }
-
 - (void)show {
+    [self observeNotification];
     [UIView animateWithDuration:kAnimatedTime animations:^{
         self.backgroundColor = kGrayColor;
         self.frame = CGRectMake(0, self.contentView.height - kHeight, self.width, self.height);
@@ -76,11 +84,12 @@
 }
 
 - (void)hide {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [UIView animateWithDuration:kAnimatedTime animations:^{
         self.backgroundColor = [UIColor clearColor];
         self.frame = CGRectMake(0, self.contentView.height, self.width, self.height);
     } completion:^(BOOL finished) {
-        [self removeFromSuperview];
+        self.isHideRemove ? [self removeFromSuperview] : nil;
     }];
 }
 
@@ -91,6 +100,10 @@
     self.saveBtn.backgroundColor = kSystemeColor;
     [self.saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.saveBtn.titleLabel setSystemFontOf18];
+    [self observeNotification];
+}
+
+- (void)observeNotification {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(textFieldDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:nil];
     [center addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -110,8 +123,121 @@
 }
 
 - (void)textFieldDidChangeNotification:(NSNotification *)notification {
-    NSString *city = self.cityTF.text;
+    NSString *textStr = self.cityTF.text;
+    if ([textStr isContainChinese]) {
+        __block NSString *foundProvnice = nil;
+        __block NSUInteger provinceIndex = 0;
+        __block NSUInteger cityIndex = 0;
+        __block NSUInteger townIndex = 0;
+        [self.pickerDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            NSString *provinceKey = (NSString *)key;
+            NSRange range = [provinceKey rangeOfString:textStr];
+            if (range.location != NSNotFound) {
+                foundProvnice = provinceKey;
+                *stop = YES;//走到这里，说明找到了
+            }
+            provinceIndex ++;
+        }];
+        __block NSString *foundCity = nil;
+        if (!foundProvnice) {//说明没找到，需要去城市列表找
+            provinceIndex = 0;//省份重新计算，清零
+            [self.pickerDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                NSArray *provinceObj = (NSArray *)obj;//省份列表
+                __block BOOL status = NO;
+                [provinceObj enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    cityIndex = 0;//城市清零
+                    NSDictionary *cityInfo = (NSDictionary *)obj;//城市列表
+                    [cityInfo enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                        NSString *cityKey = (NSString *)key;
+                        NSRange range = [cityKey rangeOfString:textStr];
+                        if (range.location != NSNotFound) {
+                            foundCity = cityKey;
+                            *stop = YES;
+                            status = YES;
+                        }
+                        cityIndex ++;
+                    }];
+                    *stop = status;//等于YES，这个循环就停止
+                }];
+                *stop = status;//等于YES，这个循环就停止
+                provinceIndex ++;//找到那个省份
+            }];
+            __block NSString *foundTown = nil;
+            if (!foundCity) {//在城市列表中没找到，就要去城镇列表寻找
+                provinceIndex = 0;
+                cityIndex = 0;
+                [self.pickerDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                    NSArray *provinceObj = (NSArray *)obj;//省份列表
+                    __block BOOL status = NO;
+                    [provinceObj enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        NSDictionary *cityInfo = (NSDictionary *)obj;//城市列表
+                        cityIndex = 0;
+                        [cityInfo enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                            NSArray *townInfo = (NSArray *)obj;
+                            [townInfo enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                NSString *townStr = (NSString *)obj;
+                                NSRange range = [townStr rangeOfString:textStr];
+                                if (range.location != NSNotFound) {
+                                    foundTown = townStr;
+                                    *stop = YES;
+                                    status = YES;
+                                }
+                                townIndex = idx + 1;
+                            }];
+                            *stop = status;//等于YES，这个循环就停止
+                            cityIndex ++;
+                        }];
+                        *stop = status;//等于YES，这个循环就停止
+                    }];
+                    *stop = status;//等于YES，这个循环就停止
+                    provinceIndex ++;//找到那个省份
+                }];
+                if (!foundTown) {
+                    PHLog(@"没有找到任何配对的城区");
+                } else {
+                    PHLog(@"找到了城镇 -> %@",foundTown);
+                    NSUInteger provinceRow = provinceIndex - 1;
+                    NSUInteger cityRow = cityIndex - 1;
+                    NSUInteger townRow = townIndex - 1;
+                    [self reloadPickerViewAtProviceRow:provinceRow cityRow:cityRow];
+                    [self selectProvinceRow:provinceRow cityRow:cityRow townRow:townRow];
+                }
+            } else {
+                PHLog(@"找到了城市 -> %@",foundCity);
+                NSUInteger provinceRow = provinceIndex - 1;
+                NSUInteger cityRow = cityIndex - 1;
+                [self reloadPickerViewAtProviceRow:provinceRow cityRow:cityRow];
+                [self selectProvinceRow:provinceRow cityRow:cityRow townRow:0];
+            }
+            
+        } else {
+            PHLog(@"找到了省份 -> %@",foundProvnice);
+            NSUInteger row = provinceIndex - 1;
+            [self reloadPickerViewAtProviceRow:row cityRow:0];
+            [self selectProvinceRow:row cityRow:0 townRow:0];
+        }
+        PHLog(@"pro -> %@, city -> %@, town -> %@", @(provinceIndex), @(cityIndex), @(townIndex));
+    }
+}
+
+- (void)reloadPickerViewAtProviceRow:(NSUInteger)row cityRow:(NSUInteger)cityRow{
+    NSArray *array = [self.pickerDic objectForKey:[self.provinceArray objectAtIndex:row]];
+    self.cityArray =  [[array objectAtIndex:0] allKeys];
+    self.townArray = [[array objectAtIndex:0] objectForKey:[self.cityArray objectAtIndex:cityRow]];
+    [self.cityPickerView reloadComponent:1];
+    [self.cityPickerView reloadComponent:2];
     
+    self.selectedArray = [self.pickerDic objectForKey:[self.provinceArray objectAtIndex:row]];
+    self.proviceStr = [self.provinceArray objectAtIndex:row];
+
+}
+
+- (void)selectProvinceRow:(NSUInteger)proRow cityRow:(NSUInteger)cityRow townRow:(NSUInteger)townRow {
+    [self.cityPickerView selectRow:proRow inComponent:0 animated:YES];
+    [self.cityPickerView selectRow:cityRow inComponent:1 animated:YES];
+    [self.cityPickerView selectRow:townRow inComponent:2 animated:YES];
+    self.cityStr = [self.cityArray objectAtIndex:cityRow];
+    self.townStr = [self.townArray objectAtIndex:townRow];
 }
 
 - (void)animatedWithHeight:(CGFloat)height {
@@ -167,9 +293,11 @@
         } else {
             self.townArray = nil;
         }
+        [pickerView selectRow:0 inComponent:1 animated:YES];
+        [pickerView selectRow:0 inComponent:2 animated:YES];
         self.proviceStr = [self.provinceArray objectAtIndex:row];
-        
-        
+        self.cityStr = [self.cityArray objectAtIndex:0];
+        self.townStr = [self.townArray objectAtIndex:0];
     }
     [pickerView selectedRowInComponent:1];
     [pickerView reloadComponent:1];
@@ -181,9 +309,10 @@
         } else {
             self.townArray = nil;
         }
-        [pickerView selectRow:1 inComponent:2 animated:YES];
+        [pickerView selectRow:0 inComponent:2 animated:YES];
         
         self.cityStr = [self.cityArray objectAtIndex:row];
+        self.townStr = [self.townArray objectAtIndex:0];
     }
     
     [pickerView reloadComponent:2];
@@ -191,14 +320,7 @@
     if (component == 2) {
         self.townStr = [self.townArray objectAtIndex:row];
     }
-    
-//    [self saveRow:row component:component];
 }
 
-- (void)saveRow:(NSInteger)row component:(NSInteger)component {
-    NSString *key = [@"pickerRowForKey" stringByAppendingString:[NSString stringWithFormat:@"%@",@(component)]];
-    [[NSUserDefaults standardUserDefaults] setInteger:row forKey:key];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
 
 @end

@@ -33,6 +33,7 @@
     
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"home_setting"] style:UIBarButtonItemStyleDone target:self action:@selector(settingClick)];
     self.navigationItem.rightBarButtonItem = right;
+    self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
