@@ -13,6 +13,8 @@
 
 @property (nonatomic, weak) UILabel *leftL;
 @property (nonatomic, weak) UITextField *textView;
+
+@property (nonatomic, weak) UIButton *control;
 @end
 
 
@@ -56,6 +58,13 @@
     [self.contentView addSubview:textView];
     self.textView = textView;
     
+    UIButton *control = [UIButton buttonWithType:UIButtonTypeCustom];
+    control.backgroundColor = [UIColor clearColor];
+    control.hidden = YES;
+    [textView addSubview:control];
+    [control addTarget:self action:@selector(controlClick) forControlEvents:UIControlEventTouchUpInside];
+    self.control = control;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tfDidChangedNotification) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
@@ -68,6 +77,7 @@
     CGFloat tvw = self.width - width - (self.textItem.accessoryName ? 40 : 0);
     CGFloat tvh = self.height;
     self.textView.frame = CGRectMake(tvx, tvy, tvw, tvh);
+    self.control.frame = self.textView.bounds;
 }
 
 + (instancetype)cellWithTableView:(UITableView *)tableView {
@@ -100,17 +110,33 @@
     } else {
         self.accessoryView = nil;
     }
+    NSString *string = self.textItem.labelTitle;
+    BOOL value = [string isEqualToString:@"物品类型"] || [string isEqualToString:@"寄件人电话"] || [string isEqualToString:@"收件人电话"] || [string isEqualToString:@"收件人姓名"];
+    if (value) {
+        self.control.hidden = NO;
+    } else {
+        self.control.hidden = YES;
+    }
 }
 
 - (void)setupData {
     self.leftL.text = self.textItem.labelTitle;
     
-    self.textView.text = self.textItem.textFTitle;
+    self.textView.text = self.textItem.textFTitle;//为了处理因为UITextField复用的问题
+}
+
+#pragma mark - Target
+- (void)controlClick {
+    if ([self.delegate respondsToSelector:@selector(textViewCellControlDidClick:)]) {
+        [self.delegate textViewCellControlDidClick:self];
+    }
+    [self.control removeFromSuperview];
+    PHLog(@"controlClick %@", self.textItem.labelTitle);
 }
 
 #pragma mark - Notification
 - (void)tfDidChangedNotification {
-    self.textItem.textFTitle = self.textView.text;
+    self.textItem.textFTitle = self.textView.text;//将数据保存到该模型当中，上下拉的时候可以复用
 }
 
 @end

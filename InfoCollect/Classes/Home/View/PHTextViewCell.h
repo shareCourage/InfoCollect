@@ -7,12 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-@class PHSettingTextItem;
+@class PHSettingTextItem, PHTextViewCell;
+
+
+@protocol PHTextViewCellDelegate <NSObject>
+
+@optional
+- (void)textViewCellControlDidClick:(PHTextViewCell *)textView;
+
+@end
 
 @interface PHTextViewCell : UITableViewCell
 
 @property (nonatomic, strong) PHSettingTextItem *textItem;
 @property (nonatomic, strong) NSString *textVTitle;
+@property (nonatomic, assign) id <PHTextViewCellDelegate> delegate;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 

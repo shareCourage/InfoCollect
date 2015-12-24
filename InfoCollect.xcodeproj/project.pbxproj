@@ -106,6 +106,8 @@
 		A9CFB3E51C28F57000C7AF6F /* icon_line_begin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9CFB3E41C28F57000C7AF6F /* icon_line_begin@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A9CFB3E81C28F5AC00C7AF6F /* search_navi_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9CFB3E61C28F5AC00C7AF6F /* search_navi_check@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A9CFB3E91C28F5AC00C7AF6F /* search_navi_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9CFB3E71C28F5AC00C7AF6F /* search_navi_check@3x.png */; settings = {ASSET_TAGS = (); }; };
+		A9CFB4051C2BDBCF00C7AF6F /* PHAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9CFB4041C2BDBCF00C7AF6F /* PHAlertController.m */; settings = {ASSET_TAGS = (); }; };
+		A9CFB4071C2BDC1700C7AF6F /* PHAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9CFB4061C2BDC1700C7AF6F /* PHAlertController.xib */; settings = {ASSET_TAGS = (); }; };
 		A9D245A61C242C4000521464 /* PHLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D245A51C242C4000521464 /* PHLabelView.m */; settings = {ASSET_TAGS = (); }; };
 		A9D245C91C243B7F00521464 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D245BD1C243B7F00521464 /* login_bg@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A9D245CA1C243B7F00521464 /* login_circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D245BE1C243B7F00521464 /* login_circle@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -354,6 +356,9 @@
 		A9CFB3E41C28F57000C7AF6F /* icon_line_begin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_line_begin@2x.png"; sourceTree = "<group>"; };
 		A9CFB3E61C28F5AC00C7AF6F /* search_navi_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_navi_check@2x.png"; sourceTree = "<group>"; };
 		A9CFB3E71C28F5AC00C7AF6F /* search_navi_check@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_navi_check@3x.png"; sourceTree = "<group>"; };
+		A9CFB4031C2BDBCF00C7AF6F /* PHAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHAlertController.h; sourceTree = "<group>"; };
+		A9CFB4041C2BDBCF00C7AF6F /* PHAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHAlertController.m; sourceTree = "<group>"; };
+		A9CFB4061C2BDC1700C7AF6F /* PHAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHAlertController.xib; sourceTree = "<group>"; };
 		A9D245A41C242C4000521464 /* PHLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHLabelView.h; sourceTree = "<group>"; };
 		A9D245A51C242C4000521464 /* PHLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHLabelView.m; sourceTree = "<group>"; };
 		A9D245BD1C243B7F00521464 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
@@ -733,6 +738,9 @@
 				A9D246301C26B66800521464 /* PHCityPickerView.h */,
 				A9D246311C26B66800521464 /* PHCityPickerView.m */,
 				A9D246331C26B67C00521464 /* PHCityPickerView.xib */,
+				A9CFB4031C2BDBCF00C7AF6F /* PHAlertController.h */,
+				A9CFB4041C2BDBCF00C7AF6F /* PHAlertController.m */,
+				A9CFB4061C2BDC1700C7AF6F /* PHAlertController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1248,6 +1256,7 @@
 				A9D245FF1C243B8900521464 /* home_setting@2x.png in Resources */,
 				A9F8E3D81C21124100A39506 /* THOCR_PDA.lib in Resources */,
 				A90C74B41C22E010007600A2 /* login_log@3x.png in Resources */,
+				A9CFB4071C2BDC1700C7AF6F /* PHAlertController.xib in Resources */,
 				A9F8E3D61C21124100A39506 /* THOCR_LP.lib in Resources */,
 				A9D245F41C243B8900521464 /* home_delete@3x.png in Resources */,
 				A9D245CD1C243B7F00521464 /* login_codeSL@3x.png in Resources */,
@@ -1346,6 +1355,7 @@
 				A9D2462F1C26901300521464 /* PHImagesViewCell.m in Sources */,
 				A9D246061C252FBE00521464 /* PHBaseSettingViewController.m in Sources */,
 				A9F8E4201C21354A00A39506 /* ViewController.m in Sources */,
+				A9CFB4051C2BDBCF00C7AF6F /* PHAlertController.m in Sources */,
 				A9F8E41B1C21354A00A39506 /* OverView.m in Sources */,
 				A90316351C1D3D3900087A81 /* PHTabBar.m in Sources */,
 				A90316331C1D3D3900087A81 /* PHTableViewController.m in Sources */,

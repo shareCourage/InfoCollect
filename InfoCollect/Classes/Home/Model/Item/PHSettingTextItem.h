@@ -17,6 +17,9 @@ typedef void (^PHSettingItemOption)();
 @property (nonatomic, assign) UIKeyboardType keyboardType;
 @property (nonatomic, assign, getter=isTextFEnable) BOOL textFEnable;
 
+/**
+ *  UITextField输入的时候，用来装数据的
+ */
 @property (nonatomic, copy) NSString *textFTitle;
 
 - (instancetype)initWithLabelTitle:(NSString *)labelTitle accessoryName:(NSString *)accessoryName;

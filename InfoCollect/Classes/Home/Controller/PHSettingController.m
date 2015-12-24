@@ -17,6 +17,10 @@
 @end
 
 @implementation PHSettingController
+- (void)dealloc {
+    PHLog(@"%@ - > dealloc", NSStringFromClass([self class]));
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;

@@ -21,7 +21,7 @@ singleton_implementation(PHUseInfo)
     if (self) {
         _maMapView = [[MAMapView alloc] init];
         _maMapView.showsUserLocation = YES;
-        _maMapView.allowsBackgroundLocationUpdates = YES;
+//        _maMapView.allowsBackgroundLocationUpdates = YES;
         _maMapView.userTrackingMode = MAUserTrackingModeFollow;
 
     }

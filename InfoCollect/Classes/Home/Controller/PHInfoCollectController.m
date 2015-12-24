@@ -13,13 +13,14 @@
 #import "PHTextHeaderView.h"
 #import "PHImagesViewCell.h"
 #import "PHCityPickerView.h"
+#import "PHAlertController.h"
 
 #import "PHZBarViewController.h"
 #import "CameraViewController.h"
 #import "EBSelectPositionController.h"
 
 
-@interface PHInfoCollectController () <UITableViewDataSource, UITableViewDelegate, PHTextHeaderViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHImagesViewCellDelegate, UIScrollViewDelegate>
+@interface PHInfoCollectController () <UITableViewDataSource, UITableViewDelegate, PHTextHeaderViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHImagesViewCellDelegate, UIScrollViewDelegate, PHTextViewCellDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -34,6 +35,7 @@
 @property (nonatomic, assign) CGRect selectCellFrame;//当前编辑的cell frame值
 @property (nonatomic, strong) PHCityPickerView *cityPicker;
 
+@property (nonatomic, strong) NSArray *textItemArray;
 @end
 /**
  *  必须的参数
@@ -49,7 +51,7 @@
     if (!_cityPicker) {
         kWS(ws);
         _cityPicker = [PHCityPickerView cityPickerAddToView:self.view completion:^(NSString *province, NSString *city, NSString *town) {
-            PHLog(@"%@%@%@",province,city,town);
+//            PHLog(@"%@%@%@",province,city,town);
             NSString *string = [NSString stringWithFormat:@"%@%@%@",province,city,town];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:2];
             PHTextViewCell *cell = [ws.tableView cellForRowAtIndexPath:indexPath];
@@ -202,11 +204,11 @@
     kWS(ws);
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(id sender) {
         [ws.view endEditing:YES];
-        [ws.cityPicker hide];
+        _cityPicker ? [ws.cityPicker hide] : nil;
     }]];
     [self.navigationController.navigationBar addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(id sender) {
         [ws.view endEditing:YES];
-        [ws.cityPicker hide];
+        _cityPicker ? [ws.cityPicker hide] : nil;
     }]];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -322,6 +324,7 @@
         return cell;
     } else {
         PHTextViewCell *cell = [PHTextViewCell cellWithTableView:tableView];
+        cell.delegate = self;
         PHSettingGroup *group = [self.dataSource objectAtIndex:indexPath.section];
         PHSettingTextItem *item = [group.items objectAtIndex:indexPath.row];
         cell.textItem = item;
@@ -372,6 +375,28 @@
 - (void)imagesViewCell:(PHImagesViewCell *)cell didSelectImageTag:(NSUInteger)tag {
 
 }
+#pragma mark - PHTextViewCellDelegate
+- (void)textViewCellControlDidClick:(PHTextViewCell *)textView {
+    NSString *title = textView.textItem.labelTitle;
+    PHAlertController *alert = [PHAlertController alertControllerWithcompletion:^(NSString *contentString) {
+        PHLog(@"%@",contentString);
+    }];
+    alert.title = title;
+    alert.alertColor = kSystemeColor;
+    alert.frame = self.view.bounds;
+    [self.view addSubview:alert];
+}
 
+
+- (NSArray *)textItemArray {
+    if (!_textItemArray) {
+        NSIndexPath *index1 = [NSIndexPath indexPathForRow:1 inSection:0];//物品类型
+        NSIndexPath *index2 = [NSIndexPath indexPathForRow:3 inSection:1];//寄件人电话
+        NSIndexPath *index3 = [NSIndexPath indexPathForRow:0 inSection:2];//收件人姓名
+        NSIndexPath *index4 = [NSIndexPath indexPathForRow:3 inSection:2];//收件人电话
+        _textItemArray = @[index1, index2, index3, index4];
+    }
+    return _textItemArray;
+}
 
 @end
