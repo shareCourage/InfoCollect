@@ -63,19 +63,21 @@
     if (selectModel.regeocode) {
         AMapReGeocode *regeocode = selectModel.regeocode;
         AMapPOI *poi = [regeocode.pois firstObject];
-        self.textLabel.text = [NSString stringWithFormat:@"[我的位置]%@",poi.name];
+        NSString *address = [NSString stringWithFormat:@"%@%@%@",poi.province, poi.city, poi.district];
+        self.textLabel.text = address;
         self.detailTextLabel.text = regeocode.formattedAddress;
         
         self.coord = CLLocationCoordinate2DMake(poi.location.latitude, poi.location.longitude);
-        self.mainTitle = poi.name;
+        self.mainTitle = address;
         self.district = poi.district;
     } else {
         AMapPOI *poi = selectModel.poi;
-        self.textLabel.text = poi.name;
+        NSString *address = [NSString stringWithFormat:@"%@%@%@",poi.province, poi.city, poi.district];
+        self.textLabel.text = address;
         self.detailTextLabel.text = poi.address;
         
         self.coord = CLLocationCoordinate2DMake(poi.location.latitude, poi.location.longitude);
-        self.mainTitle = poi.name;
+        self.mainTitle = address;
         self.district = poi.district;
     }
 }

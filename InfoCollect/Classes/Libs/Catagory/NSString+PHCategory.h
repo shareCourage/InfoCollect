@@ -64,6 +64,13 @@
  *
  */
 - (BOOL)isContainChinese;
+
+/**
+ *  正则表达式判断是否是电话号码
+ *
+ */
+- (BOOL)isPureTelephoneNumber;
+
 @end
 
 

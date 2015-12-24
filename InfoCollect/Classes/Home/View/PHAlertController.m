@@ -24,6 +24,13 @@
 
 @implementation PHAlertController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
++ (instancetype)alertController {
+    return [self alertControllerWithcompletion:nil];
+}
+
 + (instancetype)alertControllerWithcompletion:(void (^)(NSString *))completion {
     PHAlertController *alert = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] firstObject];
     alert.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
@@ -71,13 +78,29 @@
 
 - (IBAction)nextClick:(UIButton *)sender {
     if (self.completion) self.completion(self.inputTextField.text);
+    if ([self.delegate respondsToSelector:@selector(alertController:didClickNextWithContentStr:)]) {
+        [self.delegate alertController:self didClickNextWithContentStr:self.inputTextField.text];
+    }
 }
 
 
 - (void)setTitle:(NSString *)title {
     _title = title;
     if (title) self.titleLabel.text = title;
-    
+    [self.inputTextField resignFirstResponder];
+    self.inputTextField.text = nil;
+    NSRange range = [title rangeOfString:@"电话"];
+    if (range.location != NSNotFound) {
+        self.inputTextField.keyboardType = UIKeyboardTypeNumberPad;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.inputTextField becomeFirstResponder];
+        });
+    } else {
+        self.inputTextField.keyboardType = UIKeyboardTypeDefault;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.inputTextField becomeFirstResponder];
+        });
+    }
 }
 
 - (void)setAlertColor:(UIColor *)alertColor {

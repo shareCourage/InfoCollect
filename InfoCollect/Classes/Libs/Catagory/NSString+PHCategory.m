@@ -274,7 +274,20 @@ static NSString *token = @"Itisgoomesimplifiedappprivatekeyandcouldnotbegetbysom
     }
     return NO;
 }
-
+//正则表达式判断是否是电话号码
+- (BOOL)isPureTelephoneNumber {
+    if ([self length] == 0) {
+        return NO;
+    }
+    //正则表达式
+    NSString *regex=@"1\\d{10}";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    BOOL isMatch = [pred evaluateWithObject:self];
+    if (!isMatch) {
+        return NO;
+    }
+    return YES;
+}
 @end
 
 

@@ -18,7 +18,6 @@
 
 @implementation PHSettingController
 - (void)dealloc {
-    PHLog(@"%@ - > dealloc", NSStringFromClass([self class]));
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -30,8 +29,10 @@
     self.title = @"设置";
     self.view.backgroundColor = kGrayColor;
     PHSettingItem *logout = [PHSettingArrowItem itemWithTitle:@"退出登录" destVcClass:nil];
+    kWS(ws);
     logout.option = ^{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"退出登录?" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        __strong typeof(&*self) strongSelf = ws;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"退出登录?" message:nil delegate:strongSelf cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];//这里delegate直接用self会引发强引用
         [alertView show];
     };
     PHSettingGroup *group = [[PHSettingGroup alloc] init];

@@ -12,7 +12,7 @@
 @protocol PHImagesViewCellDelegate <NSObject>
 
 @optional
-- (void)imagesViewCell:(PHImagesViewCell *)cell didSelectImageTag:(NSUInteger)tag;
+- (void)imagesViewCell:(PHImagesViewCell *)cell didDoubleClickImageTag:(NSUInteger)tag;
 
 @end
 

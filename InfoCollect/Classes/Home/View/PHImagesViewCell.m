@@ -34,7 +34,9 @@
             UIImageView *imageV = [[UIImageView alloc] init];
             imageV.tag = i;
             imageV.userInteractionEnabled = YES;
-            [imageV addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapClick:)]];
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapClick:)];
+            tap.numberOfTapsRequired = 2;
+            [imageV addGestureRecognizer:tap];
             [self.imageViews addObject:imageV];
             [self.contentView addSubview:imageV];
             
@@ -44,8 +46,8 @@
 }
 - (void)imageTapClick:(UIGestureRecognizer *)recognizer {
     UIView *view = recognizer.view;
-    if ([self.delegate respondsToSelector:@selector(imagesViewCell:didSelectImageTag:)]) {
-        [self.delegate imagesViewCell:self didSelectImageTag:view.tag];
+    if ([self.delegate respondsToSelector:@selector(imagesViewCell:didDoubleClickImageTag:)]) {
+        [self.delegate imagesViewCell:self didDoubleClickImageTag:view.tag];
     }
 }
 
@@ -78,6 +80,9 @@
 
 - (void)setImages:(NSArray *)images {
     _images = images;
+    for (UIImageView *imageV in self.imageViews) {
+        imageV.image = nil;
+    }
     NSUInteger i = 0;
     for (UIImage *image in images) {
         UIImageView *imageV = i < self.imageViews.count ? [self.imageViews objectAtIndex:i] : nil;

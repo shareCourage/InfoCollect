@@ -28,6 +28,7 @@
 - (void)setTextVTitle:(NSString *)textVTitle {//这个方法是给从textField外部赋值用的
     _textVTitle = textVTitle;
     self.textView.text = textVTitle;
+    self.textItem.textFTitle = textVTitle;
 }
 
 - (NSString *)textVTitle {

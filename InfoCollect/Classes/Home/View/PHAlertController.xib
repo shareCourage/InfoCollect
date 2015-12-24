@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQp-p6-cHX" userLabel="backView">
-                    <rect key="frame" x="68" y="244" width="240" height="180"/>
+                    <rect key="frame" x="68" y="254" width="240" height="160"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="物品类型" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDK-yP-loP">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
@@ -43,17 +43,27 @@
                                 <action selector="nextClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="2aw-1L-2aC"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L4O-zn-mlS" userLabel="lineView">
+                            <rect key="frame" x="0.0" y="114" width="240" height="1"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.29999999999999999" id="7yX-3V-vwh"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="2z8-wa-zMn"/>
                         <constraint firstAttribute="trailing" secondItem="GDK-yP-loP" secondAttribute="trailing" id="4Ta-d5-9Zy"/>
+                        <constraint firstAttribute="trailing" secondItem="L4O-zn-mlS" secondAttribute="trailing" id="5g2-dh-xgo"/>
                         <constraint firstAttribute="trailing" secondItem="1FT-G7-S7T" secondAttribute="trailing" id="65A-TP-qwG"/>
-                        <constraint firstAttribute="height" constant="180" id="7XU-oq-a8o"/>
+                        <constraint firstAttribute="height" constant="160" id="7XU-oq-a8o"/>
+                        <constraint firstItem="L4O-zn-mlS" firstAttribute="leading" secondItem="zQp-p6-cHX" secondAttribute="leading" id="7xV-fS-t1s"/>
                         <constraint firstItem="GX8-hL-sE7" firstAttribute="leading" secondItem="zQp-p6-cHX" secondAttribute="leading" constant="10" id="BOb-x1-mWW"/>
                         <constraint firstItem="1FT-G7-S7T" firstAttribute="leading" secondItem="zQp-p6-cHX" secondAttribute="leading" id="N7A-X4-yfa"/>
                         <constraint firstAttribute="trailing" secondItem="GX8-hL-sE7" secondAttribute="trailing" constant="10" id="PmQ-9y-dya"/>
                         <constraint firstItem="GDK-yP-loP" firstAttribute="top" secondItem="zQp-p6-cHX" secondAttribute="top" id="Xww-Gl-DyW"/>
+                        <constraint firstItem="L4O-zn-mlS" firstAttribute="top" secondItem="GX8-hL-sE7" secondAttribute="bottom" constant="19" id="dVA-w3-vhd"/>
                         <constraint firstItem="GDK-yP-loP" firstAttribute="leading" secondItem="zQp-p6-cHX" secondAttribute="leading" id="gXL-z1-E4k"/>
                         <constraint firstItem="GX8-hL-sE7" firstAttribute="top" secondItem="GDK-yP-loP" secondAttribute="bottom" constant="5" id="oGb-Ts-XIv"/>
                         <constraint firstItem="1FT-G7-S7T" firstAttribute="top" secondItem="GX8-hL-sE7" secondAttribute="bottom" constant="20" id="qtx-gn-Vsr"/>

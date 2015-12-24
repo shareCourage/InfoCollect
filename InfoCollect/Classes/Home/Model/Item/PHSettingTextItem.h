@@ -11,6 +11,7 @@ typedef void (^PHSettingItemOption)();
 
 @interface PHSettingTextItem : NSObject
 
+@property (nonatomic, copy) NSString *keyOfTitle;
 @property (nonatomic, copy) PHSettingItemOption option;
 @property (nonatomic, copy, readonly) NSString *labelTitle;
 @property (nonatomic, copy, readonly) NSString *accessoryName;
