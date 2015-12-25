@@ -52,4 +52,10 @@
  */
 + (BOOL)isiPhone4s;
 + (BOOL)lowerThaniPhone5s;
+
+/**
+ *  当前app版本号
+ *
+ */
++ (NSString *)currentAppVersion;
 @end

@@ -57,6 +57,7 @@
     NSArray *strs = @[@"姓  名：",@"性  别：",@"民  族：",];
     for (NSInteger i = 0; i < strs.count; i ++) {
         PHLabelView *labelView = [[PHLabelView alloc] init];
+        labelView.labelTextColor = [UIColor whiteColor];
         labelView.backgroundColor = [UIColor clearColor];
         CGFloat lx = 5;
         CGFloat lw = self.partOne.width - lx;
@@ -74,6 +75,7 @@
     NSArray *strs2 = @[@"家庭住址：",@"身份证号："];
     for (NSInteger i = 0; i < strs2.count; i ++) {
         PHLabelView *labelView = [[PHLabelView alloc] init];
+        labelView.labelTextColor = [UIColor whiteColor];
         labelView.backgroundColor = [UIColor clearColor];
         CGFloat lx = 5;
         CGFloat lw = self.partTwo.width - lx;

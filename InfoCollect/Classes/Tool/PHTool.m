@@ -68,6 +68,12 @@
     return YES;
 }
 
+
++ (NSString *)currentAppVersion {
+    NSString *version = [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    NSLog(@"%@",version);
+    return version;
+}
 @end
 
 

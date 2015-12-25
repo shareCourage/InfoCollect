@@ -17,6 +17,7 @@ static NSString *kUrl_Host    = @"http://61.164.44.165:39175";
 #define kUrl_login              [kUrl_appRequest stringByAppendingPathComponent:@"login"]
 #define kUrl_uploadInfo         [kUrl_appRequest stringByAppendingPathComponent:@"uploadExpressInfo"]
 #define kUrl_getMessage         [kUrl_appRequest stringByAppendingPathComponent:@"getUnreadMessage"]
+#define KUrl_DownLoadNewestVersion @""
 
 static NSString *kArgu_identityCardId       = @"identityCardId";
 static NSString *kArgu_pwd                  = @"pwd";
@@ -25,6 +26,11 @@ static NSString *kArgu_courier              = @"courier";
 static NSString *kArgu_result               = @"result";
 static NSString *kArgu_success              = @"success";
 static NSString *kArgu_token                = @"token";
+static NSString *kArgu_appVersion           = @"appVersion";
+static NSString *kArgu_messageInfos         = @"messageInfos";
+static NSString *kArgu_content              = @"content";
+static NSString *kArgu_title                = @"title";
+static NSString *kArgu_time                 = @"time";
 
 static NSString *kArgu_courierIdentityCardId    = @"courierIdentityCardId";
 static NSString *kArgu_expressNo                = @"expressNo";

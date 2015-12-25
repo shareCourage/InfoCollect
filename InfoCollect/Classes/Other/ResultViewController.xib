@@ -27,16 +27,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5w-jz-0ky" userLabel="baseInfoView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hNT-FH-KOW" userLabel="partOneView">
-                                    <rect key="frame" x="0.0" y="0.0" width="222" height="200"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m3f-MB-nMp">
                                     <rect key="frame" x="225" y="0.0" width="140" height="200"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="140" id="XTH-tn-GEl"/>
                                     </constraints>
                                 </imageView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hNT-FH-KOW" userLabel="partOneView">
+                                    <rect key="frame" x="0.0" y="0.0" width="222" height="200"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>

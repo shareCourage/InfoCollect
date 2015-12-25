@@ -45,6 +45,9 @@
 @property (nonatomic, copy) NSString *reCity;//收件人城市
 @property (nonatomic, copy) NSString *reTown;//收件人城区
 
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property (nonatomic, strong) UIBarButtonItem *rightItem;
+
 @end
 /**
  *  必须的参数
@@ -54,6 +57,7 @@
 - (void)dealloc {
     self.tableView.delegate = nil;//处理因为scrollViewDelegate引发的野指针的问题
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [PHUseInfo sharedPHUseInfo].identityInfo = nil;//离开这个界面，扫描保存的信息，也应该清空
 }
 - (NSMutableArray *)allOfTheModel {
     if (!_allOfTheModel) {
@@ -262,7 +266,15 @@
     [center addObserver:self selector:@selector(getIdentityNotification) name:PHSaveIdentifyInfoNotification object:nil];
     [center addObserver:self selector:@selector(textFieldDidBeginNotification:) name:UITextFieldTextDidBeginEditingNotification object:nil];
     [center addObserver:self selector:@selector(textFieldDidEndNotification:) name:UITextFieldTextDidEndEditingNotification object:nil];
-
+    
+    
+    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    cancelBtn.frame = CGRectMake(0, 0, 100, 30);
+    [cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [cancelBtn setTitle:@"取消上传" forState:UIControlStateNormal];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
+    self.rightItem = rightItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -272,6 +284,16 @@
 
 #pragma mark - Target
 - (void)commitClick {
+    PHSettingTextItem *aitem1 = [self.allOfTheModel objectAtIndex:1];
+    PHLog(@"物品类型1label -> %@, key -> %@, title -> %@",aitem1.labelTitle, aitem1.keyOfTitle, aitem1.textFTitle);
+    PHSettingTextItem *aitem6 = [self.allOfTheModel objectAtIndex:6];
+    PHLog(@"寄件人电话6label -> %@, key -> %@, title -> %@",aitem6.labelTitle, aitem6.keyOfTitle, aitem6.textFTitle);
+    PHSettingTextItem *aitem7 = [self.allOfTheModel objectAtIndex:7];
+    PHLog(@"收件人姓名7label -> %@, key -> %@, title -> %@",aitem7.labelTitle, aitem7.keyOfTitle, aitem7.textFTitle);
+    PHSettingTextItem *aitem10 = [self.allOfTheModel objectAtIndex:10];
+    PHLog(@"收件人电话10label -> %@, key -> %@, title -> %@",aitem10.labelTitle, aitem10.keyOfTitle, aitem10.textFTitle);
+
+    
     PHLog(@"commitClick");
     BOOL needBreak = NO;
     NSMutableDictionary *para = [NSMutableDictionary dictionary];
@@ -343,14 +365,81 @@
     NSDate *nowDate = [NSDate date];
     NSTimeInterval time = [nowDate timeIntervalSince1970];
     [para setObject:@(time * 1000) forKey:kArgu_takeTime];
-    //这里要填写寄件人身份证号
-    //收件邮政编码
     
+    __block NSString *identityNumber = nil;
+    for (NSDictionary *identityD in [PHUseInfo sharedPHUseInfo].identityInfo) {
+        [identityD enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            if ([key isEqualToString:@"公民身份号码"]) {
+                identityNumber = obj;
+            }
+        }];
+    }
+    //这里要填写寄件人身份证号
+    if (identityNumber.length != 0) {
+        [para setObject:identityNumber forKey:kArgu_postPersonIdentityCardId];
+    } else {
+        [MBProgressHUD showError:@"缺少必要参数" toView:self.view];
+        return;
+    }
+    
+    //收件地区id
+    NSString *reDisID = @"12345";//这里假装放一些数据，还需要更改
+    if (reDisID.length != 0) {
+        [para setObject:@([reDisID integerValue]) forKey:kArgu_receiveDistrictid];
+    } else {
+        [MBProgressHUD showError:@"缺少必要参数" toView:self.view];
+        return;
+    }
+    
+    [self requestWithPara:para];
 }
 
 - (void)showError:(NSString *)title {
     NSString *info = [@"请输入" stringByAppendingString:title];
     [MBProgressHUD showError:info toView:self.view];
+}
+
+- (void)cancelBtnClick {
+    [self.manager.operationQueue cancelAllOperations];
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+#pragma mark - Request
+- (void)requestWithPara:(NSDictionary *)parameters {
+    self.navigationItem.rightBarButtonItem = self.rightItem;
+    [MBProgressHUD showMessage:@"上传中..." toView:self.view];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    self.manager = manager;
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:kUrl_uploadInfo parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSString *mime = @"image/jpeg";
+        NSUInteger index = 1;
+        for (UIImage *image in self.goodsImages) {
+            NSString *name = [NSString stringWithFormat:@"%@name",@(index)];
+            NSString *fileName = [NSString stringWithFormat:@"file%@.jpg",@(index)];
+            NSData *imageData = UIImageJPEGRepresentation(image, 1);
+            [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:mime];
+            index ++;
+        }
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.navigationItem.rightBarButtonItem = nil;
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        PHLog(@"%@",dict);
+        NSNumber *value = dict[kArgu_success];
+        if ([value boolValue]) {
+            [MBProgressHUD showSuccess:@"上传成功" toView:self.view];
+        } else {
+            [MBProgressHUD showError:@"上传失败" toView:self.view];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD showError:@"上传失败" toView:self.view];
+        PHLog(@"%@",error);
+    }];
+
 }
 
 #pragma mark - Notification
@@ -394,10 +483,15 @@
         [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             if ([key isEqualToString:@"姓名"]) {
                 cell.textVTitle = obj;
+                if (!cell) {//有时候会因为复用的问题导致cell不可见为空，这时可以采用赋值给Model形式，保证数据不会丢失
+                    PHSettingTextItem *item = [self textItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+                    item.textFTitle = obj;
+                }
                 return;
             }
         }];
     }
+    
 }
 #pragma mark - UITableView
 
@@ -495,10 +589,19 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = info[UIImagePickerControllerEditedImage];
-    if (self.goodsImages.count < kMaxImages)  [self.goodsImages addObject:image];
+    UIImage *newImage = [image scaleImage:image toScale:0.8];
+    NSData * imageData = UIImageJPEGRepresentation(newImage,1);
+    CGFloat length = [imageData length] / 1000;
+    if (length > 500) {
+        newImage = [image scaleImage:image toScale:0.7];
+        PHLog(@"执行了这句，那说明要出问题了");
+    }
+    PHLog(@"%@",@(length));
+    if (self.goodsImages.count < kMaxImages)  [self.goodsImages addObject:newImage];
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:3]] withRowAnimation:UITableViewRowAnimationNone];
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
 }
 
 #pragma mark - PHImagesViewCellDelegate
@@ -542,20 +645,15 @@
         } else {
             [MBProgressHUD showError:@"请输入正确的手机号码" toView:self.view];
         }
-        
-
     } else if ([alertConroller.title isEqualToString:@"收件人姓名"] && string.length != 0) {
         PHSettingTextItem *item = [self textItemAtIndexPath:[self.textItemArray objectAtIndex:2]];
         item.textFTitle = string;
         alertConroller.title = @"收件人电话";
         [self.tableView reloadRowsAtIndexPaths:@[[self.textItemArray objectAtIndex:2]] withRowAnimation:UITableViewRowAnimationAutomatic];
-
     } else {
-    
     }
-    
 }
-
+#pragma mark - Private Method
 - (NSArray *)textItemArray {
     if (!_textItemArray) {
         NSIndexPath *index1 = [NSIndexPath indexPathForRow:1 inSection:0];//物品类型
@@ -566,7 +664,6 @@
     }
     return _textItemArray;
 }
-
 - (PHSettingTextItem *)textItemAtIndexPath:(NSIndexPath *)indexPath {
     PHSettingGroup *group = [self.dataSource objectAtIndex:indexPath.section];
     PHSettingTextItem *item = [group.items objectAtIndex:indexPath.row];

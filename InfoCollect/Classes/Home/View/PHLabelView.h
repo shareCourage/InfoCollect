@@ -15,4 +15,6 @@
  */
 @property (nonatomic, strong) NSString *contentStr;
 
+@property (nonatomic, strong) UIColor *labelTextColor;
+
 @end

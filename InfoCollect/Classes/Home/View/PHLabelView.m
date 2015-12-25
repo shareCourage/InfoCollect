@@ -40,10 +40,17 @@
                           value:[UIFont systemFontOfSize:[PHTool lowerThaniPhone5s] ? 13 : 15]
                           range:NSMakeRange(0, 5)];
     [AttributedStr addAttribute:NSForegroundColorAttributeName
-                          value:[[UIColor grayColor] colorWithAlphaComponent:0.6f]
+                          value:[self.labelTextColor ? : [UIColor grayColor] colorWithAlphaComponent:0.6f]
                           range:NSMakeRange(0, 5)];
     self.contentLabel.attributedText = AttributedStr;
     [self setNeedsDisplay];
+}
+
+- (void)setLabelTextColor:(UIColor *)labelTextColor {
+    _labelTextColor = labelTextColor;
+    if (labelTextColor) {
+        self.contentLabel.textColor = labelTextColor;
+    }
 }
 
 

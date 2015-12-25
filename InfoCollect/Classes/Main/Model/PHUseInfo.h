@@ -26,6 +26,12 @@ singleton_interface(PHUseInfo)
  *  用户token
  */
 @property (nonatomic, copy) NSString *token;
+
+/**
+ *  从服务器获取的当前的版本号
+ */
+@property (nonatomic, copy) NSString *appVersion;
+
 /**
  *  点击登录，登录成功保存的时间
  */
@@ -48,6 +54,12 @@ singleton_interface(PHUseInfo)
 @property (nonatomic, copy) NSString *courierNo;
 /**
  *  扫描身份证获取的信息
+ *  姓名 : ..
+ *  性别 :
+ *  民族 :
+ *  出生 :
+ *  住址 :
+ *  公民身份证号码 :
  */
 @property (nonatomic, strong) NSArray *identityInfo;
 

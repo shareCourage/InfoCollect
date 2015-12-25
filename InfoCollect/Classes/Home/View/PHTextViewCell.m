@@ -66,7 +66,7 @@
     [control addTarget:self action:@selector(controlClick) forControlEvents:UIControlEventTouchUpInside];
     self.control = control;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tfDidChangedNotification) name:UITextFieldTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tfDidChangedNotification:) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
 - (void)layoutSubviews {
@@ -136,8 +136,11 @@
 }
 
 #pragma mark - Notification
-- (void)tfDidChangedNotification {
-    self.textItem.textFTitle = self.textView.text;//将数据保存到该模型当中，上下拉的时候可以复用
+- (void)tfDidChangedNotification:(NSNotification *)notification {
+    id obj = notification.object;
+    if ([obj isKindOfClass:[UITextField class]] && obj == self.textView) {//必须要先判断是否是该类的UITextField
+        self.textItem.textFTitle = self.textView.text;//将数据保存到该模型当中，上下拉的时候可以复用
+    }
 }
 
 @end

@@ -13,9 +13,12 @@
 #import "PHCourier.h"
 #import "PHLabelView.h"
 #import "PHSettingController.h"
+#import "PHAnouncementController.h"
 
-@interface PHHomeController ()
-
+@interface PHHomeController () <UIAlertViewDelegate>
+{
+    BOOL _executed;//判断judgeVersion是否已经执行
+}
 @property (nonatomic, weak) UIImageView *courierIcon;
 @property (nonatomic, weak) UIImageView *companyIcon;
 @property (nonatomic, strong) NSMutableArray *labels;
@@ -34,6 +37,8 @@
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"home_setting"] style:UIBarButtonItemStyleDone target:self action:@selector(settingClick)];
     self.navigationItem.rightBarButtonItem = right;
     self.navigationItem.leftBarButtonItem = nil;
+    [self loadCourierInfoNotification];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -148,7 +153,6 @@
         [labels addObject:labelView];
     }
     self.labels = labels;
-    [self loadCourierInfoNotification];
 }
 #pragma mark - Target
 
@@ -192,16 +196,63 @@
                 break;
         }
     }
+    
+    if (!_executed) {
+        [self judgeVersion];
+    }
 }
 
 - (void)announceMent {
     PHLog(@"announceMent");
+    PHAnouncementController *setting = [[PHAnouncementController alloc] init];
+    [self.navigationController pushViewController:setting animated:YES];
+
 }
 
 - (void)settingClick {
     PHLog(@"settingClick");
     PHSettingController *setting = [[PHSettingController alloc] init];
     [self.navigationController pushViewController:setting animated:YES];
+}
+
+- (void)judgeVersion {
+    NSString *serverAppVersion = [PHUseInfo sharedPHUseInfo].appVersion;
+    NSString *currentAppVersion = [PHTool currentAppVersion];
+#if DEBUG
+    serverAppVersion = @"1.0.1";
+#endif
+    if (serverAppVersion) {
+        NSArray *servers = [serverAppVersion componentsSeparatedByString:@"."];
+        NSArray *currents = [currentAppVersion componentsSeparatedByString:@"."];
+        if (servers.count == 3 && currents.count == 3) {
+            NSUInteger oneS = [servers[0] integerValue];
+            NSUInteger oneC = [currents[0] integerValue];
+            
+            NSUInteger twoS = [servers[1] integerValue];
+            NSUInteger twoC = [currents[1] integerValue];
+            
+            NSUInteger threeS = [servers[2] integerValue];
+            NSUInteger threeC = [currents[2] integerValue];
+            
+            if (oneS > oneC || twoS > twoC || threeS > threeC) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"有新版本，需要更新吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                [alert show];
+            }
+        }
+    }
+    _executed = YES;
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {//点击确定了，需要跳到浏览器去下载新版本的app
+        NSString *url = KUrl_DownLoadNewestVersion;
+#if DEBUG
+        url = @"http://www.baidu.com";
+#endif
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+
+    }
 }
 
 @end
