@@ -15,9 +15,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 - (IBAction)saveBtnClick:(UIButton *)sender;
 
-+ (instancetype)cityPickerAddToView:(UIView *)view completion:(void (^)(NSString *province, NSString *city, NSString *town))option;
++ (instancetype)cityPickerAddToView:(UIView *)view completion:(void (^)(NSString *province, NSString *city, NSString *town, NSString *code))option;
 
-+ (instancetype)cityPickerAddToView:(UIView *)view hideRemove:(BOOL)remove completion:(void (^)(NSString *province, NSString *city, NSString *town))option;
++ (instancetype)cityPickerAddToView:(UIView *)view hideRemove:(BOOL)remove completion:(void (^)(NSString *province, NSString *city, NSString *town, NSString *code))option;
 
 
 /**

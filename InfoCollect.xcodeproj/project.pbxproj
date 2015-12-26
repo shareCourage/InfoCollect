@@ -85,6 +85,7 @@
 		A910ACD91C1D6D1800F759D4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A910ACD81C1D6D1800F759D4 /* CoreVideo.framework */; };
 		A910ACDB1C1D6D2100F759D4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A910ACDA1C1D6D2100F759D4 /* CoreMedia.framework */; };
 		A910ACDD1C1D6D2900F759D4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A910ACDC1C1D6D2900F759D4 /* AVFoundation.framework */; };
+		A93152161C2E91460029BB8A /* newCity.plist in Resources */ = {isa = PBXBuildFile; fileRef = A93152151C2E91460029BB8A /* newCity.plist */; settings = {ASSET_TAGS = (); }; };
 		A947820E1C2D5DE20080259B /* PHAnouncementController.m in Sources */ = {isa = PBXBuildFile; fileRef = A947820C1C2D5DE20080259B /* PHAnouncementController.m */; settings = {ASSET_TAGS = (); }; };
 		A947820F1C2D5DE20080259B /* PHAnouncementController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A947820D1C2D5DE20080259B /* PHAnouncementController.xib */; settings = {ASSET_TAGS = (); }; };
 		A94782121C2D621E0080259B /* PHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A94782111C2D621E0080259B /* PHLabel.m */; settings = {ASSET_TAGS = (); }; };
@@ -328,6 +329,7 @@
 		A910ACD81C1D6D1800F759D4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		A910ACDA1C1D6D2100F759D4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A910ACDC1C1D6D2900F759D4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A93152151C2E91460029BB8A /* newCity.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = newCity.plist; sourceTree = "<group>"; };
 		A947820B1C2D5DE20080259B /* PHAnouncementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHAnouncementController.h; sourceTree = "<group>"; };
 		A947820C1C2D5DE20080259B /* PHAnouncementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHAnouncementController.m; sourceTree = "<group>"; };
 		A947820D1C2D5DE20080259B /* PHAnouncementController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHAnouncementController.xib; sourceTree = "<group>"; };
@@ -1016,6 +1018,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D246361C26BAE000521464 /* city.plist */,
+				A93152151C2E91460029BB8A /* newCity.plist */,
 			);
 			path = City;
 			sourceTree = "<group>";
@@ -1287,6 +1290,7 @@
 				A90316721C1D42D300087A81 /* MBProgressHUD.bundle in Resources */,
 				A9F8E3D31C21124100A39506 /* ProvName.txt in Resources */,
 				A9D246201C253E9300521464 /* naviBg@3x.png in Resources */,
+				A93152161C2E91460029BB8A /* newCity.plist in Resources */,
 				A9CFB3DE1C28F4D600C7AF6F /* map_minus@2x.png in Resources */,
 				A9F8E3D71C21124100A39506 /* THOCR_Num_Char.lib in Resources */,
 				A90316CF1C1D51DA00087A81 /* mapapi.bundle in Resources */,

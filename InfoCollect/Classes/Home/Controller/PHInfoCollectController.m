@@ -44,6 +44,7 @@
 @property (nonatomic, copy) NSString *reProvince;//收件人省份
 @property (nonatomic, copy) NSString *reCity;//收件人城市
 @property (nonatomic, copy) NSString *reTown;//收件人城区
+@property (nonatomic, copy) NSString *reCode;//邮编地址
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic, strong) UIBarButtonItem *rightItem;
@@ -77,8 +78,8 @@
 - (PHCityPickerView *)cityPicker {
     if (!_cityPicker) {
         kWS(ws);
-        _cityPicker = [PHCityPickerView cityPickerAddToView:self.view completion:^(NSString *province, NSString *city, NSString *town) {
-//            PHLog(@"%@%@%@",province,city,town);
+        _cityPicker = [PHCityPickerView cityPickerAddToView:self.view completion:^(NSString *province, NSString *city, NSString *town, NSString *code) {
+            PHLog(@"%@%@%@%@",province,city,town,code);
             NSString *string = [NSString stringWithFormat:@"%@ %@ %@",province,city,town];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:2];
             PHTextViewCell *cell = [ws.tableView cellForRowAtIndexPath:indexPath];
@@ -90,6 +91,7 @@
             ws.reProvince = province;
             ws.reCity = city;
             ws.reTown = town;
+            ws.reCode = code;
         }];
     }
     return _cityPicker;
@@ -271,6 +273,7 @@
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:UIControlEventTouchUpInside];
     cancelBtn.frame = CGRectMake(0, 0, 100, 30);
+    cancelBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     [cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [cancelBtn setTitle:@"取消上传" forState:UIControlStateNormal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
@@ -374,6 +377,14 @@
             }
         }];
     }
+    
+    if ([PHUseInfo sharedPHUseInfo].token.length != 0) {//令牌
+        [para setObject:[PHUseInfo sharedPHUseInfo].token forKey:kArgu_token];
+    } else {
+        [MBProgressHUD showError:@"缺少必要参数" toView:self.view];
+        return;
+    }
+    
     //这里要填写寄件人身份证号
     if (identityNumber.length != 0) {
         [para setObject:identityNumber forKey:kArgu_postPersonIdentityCardId];
@@ -383,9 +394,8 @@
     }
     
     //收件地区id
-    NSString *reDisID = @"12345";//这里假装放一些数据，还需要更改
-    if (reDisID.length != 0) {
-        [para setObject:@([reDisID integerValue]) forKey:kArgu_receiveDistrictid];
+    if (self.reCode.length != 0) {
+        [para setObject:@([self.reCode integerValue]) forKey:kArgu_receiveDistrictid];
     } else {
         [MBProgressHUD showError:@"缺少必要参数" toView:self.view];
         return;
@@ -415,7 +425,7 @@
         NSString *mime = @"image/jpeg";
         NSUInteger index = 1;
         for (UIImage *image in self.goodsImages) {
-            NSString *name = [NSString stringWithFormat:@"%@name",@(index)];
+            NSString *name = @"wupinImg";//[NSString stringWithFormat:@"%@name",@(index)];
             NSString *fileName = [NSString stringWithFormat:@"file%@.jpg",@(index)];
             NSData *imageData = UIImageJPEGRepresentation(image, 1);
             [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:mime];

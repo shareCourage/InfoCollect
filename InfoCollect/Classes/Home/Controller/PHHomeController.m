@@ -126,10 +126,12 @@
     CGFloat companyH = companyW;
     CGFloat companyY = CGRectGetMaxY(icon.frame) - companyH;
     UIImageView *companyIcon = [[UIImageView alloc] initWithFrame:CGRectMake(companyX, companyY, companyW, companyH)];
-    self.companyIcon = companyIcon;
-    companyIcon.backgroundColor = [UIColor redColor];
+    companyIcon.layer.cornerRadius = companyH / 2;
+    companyIcon.layer.masksToBounds = YES;
+    companyIcon.backgroundColor = kSystemeColor;
     [oneView addSubview:companyIcon];
-    
+    self.companyIcon = companyIcon;
+
     CGFloat twoH = contentH - oneH;
     UIView *twoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, contentW, twoH)];
     twoView.layer.cornerRadius = 5;

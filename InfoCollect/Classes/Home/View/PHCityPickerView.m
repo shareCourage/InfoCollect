@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSArray *selectedArray;
 
 @property (nonatomic, weak) UIView *contentView;
-@property (nonatomic, copy) void (^completion) (NSString *province, NSString *city, NSString *town);
+@property (nonatomic, copy) void (^completion) (NSString *province, NSString *city, NSString *town, NSString *code);
 @property (nonatomic, copy) NSString *proviceStr;
 @property (nonatomic, copy) NSString *cityStr;
 @property (nonatomic, copy) NSString *townStr;
@@ -36,9 +36,9 @@
 
 - (NSArray *)provinceArray {
     if (!_provinceArray) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"plist"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"newCity" ofType:@"plist"];
         _pickerDic = [[NSDictionary alloc] initWithContentsOfFile:path];
-        PHLog(@"---------> \n %@", _pickerDic);
+//        PHLog(@"---------> \n %@", _pickerDic);
         _provinceArray = [_pickerDic allKeys];//所有的省份名字
         NSString *firstProvice = [_provinceArray objectAtIndex:0];//第0个省份名字
         _selectedArray = [_pickerDic objectForKey:firstProvice];//将第0个省份的具体信息取出来
@@ -57,11 +57,14 @@
 }
 
 - (IBAction)saveBtnClick:(UIButton *)sender {
-    if (self.completion) self.completion(self.proviceStr, self.cityStr, self.townStr);
+    NSArray *array = [self.townStr componentsSeparatedByString:@":"];
+    NSString *town = [array firstObject];
+    NSString *code = [array lastObject];
+    if (self.completion) self.completion(self.proviceStr ? : @"", self.cityStr ? : @"", town ? : @"", code ? : @"");
     [self hide];
 }
 
-+ (instancetype)cityPickerAddToView:(UIView *)view completion:(void (^)(NSString *, NSString *, NSString *))option{
++ (instancetype)cityPickerAddToView:(UIView *)view completion:(void (^)(NSString *, NSString *, NSString *, NSString *))option{
     PHCityPickerView *picker = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] firstObject];
     picker.completion = option;
     picker.frame = CGRectMake(0, view.height, view.width, kHeight);
@@ -70,7 +73,7 @@
     [picker show];
     return picker;
 }
-+ (instancetype)cityPickerAddToView:(UIView *)view hideRemove:(BOOL)remove completion:(void (^)(NSString *province, NSString *city, NSString *town))option {
++ (instancetype)cityPickerAddToView:(UIView *)view hideRemove:(BOOL)remove completion:(void (^)(NSString *province, NSString *city, NSString *town, NSString *code))option {
     PHCityPickerView *picker = [self cityPickerAddToView:view completion:option];
     picker.hideRemove = remove;
     return picker;
@@ -95,6 +98,7 @@
 
 - (void)awakeFromNib {
     self.cityTF.placeholder = @"请输入省、市、区（县）";
+    self.cityTF.rightViewMode = UITextFieldViewModeAlways;
     self.cityPickerView.dataSource = self;
     self.cityPickerView.delegate = self;
     self.saveBtn.backgroundColor = kSystemeColor;
@@ -266,7 +270,9 @@
     } else if (component == 1) {
         return [self.cityArray objectAtIndex:row];
     } else {
-        return [self.townArray objectAtIndex:row];
+        NSString *string = [self.townArray objectAtIndex:row];
+        NSArray *array = [string componentsSeparatedByString:@":"];
+        return [array firstObject];
     }
 }
 
