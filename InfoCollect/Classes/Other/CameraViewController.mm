@@ -34,6 +34,12 @@
 @end
 
 @implementation CameraViewController
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    PHLog(@"%@ --> dealloc", NSStringFromClass([self class]));
+}
+
 - (void)setUp {
     self.recogType = 2;
     self.resultCount = 7;
@@ -449,6 +455,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 //返回按钮按钮点击事件
 - (void)backAction{
     [self.navigationController popViewControllerAnimated:YES];
+    [PHUseInfo sharedPHUseInfo].executeOnce = YES;
+
 }
 
 //闪光灯按钮点击事件

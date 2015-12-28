@@ -23,6 +23,11 @@
 
 - (void)viewControllerWillResignActive;
 
+/**
+ *  返回按钮，可供子类重写
+ */
+- (void)backClick;
+
 @property (nonatomic, assign, getter = isAppearRefresh) BOOL appearRefresh;
 
 

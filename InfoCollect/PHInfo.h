@@ -12,7 +12,12 @@
 static NSString * const PHLoadedCourierInfoNotification = @"PHLoadedCourierInfoNotification";
 static NSString * const PHSaveIdentifyInfoNotification = @"PHSaveIdentifyInfoNotification";
 
-static NSString *kUrl_Host    = @"http://61.164.44.168:39175";
+#if 0//DEBUG
+static NSString *kUrl_Host    = @"http://61.164.44.163/express_out";//test
+#else
+static NSString *kUrl_Host    = @"http://61.164.44.165:39175";
+#endif
+
 #define kUrl_appRequest         [kUrl_Host stringByAppendingPathComponent:@"appRequest"]
 #define kUrl_login              [kUrl_appRequest stringByAppendingPathComponent:@"login"]
 #define kUrl_uploadInfo         [kUrl_appRequest stringByAppendingPathComponent:@"uploadExpressInfo"]

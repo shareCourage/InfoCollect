@@ -66,7 +66,9 @@
         NSNumber *value = resultD[kArgu_success];
         if ([value boolValue]) {
             [[PHUseInfo sharedPHUseInfo] setPropertyValue:dict];
-            [[NSNotificationCenter defaultCenter] postNotificationName:PHLoadedCourierInfoNotification object:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:PHLoadedCourierInfoNotification object:nil];
+            });
         } else {
             [[PHUseInfo sharedPHUseInfo] setPropertyNil];
         }

@@ -47,7 +47,7 @@
     LoginTextField *userNameTF = [[LoginTextField alloc] initWithFrame:CGRectMake(0, 0, centerW, height) leftImageName:@"login_userSL" selName:@"login_user"];
     CGFloat userNameY = centerW / 2 - height - height / 2;
     userNameTF.center = CGPointMake(centerW / 2, userNameY);
-    userNameTF.text = @"JDY0105";
+    userNameTF.text = @"test";//@"JDY0313";
     userNameTF.textAlignment = NSTextAlignmentCenter;
     userNameTF.placeholder = @"用户名";
     [centerV addSubview:userNameTF];
@@ -57,7 +57,7 @@
     LoginTextField *userCodeTF = [[LoginTextField alloc] initWithFrame:CGRectMake(0, 0, centerW, height) leftImageName:@"login_codeSL" selName:@"login_code"];
     userCodeTF.secureTextEntry = YES;
     userCodeTF.center = CGPointMake(centerW / 2, codeY);
-    userCodeTF.text = @"111111";
+    userCodeTF.text = @"jxea";//@"1";
     userCodeTF.textAlignment = NSTextAlignmentCenter;
     userCodeTF.placeholder = @"密码";
     [centerV addSubview:userCodeTF];

@@ -69,5 +69,9 @@ singleton_interface(PHUseInfo)
 @property (nonatomic, strong, readonly) MAMapView *maMapView;
 @property (nonatomic, assign) CLLocationCoordinate2D userLocation;
 
+/**
+ *  判断身份证和快递单号是否都扫面成功
+ */
+@property (nonatomic, assign) BOOL executeOnce;
 
 @end

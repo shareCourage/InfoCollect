@@ -52,6 +52,15 @@
     [self createTimer];
 }
 
+#pragma mark - Override backClick
+- (void)backClick {
+    PHLog(@"backClick -> %@",NSStringFromClass([self class]));
+    UIViewController *vc = [self.navigationController.viewControllers objectAtIndex:1];
+    [self.navigationController popToViewController:vc animated:YES];
+    [PHUseInfo sharedPHUseInfo].executeOnce = YES;
+
+}
+
 
 #pragma mark -- ZBarReaderViewDelegate
 
@@ -61,10 +70,15 @@
     const zbar_symbol_t *symbol =zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
     NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
     
-    [PHUseInfo sharedPHUseInfo].courierNo = symbolStr;
-    if (self.option) self.option(symbolStr);
-    [self.navigationController popViewControllerAnimated:YES];
+    if (symbolStr.length != 0) {
+        [PHUseInfo sharedPHUseInfo].courierNo = symbolStr;
+        if (self.option) self.option(symbolStr);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+    }
     
+    PHLog(@"symbolStr -> %@",symbolStr);
     //判断是否包含 头'http:'
     NSString *regex =@"http+:[^\\s]*";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
@@ -96,18 +110,18 @@
     //最上部view
     UIView * upView = [[UIView alloc] initWithFrame:CGRectMake(0,0, VIEW_WIDTH,SCANVIEW_EdgeTop)];
     upView.alpha =TINTCOLOR_ALPHA;
-    upView.backgroundColor = [UIColor purpleColor];
+    upView.backgroundColor = kSystemeColor;
     [_scanView addSubview:upView];
     //左侧的view
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0,SCANVIEW_EdgeTop, SCANVIEW_EdgeLeft,VIEW_WIDTH-2*SCANVIEW_EdgeLeft)];
     leftView.alpha =TINTCOLOR_ALPHA;
-    leftView.backgroundColor = [UIColor purpleColor];
+    leftView.backgroundColor = kSystemeColor;
     [_scanView addSubview:leftView];
     /******************中间扫描区域****************************/
     
     UIImageView *scanCropView=[[UIImageView alloc] initWithFrame:CGRectMake(SCANVIEW_EdgeLeft,SCANVIEW_EdgeTop, VIEW_WIDTH-2*SCANVIEW_EdgeLeft,VIEW_WIDTH-2*SCANVIEW_EdgeLeft)];
     //scanCropView.image=[UIImage imageNamed:@""];
-    scanCropView.layer.borderColor=[UIColor redColor].CGColor;
+    scanCropView.layer.borderColor = kSystemeColor.CGColor;
     scanCropView.layer.borderWidth=2.0;
     scanCropView.backgroundColor=[UIColor clearColor];
     [_scanView addSubview:scanCropView];
@@ -115,7 +129,7 @@
     //右侧的view
     UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(VIEW_WIDTH-SCANVIEW_EdgeLeft,SCANVIEW_EdgeTop, SCANVIEW_EdgeLeft,VIEW_WIDTH-2*SCANVIEW_EdgeLeft)];
     rightView.alpha =TINTCOLOR_ALPHA;
-    rightView.backgroundColor = [UIColor purpleColor];
+    rightView.backgroundColor = kSystemeColor;
     [_scanView addSubview:rightView];
     
 
@@ -123,7 +137,7 @@
     
     UIView *downView = [[UIView alloc] initWithFrame:CGRectMake(0,VIEW_WIDTH-2*SCANVIEW_EdgeLeft+SCANVIEW_EdgeTop,VIEW_WIDTH, VIEW_HEIGHT-(VIEW_WIDTH-2*SCANVIEW_EdgeLeft+SCANVIEW_EdgeTop)-64)];
     //downView.alpha = TINTCOLOR_ALPHA;
-    downView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:TINTCOLOR_ALPHA];
+    downView.backgroundColor = [kSystemeColor colorWithAlphaComponent:TINTCOLOR_ALPHA];
     [_scanView addSubview:downView];
     
     
@@ -160,7 +174,9 @@
     
     //用于开关灯操作的button
     
-    UIButton *openButton=[[UIButton alloc] initWithFrame:CGRectMake(10,20, 300.0, 40.0)];
+    UIButton *openButton=[UIButton buttonWithType:UIButtonTypeSystem];
+    openButton.frame = CGRectMake(0, 0, 300.0, 40.0);
+    openButton.center = CGPointMake(darkView.centerX, 20);
     
     openButton.layer.cornerRadius = 5;
     
@@ -170,7 +186,7 @@
     
     openButton.titleLabel.textAlignment=NSTextAlignmentCenter;
     
-    openButton.backgroundColor = kRedColor;
+    openButton.backgroundColor = kSystemeColor;
     
     openButton.titleLabel.font=[UIFont systemFontOfSize:22.0];
     

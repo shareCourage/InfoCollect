@@ -718,10 +718,10 @@
 				A9CFB3D71C28F19900C7AF6F /* EBSearchAddressController.h */,
 				A9CFB3D81C28F19900C7AF6F /* EBSearchAddressController.m */,
 				A9CFB3D91C28F19900C7AF6F /* EBSearchAddressController.xib */,
-				A9D2461B1C25328C00521464 /* Setting */,
 				A947820B1C2D5DE20080259B /* PHAnouncementController.h */,
 				A947820C1C2D5DE20080259B /* PHAnouncementController.m */,
 				A947820D1C2D5DE20080259B /* PHAnouncementController.xib */,
+				A9D2461B1C25328C00521464 /* Setting */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

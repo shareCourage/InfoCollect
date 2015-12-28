@@ -9,6 +9,7 @@
 #import "PHHomeController.h"
 #import "PHZBarViewController.h"
 #import "PHInfoCollectController.h"
+#import "CameraViewController.h"
 
 #import "PHCourier.h"
 #import "PHLabelView.h"
@@ -16,9 +17,7 @@
 #import "PHAnouncementController.h"
 
 @interface PHHomeController () <UIAlertViewDelegate>
-{
-    BOOL _executed;//判断judgeVersion是否已经执行
-}
+
 @property (nonatomic, weak) UIImageView *courierIcon;
 @property (nonatomic, weak) UIImageView *companyIcon;
 @property (nonatomic, strong) NSMutableArray *labels;
@@ -114,7 +113,7 @@
     icon.layer.cornerRadius = 10;
     icon.layer.masksToBounds = YES;
     icon.backgroundColor = [UIColor clearColor];
-    icon.contentMode = UIViewContentModeScaleAspectFit;
+    icon.contentMode = UIViewContentModeScaleToFill;
     icon.center = CGPointMake(contentW / 2, oneY);
     icon.image = [UIImage imageNamed:@"home_per"];
     [oneView addSubview:icon];
@@ -159,13 +158,21 @@
 #pragma mark - Target
 
 - (void)getClick {
-//    PHZBarViewController *zbar = [[PHZBarViewController alloc] init];
-//    NSMutableArray * viewControllers = [self.navigationController.viewControllers mutableCopy];
-//    [viewControllers insertObject:infoCollect atIndex:1];
-//    [viewControllers insertObject:zbar atIndex:2];
-//    [self.navigationController setViewControllers:viewControllers animated:YES];
+    PHZBarViewController *zbar = [[PHZBarViewController alloc] init];
     PHInfoCollectController *infoCollect = [[PHInfoCollectController alloc] init];
-    [self.navigationController pushViewController:infoCollect animated:YES];
+    CameraViewController *camera = [[CameraViewController alloc] init];
+
+    NSMutableArray * viewControllers = [self.navigationController.viewControllers mutableCopy];
+    [viewControllers insertObject:infoCollect atIndex:1];
+    [viewControllers insertObject:camera atIndex:2];
+    [viewControllers insertObject:zbar atIndex:3];
+    [self.navigationController setViewControllers:viewControllers animated:YES];
+    
+    
+    [PHUseInfo sharedPHUseInfo].executeOnce = NO;
+    
+//    PHInfoCollectController *infoCollect = [[PHInfoCollectController alloc] init];
+//    [self.navigationController pushViewController:infoCollect animated:YES];
 }
 
 
@@ -198,10 +205,7 @@
                 break;
         }
     }
-    
-    if (!_executed) {
-        [self judgeVersion];
-    }
+    [self judgeVersion];
 }
 
 - (void)announceMent {
@@ -220,9 +224,6 @@
 - (void)judgeVersion {
     NSString *serverAppVersion = [PHUseInfo sharedPHUseInfo].appVersion;
     NSString *currentAppVersion = [PHTool currentAppVersion];
-#if DEBUG
-    serverAppVersion = @"1.0.1";
-#endif
     if (serverAppVersion) {
         NSArray *servers = [serverAppVersion componentsSeparatedByString:@"."];
         NSArray *currents = [currentAppVersion componentsSeparatedByString:@"."];
@@ -242,7 +243,6 @@
             }
         }
     }
-    _executed = YES;
 }
 
 #pragma mark - UIAlertViewDelegate

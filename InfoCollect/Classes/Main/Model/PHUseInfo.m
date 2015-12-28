@@ -105,7 +105,7 @@ singleton_implementation(PHUseInfo)
     NSDictionary *courierD = courierInfoD[kArgu_courier];
     PHCourier *courier = [[PHCourier alloc] initWithDict:courierD];
     self.courier = courier;
-    self.appVersion = value[kArgu_appVersion];
+    self.appVersion = courierInfoD[kArgu_appVersion];
 }
 
 @end
