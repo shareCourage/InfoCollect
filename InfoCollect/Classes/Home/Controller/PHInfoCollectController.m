@@ -132,6 +132,9 @@
     group.header = self.groupHeader[0];
     NSArray *goods = @[@"快递单号", @"物品类型", @"物品数量"];
     PHSettingTextItem *a = [PHSettingTextItem itemWithLabelTitle:goods[0] accessoryName:@"home_scan"];
+#if DEBUG
+    a.textFTitle = @"900 800 700 600";
+#endif
     a.keyboardType = UIKeyboardTypeNumberPad;
     a.keyOfTitle = kArgu_expressNo;
     kWS(ws);
@@ -145,6 +148,9 @@
         [ws.navigationController pushViewController:zbar animated:YES];
     };
     PHSettingTextItem *b = [PHSettingTextItem itemWithLabelTitle:goods[1]];
+#if DEBUG
+    b.textFTitle = @"手机";
+#endif
     b.keyOfTitle = kArgu_materialType;
     PHSettingTextItem *c = [PHSettingTextItem itemWithLabelTitle:goods[2]];
     c.keyOfTitle = kArgu_packageCount;
@@ -157,6 +163,11 @@
     group.header = self.groupHeader[1];
     NSArray *senders = @[@"寄件人姓名",@"寄件人位置",@"寄件人具体位置",@"寄件人电话"];
     PHSettingTextItem *a = [PHSettingTextItem itemWithLabelTitle:senders[0] accessoryName:@"home_scan"];
+    
+#if DEBUG
+    a.textFTitle = @"伯罗奔尼撒";
+#endif
+    
     a.textFEnable = NO;
     a.keyOfTitle = kArgu_postPersonName;
     kWS(ws);
@@ -167,6 +178,9 @@
         
     };
     PHSettingTextItem *b = [PHSettingTextItem itemWithLabelTitle:senders[1] accessoryName:@"home_location"];
+#if DEBUG
+    b.textFTitle = @"广东省深圳市南山区";
+#endif
     b.textFEnable = NO;
     b.option = ^{
         EBSelectPositionController *position = [[EBSelectPositionController alloc] initWithExtraOption:^(NSString *title, NSString *district, CLLocationCoordinate2D coord) {
@@ -179,6 +193,9 @@
         [ws.navigationController pushViewController:position animated:YES];
     };
     PHSettingTextItem *c = [PHSettingTextItem itemWithLabelTitle:senders[2]];
+#if DEBUG
+    c.textFTitle = @"科技园大厦";
+#endif
     PHSettingTextItem *d = [PHSettingTextItem itemWithLabelTitle:senders[3]];
     d.keyOfTitle = kArgu_postPersonPhone;
     d.keyboardType = UIKeyboardTypeNumberPad;
@@ -285,6 +302,24 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (![PHUseInfo sharedPHUseInfo].executeOnce) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        PHSettingTextItem *item = [self textItemAtIndexPath:indexPath];
+        item.textFTitle = [PHUseInfo sharedPHUseInfo].courierNo;
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [self getIdentityNotification];//主动再调一次
+        
+        PHTextViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [self textViewCellControlDidClick:cell];
+        
+        [PHUseInfo sharedPHUseInfo].executeOnce = YES;
+    }
+    
+}
+
 #pragma mark - Target
 - (void)commitClick {
     PHSettingTextItem *aitem1 = [self.allOfTheModel objectAtIndex:1];
@@ -367,9 +402,13 @@
     }
     NSDate *nowDate = [NSDate date];
     NSTimeInterval time = [nowDate timeIntervalSince1970];
-    [para setObject:@(time * 1000) forKey:kArgu_takeTime];
+    NSUInteger uintegerTime = (NSUInteger)time;
+    [para setObject:@(uintegerTime * 1000) forKey:kArgu_takeTime];
     
     __block NSString *identityNumber = nil;
+#if DEBUG
+    identityNumber = @"1111111111111111";
+#endif
     for (NSDictionary *identityD in [PHUseInfo sharedPHUseInfo].identityInfo) {
         [identityD enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             if ([key isEqualToString:@"公民身份号码"]) {
