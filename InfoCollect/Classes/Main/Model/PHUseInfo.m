@@ -23,6 +23,7 @@ singleton_implementation(PHUseInfo)
         _maMapView.showsUserLocation = YES;
 //        _maMapView.allowsBackgroundLocationUpdates = YES;
         _maMapView.userTrackingMode = MAUserTrackingModeFollow;
+        _userLocation = kCLLocationCoordinate2DInvalid;
 
     }
     return self;

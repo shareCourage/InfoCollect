@@ -16,16 +16,27 @@
 #import "PHSettingController.h"
 #import "PHAnouncementController.h"
 
-@interface PHHomeController () <UIAlertViewDelegate>
+#import <AMapSearchKit/AMapSearchKit.h>
+
+@interface PHHomeController () <UIAlertViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
 
 @property (nonatomic, weak) UIImageView *courierIcon;
 @property (nonatomic, weak) UIImageView *companyIcon;
 @property (nonatomic, strong) NSMutableArray *labels;
 
+@property (nonatomic, weak) MAMapView *maMapView;
+@property (nonatomic, strong) AMapSearchAPI *searchPOI;
+
 @end
 
 @implementation PHHomeController
-
+- (AMapSearchAPI *)searchPOI {
+    if (_searchPOI == nil) {
+        _searchPOI = [[AMapSearchAPI alloc] init];
+        _searchPOI.delegate = self;
+    }
+    return _searchPOI;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的信息";
@@ -38,6 +49,19 @@
     self.navigationItem.leftBarButtonItem = nil;
     [self loadCourierInfoNotification];
 
+    self.maMapView = [PHUseInfo sharedPHUseInfo].maMapView;
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.maMapView.delegate = self;
+    self.maMapView.showsUserLocation = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.maMapView.delegate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -257,6 +281,32 @@
     }
 }
 
+#pragma mark - MKMapViewDelegate 
+//这个方法，即使关闭定位，也会执行
+- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation{
+    PHLog(@"mapViewLocation -> %.6f, %.6f", userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude);
+    CLLocationCoordinate2D coord = userLocation.location.coordinate;
+    if ([PHTool locationEnable]) {
+        [PHUseInfo sharedPHUseInfo].userLocation = coord;
+        [self locationSearchThroughAMAP:coord];
+    }
+}
+
+- (void)locationSearchThroughAMAP:(CLLocationCoordinate2D)coord {
+    AMapReGeocodeSearchRequest *request = [[AMapReGeocodeSearchRequest alloc] init];
+    request.location = [AMapGeoPoint locationWithLatitude:coord.latitude longitude:coord.longitude];
+    request.requireExtension = YES;
+    [self.searchPOI AMapReGoecodeSearch:request];
+}
+
+#pragma mark - AMapSearchDelegate
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
+    AMapReGeocode *regeocode = response.regeocode;
+    AMapAddressComponent *component = regeocode.addressComponent;
+    NSString *string = [NSString stringWithFormat:@"%@%@%@%@",component.province, component.city, component.district, component.township];
+    [PHUseInfo sharedPHUseInfo].currentAddress = string;
+    PHLog(@"%@",string);
+}
 @end
 
 

@@ -67,7 +67,13 @@ singleton_interface(PHUseInfo)
  *  高德地图
  */
 @property (nonatomic, strong, readonly) MAMapView *maMapView;
+
+/**
+ *  定位获得的经纬度，初始值为kCLLocationCoordinate2DInvalid
+ */
 @property (nonatomic, assign) CLLocationCoordinate2D userLocation;
+
+@property (nonatomic, copy) NSString *currentAddress;
 
 /**
  *  判断身份证和快递单号是否都扫面成功

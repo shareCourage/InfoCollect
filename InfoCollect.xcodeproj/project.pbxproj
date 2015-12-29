@@ -1567,6 +1567,7 @@
 					"$(PROJECT_DIR)/InfoCollect/Classes/Libs/JPush",
 					"$(PROJECT_DIR)/InfoCollect/Classes/Libs/UMeng_No_IDFA",
 					"$(PROJECT_DIR)/InfoCollect/Classes/Libs/IDCard",
+					"$(PROJECT_DIR)/InfoCollect/GMLibDecoder",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.goome.EBus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1595,6 +1596,7 @@
 					"$(PROJECT_DIR)/InfoCollect/Classes/Libs/JPush",
 					"$(PROJECT_DIR)/InfoCollect/Classes/Libs/UMeng_No_IDFA",
 					"$(PROJECT_DIR)/InfoCollect/Classes/Libs/IDCard",
+					"$(PROJECT_DIR)/InfoCollect/GMLibDecoder",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.goome.EBus;
 				PRODUCT_NAME = "$(TARGET_NAME)";

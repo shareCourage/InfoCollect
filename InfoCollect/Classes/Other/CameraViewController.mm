@@ -271,6 +271,48 @@
     
     [self.view addSubview:flashBtn];
     
+    CGFloat backVH = 50;
+    CGFloat backVY = kHeightOfScreen - backVH;
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, backVY, kWidthOfScreen, backVH)];
+    backView.backgroundColor = [kSystemeColor colorWithAlphaComponent:0.7f];
+    [self.view addSubview:backView];
+    
+    NSArray *btns = @[@"二代身份证", @"中国驾驶证"];
+    for (NSInteger i = 0; i < btns.count; i ++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+        btn.tag = i + 1;
+        btn.layer.cornerRadius = 10;
+        CGFloat lw = [PHTool lowerThaniPhone5s] ? 100 : 150;
+        CGFloat lh = 40;
+        btn.frame = CGRectMake(0, 0, lw, lh);
+        CGFloat padding = 30;
+        CGFloat distance = backView.width - lw * 2 - padding;
+        CGFloat lx = distance / 2 + lw / 2 + i * (lw + padding);
+        CGFloat ly = backView.height / 2;
+        btn.center = CGPointMake(lx, ly);
+        [btn setTitle:btns[i] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        btn.backgroundColor = kSystemeColor;
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [backView addSubview:btn];
+    }
+    
+}
+#pragma mark - Target
+- (void)btnClick:(UIButton *)sender {
+    if (sender.tag == 1) {
+        self.recogType = 2;
+        self.resultCount = 7;
+        self.typeName = @"二代证身份证";
+    } else if (sender.tag == 2) {
+        self.recogType = 5;
+        self.resultCount = 6;
+        self.typeName = @"中国驾驶证";
+    }
+    [self.cardRecog setConfirmSideMethodWithType:self.recogType];
+    self.middleLabel.text = self.typeName;
+
+    PHLog(@"%@",sender.titleLabel.text);
 }
 
 //从摄像头缓冲区获取图像

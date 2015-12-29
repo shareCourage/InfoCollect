@@ -22,7 +22,7 @@ static NSString *kUrl_Host    = @"http://61.164.44.165:39175";
 #define kUrl_login              [kUrl_appRequest stringByAppendingPathComponent:@"login"]
 #define kUrl_uploadInfo         [kUrl_appRequest stringByAppendingPathComponent:@"uploadExpressInfo"]
 #define kUrl_getMessage         [kUrl_appRequest stringByAppendingPathComponent:@"getUnreadMessage"]
-#define KUrl_DownLoadNewestVersion @""
+#define KUrl_DownLoadNewestVersion @"http://61.164.44.165:39175/InfoCollect.ipa"
 
 static NSString *kArgu_identityCardId       = @"identityCardId";
 static NSString *kArgu_pwd                  = @"pwd";

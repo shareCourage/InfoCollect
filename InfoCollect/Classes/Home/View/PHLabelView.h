@@ -17,4 +17,6 @@
 
 @property (nonatomic, strong) UIColor *labelTextColor;
 
+@property (nonatomic, weak) UILabel *contentLabel;
+
 @end

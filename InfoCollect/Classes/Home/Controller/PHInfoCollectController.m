@@ -161,14 +161,14 @@
 - (PHSettingGroup *)two {
     PHSettingGroup *group = [PHSettingGroup group];
     group.header = self.groupHeader[1];
-    NSArray *senders = @[@"寄件人姓名",@"寄件人位置",@"寄件人具体位置",@"寄件人电话"];
+    NSArray *senders = @[@"寄件人姓名",@"寄件人身份证号",@"寄件人位置",@"寄件人具体位置",@"寄件人电话"];
     PHSettingTextItem *a = [PHSettingTextItem itemWithLabelTitle:senders[0] accessoryName:@"home_scan"];
     
 #if DEBUG
     a.textFTitle = @"伯罗奔尼撒";
 #endif
     
-    a.textFEnable = NO;
+    a.textFEnable = YES;
     a.keyOfTitle = kArgu_postPersonName;
     kWS(ws);
     a.option = ^{
@@ -177,29 +177,36 @@
         [ws.navigationController pushViewController:vc animated:YES];
         
     };
-    PHSettingTextItem *b = [PHSettingTextItem itemWithLabelTitle:senders[1] accessoryName:@"home_location"];
+    
+    PHSettingTextItem *b = [PHSettingTextItem itemWithLabelTitle:senders[1]];
+    b.keyOfTitle = kArgu_postPersonIdentityCardId;
+    b.keyboardType = UIKeyboardTypeNumberPad;
+    
+    PHSettingTextItem *c = [PHSettingTextItem itemWithLabelTitle:senders[2] accessoryName:@"home_location"];
 #if DEBUG
-    b.textFTitle = @"广东省深圳市南山区";
+    c.textFTitle = @"广东省深圳市南山区";
 #endif
-    b.textFEnable = NO;
-    b.option = ^{
+    c.textFTitle = [PHUseInfo sharedPHUseInfo].currentAddress;
+
+    c.textFEnable = NO;
+    c.option = ^{
         EBSelectPositionController *position = [[EBSelectPositionController alloc] initWithExtraOption:^(NSString *title, NSString *district, CLLocationCoordinate2D coord) {
             __strong typeof(&*self) strongSelf = ws;
-            PHTextViewCell *cell = [ws.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+            PHTextViewCell *cell = [ws.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]];
             cell.textVTitle = title;
             strongSelf.senderAddress = title;
             strongSelf.senderCoord = coord;
         }];
         [ws.navigationController pushViewController:position animated:YES];
     };
-    PHSettingTextItem *c = [PHSettingTextItem itemWithLabelTitle:senders[2]];
-#if DEBUG
-    c.textFTitle = @"科技园大厦";
-#endif
     PHSettingTextItem *d = [PHSettingTextItem itemWithLabelTitle:senders[3]];
-    d.keyOfTitle = kArgu_postPersonPhone;
-    d.keyboardType = UIKeyboardTypeNumberPad;
-    group.items = @[a,b,c,d];
+#if DEBUG
+    d.textFTitle = @"科技园大厦";
+#endif
+    PHSettingTextItem *e = [PHSettingTextItem itemWithLabelTitle:senders[4]];
+    e.keyOfTitle = kArgu_postPersonPhone;
+    e.keyboardType = UIKeyboardTypeNumberPad;
+    group.items = @[a,b,c,d,e];
     return group;
 }
 
@@ -262,8 +269,8 @@
 #pragma mark - Super
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"识别结果";
-    self.senderCoord = kCLLocationCoordinate2DInvalid;
+    self.navigationItem.title = @"信息录入";
+    self.senderCoord = [PHUseInfo sharedPHUseInfo].userLocation;
     self.view.backgroundColor = kSystemeColor;
     [self tableViewInitial];
     [self commonInitial];
@@ -390,43 +397,25 @@
         return;
     }
     
-    NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:1 inSection:1];//寄件人位置
-    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:1 inSection:1];//寄件人具体位置
+    NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:2 inSection:1];//寄件人位置
+    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:3 inSection:1];//寄件人具体位置
     NSString *senderLocation = nil;
     PHSettingTextItem *item1 = [self textItemAtIndexPath:indexPath1];
     senderLocation = item1.textFTitle;
     PHSettingTextItem *item2 = [self textItemAtIndexPath:indexPath2];
-    senderLocation = (senderLocation ? [senderLocation stringByAppendingString:item2.textFTitle] : item2.textFTitle);
+    
+    senderLocation = (senderLocation ? [senderLocation stringByAppendingString:item2.textFTitle ? : @""] : item2.textFTitle);
     if (senderLocation) {
         [para setObject:senderLocation forKey:kArgu_takeAddr];
     }
     NSDate *nowDate = [NSDate date];
     NSTimeInterval time = [nowDate timeIntervalSince1970];
-    NSUInteger uintegerTime = (NSUInteger)time;
-    [para setObject:@(uintegerTime * 1000) forKey:kArgu_takeTime];
+    NSUInteger uintegerTime = (NSUInteger)(time * 1000);
+    [para setObject:@(uintegerTime) forKey:kArgu_takeTime];
     
-    __block NSString *identityNumber = nil;
-#if DEBUG
-    identityNumber = @"1111111111111111";
-#endif
-    for (NSDictionary *identityD in [PHUseInfo sharedPHUseInfo].identityInfo) {
-        [identityD enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            if ([key isEqualToString:@"公民身份号码"]) {
-                identityNumber = obj;
-            }
-        }];
-    }
     
     if ([PHUseInfo sharedPHUseInfo].token.length != 0) {//令牌
         [para setObject:[PHUseInfo sharedPHUseInfo].token forKey:kArgu_token];
-    } else {
-        [MBProgressHUD showError:@"缺少必要参数" toView:self.view];
-        return;
-    }
-    
-    //这里要填写寄件人身份证号
-    if (identityNumber.length != 0) {
-        [para setObject:identityNumber forKey:kArgu_postPersonIdentityCardId];
     } else {
         [MBProgressHUD showError:@"缺少必要参数" toView:self.view];
         return;
@@ -455,6 +444,7 @@
 
 #pragma mark - Request
 - (void)requestWithPara:(NSDictionary *)parameters {
+    if (!parameters) return;
     self.navigationItem.rightBarButtonItem = self.rightItem;
     [MBProgressHUD showMessage:@"上传中..." toView:self.view];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -527,20 +517,22 @@
 }
 
 - (void)getIdentityNotification {
-    PHTextViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:1];
+    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:1 inSection:1];
+    PHSettingTextItem *item1 = [self textItemAtIndexPath:indexPath1];
+    PHSettingTextItem *item2 = [self textItemAtIndexPath:indexPath2];
+    
     for (NSDictionary *dict in [PHUseInfo sharedPHUseInfo].identityInfo) {
         [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             if ([key isEqualToString:@"姓名"]) {
-                cell.textVTitle = obj;
-                if (!cell) {//有时候会因为复用的问题导致cell不可见为空，这时可以采用赋值给Model形式，保证数据不会丢失
-                    PHSettingTextItem *item = [self textItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-                    item.textFTitle = obj;
-                }
-                return;
+                item1.textFTitle = obj;
+            } else if ([key isEqualToString:@"公民身份号码"] || [key isEqualToString:@"证号"]) {
+                item2.textFTitle = obj;
             }
         }];
     }
     
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath1, indexPath2] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 #pragma mark - UITableView
 
@@ -706,7 +698,7 @@
 - (NSArray *)textItemArray {
     if (!_textItemArray) {
         NSIndexPath *index1 = [NSIndexPath indexPathForRow:1 inSection:0];//物品类型
-        NSIndexPath *index2 = [NSIndexPath indexPathForRow:3 inSection:1];//寄件人电话
+        NSIndexPath *index2 = [NSIndexPath indexPathForRow:4 inSection:1];//寄件人电话
         NSIndexPath *index3 = [NSIndexPath indexPathForRow:0 inSection:2];//收件人姓名
         NSIndexPath *index4 = [NSIndexPath indexPathForRow:3 inSection:2];//收件人电话
         _textItemArray = @[index1, index2, index3, index4];

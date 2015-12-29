@@ -10,7 +10,6 @@
 
 @interface PHLabelView ()
 
-@property (nonatomic, weak) UILabel *contentLabel;
 
 @end
 
