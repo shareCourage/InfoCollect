@@ -71,7 +71,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self titleViewImplementation];
+//    [self titleViewImplementation];
     [self searchMapViewImplementation];
     [self tableViewImplementation];
 }

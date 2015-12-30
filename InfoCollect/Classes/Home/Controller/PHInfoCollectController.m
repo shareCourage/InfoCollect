@@ -469,6 +469,7 @@
         NSNumber *value = dict[kArgu_success];
         if ([value boolValue]) {
             [MBProgressHUD showSuccess:@"上传成功" toView:self.view];
+            [self.navigationController popViewControllerAnimated:YES];
         } else {
             [MBProgressHUD showError:@"上传失败" toView:self.view];
         }
@@ -667,6 +668,9 @@
             alertConroller.hidden = YES;
             [alertConroller removeFromSuperview];
             [self.tableView reloadRowsAtIndexPaths:@[[self.textItemArray objectAtIndex:3]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.cityPicker show];
+            });
         } else {
             [MBProgressHUD showError:@"请输入正确的手机号码" toView:self.view];
         }

@@ -71,6 +71,12 @@
  */
 - (BOOL)isPureTelephoneNumber;
 
+/*
+ 正则判断手机号码格式(精确验证)
+ 新增其他号段的手机号,做简单修改即可
+ */
++ (BOOL)accurateValidatePhone:(NSString *)phone;
+
 @end
 
 

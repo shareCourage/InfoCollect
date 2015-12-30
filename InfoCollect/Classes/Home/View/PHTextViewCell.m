@@ -52,7 +52,7 @@
     self.leftL = leftL;
     
     UITextField *textView = [[UITextField alloc] init];
-    textView.font = [UIFont systemFontOfSize:16];
+    textView.font = [PHTool lowerThaniPhone5s] ? [UIFont systemFontOfSize:14] : [UIFont systemFontOfSize:18];
     textView.textAlignment = NSTextAlignmentNatural;
 //    textView.scrollEnabled = NO;
     textView.keyboardType = UIKeyboardTypeNumberPad;

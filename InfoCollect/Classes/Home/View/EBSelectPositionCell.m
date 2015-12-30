@@ -72,12 +72,17 @@
         self.district = poi.district;
     } else {
         AMapPOI *poi = selectModel.poi;
-        NSString *address = [NSString stringWithFormat:@"%@%@%@",poi.province, poi.city, poi.district];
-        self.textLabel.text = address;
+        NSString *addressStr = [NSString stringWithFormat:@"%@%@%@",poi.province, poi.city, poi.district];
+        if (poi.businessArea) {
+            addressStr = poi.businessArea ? [addressStr stringByAppendingString:poi.businessArea] : addressStr;
+        } else if (poi.address) {
+            addressStr = [addressStr stringByAppendingString:poi.address];
+        }
+        self.textLabel.text = addressStr;
         self.detailTextLabel.text = poi.address;
         
         self.coord = CLLocationCoordinate2DMake(poi.location.latitude, poi.location.longitude);
-        self.mainTitle = address;
+        self.mainTitle = addressStr;
         self.district = poi.district;
     }
 }

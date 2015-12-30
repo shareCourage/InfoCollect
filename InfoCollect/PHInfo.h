@@ -12,10 +12,13 @@
 static NSString * const PHLoadedCourierInfoNotification = @"PHLoadedCourierInfoNotification";
 static NSString * const PHSaveIdentifyInfoNotification = @"PHSaveIdentifyInfoNotification";
 
-#if 0//DEBUG
-static NSString *kUrl_Host    = @"http://61.164.44.163/express_out";//test
+#if DEBUG
+//static NSString *kUrl_Host    = @"http://61.164.44.163/express_out";//test
+static NSString *kUrl_Host    = @"http://61.164.44.168:39175";
 #else
-static NSString *kUrl_Host    = @"http://61.164.44.165:39175";
+//static NSString *kUrl_Host    = @"http://61.164.44.165:39175";
+#warning mark - 这里记得要更改165是生产环境下的，168是开发环境下的.
+static NSString *kUrl_Host    = @"http://61.164.44.168:39175";
 #endif
 
 #define kUrl_appRequest         [kUrl_Host stringByAppendingPathComponent:@"appRequest"]
