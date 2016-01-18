@@ -277,7 +277,6 @@
         url = @"http://www.baidu.com";
 #endif
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-
     }
 }
 
