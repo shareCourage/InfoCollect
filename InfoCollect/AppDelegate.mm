@@ -92,7 +92,7 @@
     // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
     BOOL ret = [_mapManager start:Argu_KeyOfBMK  generalDelegate:nil];
     if (!ret) {
-        PHLog(@"manager start failed!");
+        PHLog(@"manager start failed...!");
     } else {
         PHLog(@"manager start success!");
     }
